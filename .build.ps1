@@ -1,4 +1,5 @@
-#Requires -Modules @{ModuleName="InvokeBuild";ModuleVersion="3.2.1"}
+#Requires -Modules @{ModuleName='InvokeBuild';ModuleVersion='3.2.1'}
+#Requires -Modules @{ModuleName='PowerShellGet';ModuleVersion='1.6.0'}
 
 $script:IsAppveyor = $env:APPVEYOR -ne $null
 $script:ModuleName = Get-Item -Path $BuildRoot | Select-Object -ExpandProperty Name
@@ -23,6 +24,10 @@ task CopyFiles {
     Get-ChildItem -Path "$BuildRoot\license*" | Copy-Item -Destination "$BuildRoot\bin\"
 }
 
+task UpdateManifest {
+
+}
+
 task CompilePSM {
     param(
 
@@ -39,14 +44,20 @@ task CompilePSM {
     $PublicFunctions = $PublicScriptBlock.Ast.FindAll({ $args[0] -is [System.Management.Automation.Language.FunctionDefinitionAst]},$false).Name
     $PublicAlias = $PublicScriptBlock.Ast.FindAll({ $args[0] -is [System.Management.Automation.Language.AttributeAst] },$true).Where{$_.TypeName.FullName -eq 'Alias' -and $_.Parent -is [System.Management.Automation.Language.ParamBlockAst]}.PositionalArguments.Value
     $PublicFunctionParam, $PublicAliasParam = ''
+    $UpdateManifestParam = @{}
     if(-Not [String]::IsNullOrEmpty($PublicFunctions)) {
         $PublicFunctionParam = "-Function '{0}'" -f ($PublicFunctions -join "','")
+        $UpdateManifestParam['FunctionsToExport'] = $PublicFunctions
     }
     if($PublicAlias) {
         $PublicAliasParam = "-Alias '{0}'" -f ($PublicAlias -join "','")
+        $UpdateManifestParam['AliasesToExport'] = $PublicAlias
     }
     $ExportStrings = 'Export-ModuleMember',$PublicFunctionParam,$PublicAliasParam | Where-Object {-Not [string]::IsNullOrWhiteSpace($_)}
     $ExportStrings -join ' ' | Out-File -FilePath  "$BuildRoot\bin\$ModuleName\$ModuleName.psm1" -Append -Encoding UTF8
+    if ($UpdateManifestParam.Count -gt 0) {
+        Update-ModuleManifest -Path "$BuildRoot\bin\$ModuleName\$ModuleName.psd1" @UpdateManifestParam
+    }
 }
 
 task MakeHelp -if (Test-Path -Path "$PSScriptRoot\Docs") {
