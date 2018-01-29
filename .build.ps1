@@ -19,13 +19,9 @@ task TestCode {
 }
 
 task CopyFiles {
-    $null = New-Item -Path "$BuildRoot\bin\$Script:ModuleName" -ItemType Directory
+    $null = New-Item -Path "$BuildRoot\bin\$ModuleName" -ItemType Directory
     Copy-Item -Path "$BuildRoot\*.psd1" -Destination "$BuildRoot\bin\$ModuleName"
-    Get-ChildItem -Path "$BuildRoot\license*" | Copy-Item -Destination "$BuildRoot\bin\"
-}
-
-task UpdateManifest {
-
+    Get-ChildItem -Path "$BuildRoot\license*" | Copy-Item -Destination "$BuildRoot\bin\$ModuleName"
 }
 
 task CompilePSM {
@@ -55,6 +51,15 @@ task CompilePSM {
     }
     $ExportStrings = 'Export-ModuleMember',$PublicFunctionParam,$PublicAliasParam | Where-Object {-Not [string]::IsNullOrWhiteSpace($_)}
     $ExportStrings -join ' ' | Out-File -FilePath  "$BuildRoot\bin\$ModuleName\$ModuleName.psm1" -Append -Encoding UTF8
+
+    if (Get-Command -Name gitversion) {
+        $gitversion = gitversion | ConvertFrom-Json
+        $UpdateManifestParam['ModuleVersion'] = $gitversion.MajorMinorPatch
+        if ($gitversion.CommitsSinceVersionSource -gt 0) {
+            # Prerelease
+            $UpdateManifestParam['Prerelease'] = '-beta{0}' -f $gitversion.CommitsSinceVersionSourcePadded
+        }
+    }
     if ($UpdateManifestParam.Count -gt 0) {
         Update-ModuleManifest -Path "$BuildRoot\bin\$ModuleName\$ModuleName.psd1" @UpdateManifestParam
     }
