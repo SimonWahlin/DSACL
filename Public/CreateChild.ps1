@@ -1,3 +1,13 @@
+<#
+.SYNOPSIS
+Give Delegate rights to create objects of selected type in target (usually an OU)
+
+.EXAMPLE
+Add-DSACLFullControl -TargetDN $UsersOU -DelegateDN $UserAdminGroup -ObjectTypeName User -AccessType Allow
+Will give the group with DistinguishedName in UserAdminGroup access to create user objects in
+the OU with DistinguishedName in $UsersOU and all sub-OUs.
+
+#>
 function Add-DSACLCreateChild {
     [CmdletBinding(DefaultParameterSetName='ByTypeName')]
     param (
