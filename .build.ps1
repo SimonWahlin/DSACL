@@ -3,6 +3,7 @@
 
 $script:IsAppveyor = $env:APPVEYOR -ne $null
 $script:ModuleName = Get-Item -Path $BuildRoot | Select-Object -ExpandProperty Name
+Get-Module -Name $ModuleName | Remove-Module -Force
 
 if ($PSVersionTable.PSEdition -ne "Core") {
     Add-Type -Assembly System.IO.Compression.FileSystem
