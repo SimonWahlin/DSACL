@@ -55,7 +55,7 @@ function Add-DSACLFullControl {
                 $InheritanceType = [System.DirectoryServices.ActiveDirectorySecurityInheritance]'Descendents'
             }
             switch ($PSCmdlet.ParameterSetName) {
-                'ByTypeName' { $ObjectType = $Script:TypeTable[$ObjectTypeName]}
+                'ByTypeName' { $ObjectType = $Script:GuidTable[$ObjectTypeName]}
                 'ByGuid'     { $ObjectType = $ObjectTypeGuid }
             }
 

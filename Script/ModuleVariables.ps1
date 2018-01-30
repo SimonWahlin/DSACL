@@ -1,4 +1,4 @@
-$Script:TypeTable = @{
+$Script:GuidTable = @{
     'Computer'              = [guid]'bf967a86-0de6-11d0-a285-00aa003049e2'
     'Contact'               = [guid]'5cb41ed0-0e4c-11d0-a286-00aa003049e2'
     'Group'                 = [guid]'bf967a9c-0de6-11d0-a285-00aa003049e2'
