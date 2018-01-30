@@ -3,9 +3,9 @@
 Give Delegate rights to create objects of selected type in target (usually an OU)
 
 .EXAMPLE
-Add-DSACLFullControl -TargetDN $UsersOU -DelegateDN $UserAdminGroup -ObjectTypeName User -AccessType Allow
-Will give the group with DistinguishedName in UserAdminGroup access to create user objects in
-the OU with DistinguishedName in $UsersOU and all sub-OUs.
+Add-DSACLCreateChild -TargetDN $UsersOU -DelegateDN $UserAdminGroup -ObjectTypeName User -AccessType Allow
+Will give the group with DistinguishedName in $UserAdminGroup access to create user objects in
+the OU with DistinguishedName in $UsersOU and all sub-OUs. Add -NoInheritance do disable inheritance.
 
 #>
 function Add-DSACLCreateChild {
@@ -25,7 +25,7 @@ function Add-DSACLCreateChild {
 
         # Object type to give full control over
         [Parameter(Mandatory,ParameterSetName='ByTypeName')]
-        [ValidateSet('Computer', 'Contact', 'Group', 'ManagedServiceAccount', 'User')]
+        [ValidateSet('Computer', 'Contact', 'Group', 'ManagedServiceAccount', 'User','All')]
         [String]
         $ObjectTypeName,
 

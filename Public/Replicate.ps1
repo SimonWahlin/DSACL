@@ -3,6 +3,9 @@
 Give Delegate "Replicating Directory Changes" rights on domain with DistinguishedName in target
 
 .EXAMPLE
+Add-DSACLReplicatingDirectoryChanges -DelegateDN $AADCServiceAccount
+Will give the service account with DistinguishedName in $AADCServiceAccount the right "Replicating Directory Changes".
+Add -AllowReplicateSecrets to grant "Replicating Directory Changes All" instead..
 
 #>
 function Add-DSACLReplicatingDirectoryChanges {

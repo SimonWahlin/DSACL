@@ -6,13 +6,10 @@
 .EXAMPLE
    New-ADAccessRule -Identity $SID -ActiveDirectoryRights 'CreateChild', 'DeleteChild' -AccessControlType Allow -ObjectType $TypeGuid -InheritanceType None
    Create access rule that gives the object with SID $SID access to create and delete objects of type $TypeGuid on "this object only"
-.NOTES
-   Written by Simon Wåhlin
 #>
-Function New-DSACLAccessRule {
-    [cmdletbinding()]
-    param
-    (
+function New-DSACLAccessRule {
+    [CmdletBinding()]
+    param (
         # SID of principal that will rule will apply to
         [Parameter(Mandatory = $true, ParameterSetName = '1', ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true)]
         [Parameter(Mandatory = $true, ParameterSetName = '2', ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true)]

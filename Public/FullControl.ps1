@@ -4,8 +4,8 @@ Give Delegate FullControl rights on objects of selected type in target (usually 
 
 .EXAMPLE
 Add-DSACLFullControl -TargetDN $UsersOU -DelegateDN $UserAdminGroup -ObjectTypeName User -AccessType Allow
-Will give the group with DistinguishedName in UserAdminGroup FullControl of user objects in
-the OU with DistinguishedName in $UsersOU and all sub-OUs.
+Will give the group with DistinguishedName in $UserAdminGroup FullControl of user objects in
+the OU with DistinguishedName in $UsersOU and all sub-OUs. Add -NoInheritance do disable inheritance.
 #>
 function Add-DSACLFullControl {
     [CmdletBinding(DefaultParameterSetName='ByTypeName')]
@@ -24,7 +24,7 @@ function Add-DSACLFullControl {
 
         # Object type to give full control over
         [Parameter(Mandatory,ParameterSetName='ByTypeName')]
-        [ValidateSet('Computer', 'Contact', 'Group', 'ManagedServiceAccount', 'User')]
+        [ValidateSet('Computer', 'Contact', 'Group', 'ManagedServiceAccount', 'User', 'All')]
         [String]
         $ObjectTypeName,
 

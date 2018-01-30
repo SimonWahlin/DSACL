@@ -4,8 +4,8 @@ Give Delegate rights to delete objects of selected type in target (usually an OU
 
 .EXAMPLE
 Add-DSACLDeleteChild -TargetDN $UsersOU -DelegateDN $UserAdminGroup -ObjectTypeName User -AccessType Allow
-Will give the group with DistinguishedName in UserAdminGroup access to delete user objects in
-the OU with DistinguishedName in $UsersOU and all sub-OUs.
+Will give the group with DistinguishedName in $UserAdminGroup access to delete user objects in
+the OU with DistinguishedName in $UsersOU and all sub-OUs. Add -NoInheritance do disable inheritance.
 
 #>
 function Add-DSACLDeleteChild {
@@ -25,7 +25,7 @@ function Add-DSACLDeleteChild {
 
         # Object type to give full control over
         [Parameter(Mandatory,ParameterSetName='ByTypeName')]
-        [ValidateSet('Computer', 'Contact', 'Group', 'ManagedServiceAccount', 'User')]
+        [ValidateSet('Computer', 'Contact', 'Group', 'ManagedServiceAccount', 'User','All')]
         [String]
         $ObjectTypeName,
 
