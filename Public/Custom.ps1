@@ -8,40 +8,51 @@ Requires knowledge of creating ActiveDirectoryAccessRules, please use with cauti
 
 #>
 function Add-DSACLCustom {
-    [CmdletBinding()]
+    [CmdletBinding(DefaultParameterSetName='Delegate')]
     param (
         # DistinguishedName of object to modify ACL on. Usually an OU.
-        [Parameter(Mandatory)]
+        [Parameter(Mandatory,ParameterSetName='Delegate')]
+        [Parameter(Mandatory,ParameterSetName='Self')]
         [String]
         $TargetDN,
 
+        # Give access to "Self" instead of a user or group
+        [Parameter(Mandatory,ParameterSetName='Self')]
+        [Switch]
+        $Self,
+
         # DistinguishedName of group or user to give permissions to.
-        [Parameter(Mandatory)]
+        [Parameter(Mandatory,ParameterSetName='Delegate')]
         [String]
         $DelegateDN,
 
         # List of access rights that should be applied
-        [Parameter(Mandatory)]
+        [Parameter(Mandatory,ParameterSetName='Delegate')]
+        [Parameter(Mandatory,ParameterSetName='Self')]
         [System.DirectoryServices.ActiveDirectoryRights[]]
         $ActiveDirectoryRights,
 
         # Sets allow or deny
-        [Parameter(Mandatory)]
+        [Parameter(Mandatory,ParameterSetName='Delegate')]
+        [Parameter(Mandatory,ParameterSetName='Self')]
         [System.Security.AccessControl.AccessControlType]
         $AccessControlType,
 
         # Sets guid where access right should apply
-        [Parameter()]
+        [Parameter(ParameterSetName='Delegate')]
+        [Parameter(ParameterSetName='Self')]
         [Guid]
         $ObjectType,
 
         # Sets if and how this rule should be inherited
-        [Parameter()]
+        [Parameter(ParameterSetName='Delegate')]
+        [Parameter(ParameterSetName='Self')]
         [System.DirectoryServices.ActiveDirectorySecurityInheritance]
         $InheritanceType,
 
         # Sets guid of object types that should inherit this rule
-        [Parameter()]
+        [Parameter(ParameterSetName='Delegate')]
+        [Parameter(ParameterSetName='Self')]
         [Guid]
         $InheritedObjectType
 
@@ -50,8 +61,13 @@ function Add-DSACLCustom {
     process {
         try {
             $Target = Get-LDAPObject -DistinguishedName $TargetDN
-            $Delegate = Get-LDAPObject -DistinguishedName $DelegateDN
-            $DelegateSID = New-Object -TypeName System.Security.Principal.SecurityIdentifier -ArgumentList $Delegate.ObjectSID.Value, 0
+            switch ($PSCmdlet.ParameterSetName) {
+                'Delegate' {
+                    $Delegate = Get-LDAPObject -DistinguishedName $DelegateDN
+                    $DelegateSID = New-Object -TypeName System.Security.Principal.SecurityIdentifier -ArgumentList $Delegate.ObjectSID.Value, 0
+                }
+                'Self' { $DelegateSID = New-Object -TypeName System.Security.Principal.SecurityIdentifier -ArgumentList 'S-1-5-10' }
+            }
 
             $null = $PSBoundParameters.Remove('TargetDN')
             $null = $PSBoundParameters.Remove('DelegateDN')
