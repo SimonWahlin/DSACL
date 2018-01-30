@@ -62,7 +62,7 @@ function New-DSACLAccessRule {
         $InheritedObjectType
     )
     process {
-        Switch ($PSCmdlet.ParameterSetName) {
+        switch ($PSCmdlet.ParameterSetName) {
             '1' {$ArgumentList = $Identity, $ActiveDirectoryRights, $AccessControlType}
             '2' {$ArgumentList = $Identity, $ActiveDirectoryRights, $AccessControlType, $InheritanceType}
             '3' {$ArgumentList = $Identity, $ActiveDirectoryRights, $AccessControlType, $InheritanceType, $InheritedObjectType}
