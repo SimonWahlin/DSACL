@@ -56,7 +56,7 @@ function Add-DSACLCreateChild {
                 $InheritanceType = [System.DirectoryServices.ActiveDirectorySecurityInheritance]'All'
             }
             switch ($PSCmdlet.ParameterSetName) {
-                'ByTypeName' { $ObjectType = $Script:TypeTable[$ObjectTypeName]}
+                'ByTypeName' { $ObjectType = $Script:GuidTable[$ObjectTypeName]}
                 'ByGuid'     { $ObjectType = $ObjectTypeGuid }
             }
 
