@@ -5,15 +5,24 @@ function Add-DSACLAccessRule {
         [System.DirectoryServices.DirectoryEntry]
         $Target,
 
-        [Parameter(Mandatory)]
+        [Parameter(Mandatory,ValueFromPipeline)]
         [System.DirectoryServices.ActiveDirectoryAccessRule]
         $ACE
     )
-    try {
-        $Target.psbase.ObjectSecurity.AddAccessRule($ACE)
-        $Target.psbase.CommitChanges()
+    process {
+        try {
+            $Target.psbase.ObjectSecurity.AddAccessRule($ACE)
+        }
+        catch {
+            throw
+        }
     }
-    catch {
-        throw
+    end {
+        try {
+            $Target.psbase.CommitChanges()
+        }
+        catch {
+            throw
+        }
     }
 }
