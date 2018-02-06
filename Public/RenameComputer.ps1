@@ -26,12 +26,6 @@ function Add-DSACLRenameComputer {
         [String]
         $DelegateDN,
 
-        # Allow or Deny
-        [Parameter(Mandatory,ParameterSetName='Delegate')]
-        [Parameter(Mandatory,ParameterSetName='Self')]
-        [System.Security.AccessControl.AccessControlType]
-        $AccessType,
-
         # Sets access right to "This object only"
         [Parameter(ParameterSetName='Delegate')]
         [Parameter(ParameterSetName='Self')]
@@ -60,7 +54,7 @@ function Add-DSACLRenameComputer {
             $AceParams = @{
                 Identity = $DelegateSID
                 ActiveDirectoryRights = 'WriteProperty'
-                AccessControlType = $AccessType
+                AccessControlType = 'Allow'
                 InheritedObjectType   = $Script:GuidTable['Computer']
                 InheritanceType       = $InheritanceType
             }
