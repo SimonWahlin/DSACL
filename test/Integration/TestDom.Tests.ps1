@@ -1,13 +1,11 @@
 param (
-    $ModulePath = "$PSScriptRoot\..",
+    $ModulePath = "$PSScriptRoot\..\..",
     $DomainDN = 'DC=test,DC=biz'
 )
 $ErrorActionPreference = 'Stop'
 # Remove trailing slash or backslash
 $ModulePath = $ModulePath -replace '[\\/]*$'
 $ModuleName = Split-Path -Path $ModulePath -Leaf
-$ModuleManifestName = 'DSAcl.psd1'
-$ModuleManifestPath = Join-Path -Path $ModulePath -ChildPath $ModuleManifestName
 
 # Validate we are in designated test environment
 try {
@@ -19,7 +17,7 @@ try {
     }
 }
 catch {
-    Write-Warning -Message 'Not in test environment or invalid environment'
+    Write-Verbose -Message 'Not in test environment or invalid environment' -Verbose
     return
 }
 
@@ -47,7 +45,13 @@ catch {
     throw
 }
 
-Describe "Integration testing in domain: $DomainDN" {
+Describe "Integration testing in domain: $DomainDN" -Tag Integration {
+    AfterEach {
+        Set-ACL -Path "AD:\$($TestOU.DistinguishedName)" -AclObject $CleanACL
+    }
+    AfterAll {
+        Get-Module -Name $ModuleName | Remove-Module -Force
+    }
     $ObjectTypeCases = @(
         @{
             ObjectType = 'Computer'
@@ -74,9 +78,6 @@ Describe "Integration testing in domain: $DomainDN" {
             ObjectGuid = '00000000-0000-0000-0000-000000000000'
         }
     )
-    AfterEach {
-        Set-ACL -Path "AD:\$($TestOU.DistinguishedName)" -AclObject $CleanACL
-    }
     $Commands = @(
         @{
             Command = 'Add-DSACLCreateChild'
