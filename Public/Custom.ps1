@@ -60,11 +60,10 @@ function Add-DSACLCustom {
 
     process {
         try {
-            $Target = Get-LDAPObject -DistinguishedName $TargetDN
+            $Target = Get-LDAPObject -DistinguishedName $TargetDN -ErrorAction Stop
             switch ($PSCmdlet.ParameterSetName) {
                 'Delegate' {
-                    $Delegate = Get-LDAPObject -DistinguishedName $DelegateDN
-                    $DelegateSID = New-Object -TypeName System.Security.Principal.SecurityIdentifier -ArgumentList $Delegate.ObjectSID.Value, 0
+                    $DelegateSID = Get-SID -DistinguishedName $DelegateDN
                 }
                 'Self' { $DelegateSID = New-Object -TypeName System.Security.Principal.SecurityIdentifier -ArgumentList 'S-1-5-10' }
             }
