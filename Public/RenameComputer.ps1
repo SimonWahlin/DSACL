@@ -45,8 +45,7 @@ function Add-DSACLRenameComputer {
             $Target = Get-LDAPObject -DistinguishedName $TargetDN
             switch ($PSCmdlet.ParameterSetName) {
                 'Delegate' {
-                    $Delegate = Get-LDAPObject -DistinguishedName $DelegateDN
-                    $DelegateSID = New-Object -TypeName System.Security.Principal.SecurityIdentifier -ArgumentList $Delegate.ObjectSID.Value, 0
+                    $DelegateSID = Get-SID -DistinguishedName $DelegateDN
                 }
                 'Self' { $DelegateSID = New-Object -TypeName System.Security.Principal.SecurityIdentifier -ArgumentList 'S-1-5-10' }
             }
