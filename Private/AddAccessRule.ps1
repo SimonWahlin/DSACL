@@ -2,6 +2,7 @@ function Add-DSACLAccessRule {
     [CmdletBinding()]
     param (
         [Parameter(Mandatory)]
+        [ValidateNotNullOrEmpty()]
         [System.DirectoryServices.DirectoryEntry]
         $Target,
 
