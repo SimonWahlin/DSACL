@@ -67,7 +67,7 @@ function Add-DSACLRenameComputer {
 
             'distinguishedName', 'name', 'CN' | ForEach-Object -Process {
                 New-DSACLAccessRule -ObjectType $Script:GuidTable[$_] @AceParams
-            } | Add-DSACLAccessRule -Tartget $Target
+            } | Add-DSACLAccessRule -Target $Target
 
         }
         catch {
