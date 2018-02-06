@@ -8,4 +8,5 @@ $Script:GuidTable = @{
     'distinguishedName'     = [guid]'bf9679e4-0de6-11d0-a285-00aa003049e2'
     'name'                  = [guid]'bf967a0e-0de6-11d0-a285-00aa003049e2'
     'CN'                    = [guid]'bf96793f-0de6-11d0-a285-00aa003049e2'
+    'ResetPassword'         = [guid]'00299570-246d-11d0-a768-00aa006e0529'
 }
