@@ -31,6 +31,13 @@ function Get-LDAPObject {
             }
         )
         $DirectoryEntry = New-Object -TypeName System.DirectoryServices.DirectoryEntry -ArgumentList $ArgumentList
+        $null = try {
+            # Try to read the object to force an exception if no object was found.
+            $DirectoryEntry | Format-List
+        }
+        catch {
+            throw 'Object not found!'
+        }
         return $DirectoryEntry
     }
     catch {
