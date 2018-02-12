@@ -6,6 +6,7 @@ $Script:IsAppveyor = $env:APPVEYOR -ne $null
 $Script:ModuleName = Get-Item -Path $BuildRoot | Select-Object -ExpandProperty Name
 Get-Module -Name $ModuleName,'helpers' | Remove-Module -Force
 Import-Module "$BuildRoot\buildhelpers\helpers.psm1"
+$ShouldSign = $false
 
 task Clean {
     Remove-Item -Path ".\Bin" -Recurse -Force -ErrorAction SilentlyContinue
@@ -75,8 +76,8 @@ task TestBuild {
     if($TestResult.FailedCount -gt 0) {throw 'Tests failed'}
 }
 
-task Sign -if ($ShoudSign) {
-
+task Sign -if ($ShouldSign) {
+    # Put code to sign here
 }
 
 task UploadArtifactsAppveyor -if ($script:IsAppveyor) {
@@ -84,7 +85,7 @@ task UploadArtifactsAppveyor -if ($script:IsAppveyor) {
 }
 
 task PublishToGallery {
-
+    # Put code to publish to Gallery here
 }
 
 task . Clean, TestCode, Build, UploadArtifacts, PublishToGallery
