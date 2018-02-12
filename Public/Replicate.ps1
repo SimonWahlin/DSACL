@@ -28,9 +28,11 @@ function Add-DSACLReplicatingDirectoryChanges {
             $TargetDN = Get-LdapObject -DistinguishedName RootDse | Select-Object -ExpandProperty defaultNamingContext
 
             if ($AllowReplicateSecrets.IsPresent) {
+                # Replicating Directory Changes All
                 $ObjectType = '1131f6ad-9c07-11d1-f79f-00c04fc2dcd2'
             }
             else {
+                # Replicating Directory Changes
                 $ObjectType = '1131f6aa-9c07-11d1-f79f-00c04fc2dcd2'
             }
             $Params = @{
