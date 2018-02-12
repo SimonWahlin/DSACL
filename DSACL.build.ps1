@@ -1,5 +1,6 @@
 #Requires -Modules @{ModuleName='InvokeBuild';ModuleVersion='3.2.1'}
 #Requires -Modules @{ModuleName='PowerShellGet';ModuleVersion='1.6.0'}
+#Requires -Modules @{ModuleName='Pester';ModuleVersion='4.1.1'}
 
 $Script:IsAppveyor = $env:APPVEYOR -ne $null
 $Script:ModuleName = Get-Item -Path $BuildRoot | Select-Object -ExpandProperty Name
