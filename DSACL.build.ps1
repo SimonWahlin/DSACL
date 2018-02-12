@@ -46,7 +46,7 @@ task CompilePSM {
     $ExportStrings = 'Export-ModuleMember',$PublicFunctionParam,$PublicAliasParam | Where-Object {-Not [string]::IsNullOrWhiteSpace($_)}
     $ExportStrings -join ' ' | Out-File -FilePath  "$BuildRoot\bin\$ModuleName\$ModuleName.psm1" -Append -Encoding UTF8
 
-    if (Get-Command -Name gitversion) {
+    if (try{Get-Command -Name gitversion -ErrorAction Stop}catch{}) {
         $gitversion = gitversion | ConvertFrom-Json
         $UpdateManifestParam['ModuleVersion'] = $gitversion.MajorMinorPatch
         if ($gitversion.CommitsSinceVersionSource -gt 0) {
