@@ -77,8 +77,11 @@ function Get-AliasFromScriptblock {
         $ScriptBlock
     )
     process {
-        $PublicScriptBlock.Ast.FindAll({ $args[0] -is [System.Management.Automation.Language.AttributeAst] },$true).Where{
-            $_.TypeName.FullName -eq 'Alias' -and $_.Parent -is [System.Management.Automation.Language.ParamBlockAst]
-        }.PositionalArguments.Value
+        (
+            $ScriptBlock.Ast.FindAll({ $args[0] -is [System.Management.Automation.Language.AttributeAst] },$true) |
+            Where-Object -FilterScript {
+                $_.TypeName.FullName -eq 'Alias' -and $_.Parent -is [System.Management.Automation.Language.ParamBlockAst]
+            }
+        ).PositionalArguments.Value
     }
 }
