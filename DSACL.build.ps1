@@ -3,7 +3,7 @@
 
 $Script:IsAppveyor = $env:APPVEYOR -ne $null
 $Script:ModuleName = Get-Item -Path $BuildRoot | Select-Object -ExpandProperty Name
-Get-Module -Name $ModuleName | Remove-Module -Force
+Get-Module -Name $ModuleName,'helpers' | Remove-Module -Force
 Import-Module "$BuildRoot\buildhelpers\helpers.psm1"
 
 task Clean {
