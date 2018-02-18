@@ -3,7 +3,6 @@
 | Master Branch                   | Current Branch                  |
 |---------------------------------|---------------------------------|
 | [![av-master-image][]][av-site] | [![av-dev-image][]][av-site]    |
-|---------------------------------|---------------------------------|
 
 [av-master-image]: https://ci.appveyor.com/api/projects/status/8xnk88yywn3jsk5l/branch/master?svg=true
 [av-dev-image]: https://ci.appveyor.com/api/projects/status/8xnk88yywn3jsk5l/branch/dev?svg=true
