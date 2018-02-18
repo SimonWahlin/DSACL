@@ -45,13 +45,24 @@ task CompilePSM {
     $ExportStrings = 'Export-ModuleMember',$PublicFunctionParam,$PublicAliasParam | Where-Object {-Not [string]::IsNullOrWhiteSpace($_)}
     $ExportStrings -join ' ' | Out-File -FilePath  "$BuildRoot\bin\$ModuleName\$ModuleName.psm1" -Append -Encoding UTF8
 
+    # If we have git and gitversion installed, let's use it to get new module version and Release Notes
     if ($(try{Get-Command -Name gitversion -ErrorAction Stop}catch{})) {
         $gitversion = gitversion | ConvertFrom-Json
-        $UpdateManifestParam['ModuleVersion'] = $gitversion.MajorMinorPatch
         if ($gitversion.CommitsSinceVersionSource -gt 0) {
             # Prerelease, raise minor-version by 1 and add prerelease string.
             $UpdateManifestParam['ModuleVersion'] = '{0}.{1}.{2}' -f $gitversion.Major, ($gitversion.Minor+1), $gitversion.Patch
             $UpdateManifestParam['Prerelease'] = '-beta{0}' -f $gitversion.CommitsSinceVersionSourcePadded
+        }
+        else {
+            # This is a release version
+            # If there is a tag pointing at HEAD, use that as release notes
+            $UpdateManifestParam['ModuleVersion'] = $gitversion.MajorMinorPatch
+            if ($(try{Get-Command -Name git -ErrorAction Stop}catch{})) {
+                if($CurrentTag = git tag --points-at HEAD) {
+                    $ReleaseNotes = git tag -l -n20 $CurrentTag | Select-Object -Skip 1
+                    $UpdateManifestParam['ReleaseNotes'] = $ReleaseNotes
+                }
+            }
         }
     }
     if ($UpdateManifestParam.Count -gt 0) {
