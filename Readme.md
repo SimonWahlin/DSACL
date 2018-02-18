@@ -1,5 +1,14 @@
 # DSACL - Delegation Made Easy
 
+| Master Branch                   | Current Branch                  |
+|---------------------------------|---------------------------------|
+| [![av-master-image][]][av-site] | [![av-dev-image][]][av-site]    |
+|---------------------------------|---------------------------------|
+
+[av-master-image]: https://ci.appveyor.com/api/projects/status/8xnk88yywn3jsk5l/branch/master?svg=true
+[av-dev-image]: https://ci.appveyor.com/api/projects/status/8xnk88yywn3jsk5l/branch/dev?svg=true
+[av-site]: https://ci.appveyor.com/project/SimonWahlin/dsacl
+
 DSACL is a PowerShell module for creating ACLs in Active Directory.
 
 Tired of using dsacls.exe but still thinks manually creating access rules in AD is a hassle?
