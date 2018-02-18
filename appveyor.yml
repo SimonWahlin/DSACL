@@ -15,3 +15,4 @@ build_script:
       Invoke-Build
       Compress-Archive -Path ".\bin\$Env:APPVEYOR_PROJECT_NAME" -DestinationPath ".\$Env:APPVEYOR_PROJECT_NAME.zip"
       Push-AppveyorArtifact ".\$Env:APPVEYOR_PROJECT_NAME.zip"
+      "All Done"
