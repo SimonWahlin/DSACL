@@ -1,7 +1,6 @@
 # Custom Appveyor settings
 
-image:
-  - Visual Studio 2017
+image: Visual Studio 2017
 
 matrix:
   # immediately finish build on failure
@@ -9,17 +8,15 @@ matrix:
 
 # Scripts that run after cloning
 install:
-  - ps: |
-    Install-Module -Name InvokeBuild, PowerShellGet, Pester -SkipPublisherCheck
-
+  - ps: Install-Module -Name InvokeBuild, PowerShellGet, Pester -SkipPublisherCheck
 build_script:
   - ps: |
-    try {
-      $ErrorActionPreference = 'Stop'
-      Invoke-Build
-      Compress-Archive -Path ".\bin\$Env:APPVEYOR_PROJECT_NAME" -DestinationPath ".\$Env:APPVEYOR_PROJECT_NAME.zip"
-      Push-AppveyorArtifact ".\$Env:APPVEYOR_PROJECT_NAME.zip"
-    }
-    catch {
-      throw
-    }
+      try {
+        $ErrorActionPreference = 'Stop'
+        Invoke-Build
+        Compress-Archive -Path ".\bin\$Env:APPVEYOR_PROJECT_NAME" -DestinationPath ".\$Env:APPVEYOR_PROJECT_NAME.zip"
+        Push-AppveyorArtifact ".\$Env:APPVEYOR_PROJECT_NAME.zip"
+      }
+      catch {
+        throw
+      }
