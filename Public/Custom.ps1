@@ -68,6 +68,7 @@ function Add-DSACLCustom {
                 'Self' { $DelegateSID = New-Object -TypeName System.Security.Principal.SecurityIdentifier -ArgumentList 'S-1-5-10' }
             }
 
+            $null = $PSBoundParameters.Remove('Self')
             $null = $PSBoundParameters.Remove('TargetDN')
             $null = $PSBoundParameters.Remove('DelegateDN')
             $PSBoundParameters.Add('Identity',$DelegateSID)
