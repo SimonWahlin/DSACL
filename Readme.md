@@ -14,7 +14,15 @@ Tired of using dsacls.exe but still thinks manually creating access rules in AD 
 
 Then this is for you!
 
-## Instructions
+## Install
+
+The latest released version is best installed from PowerShell Gallery using the command:
+
+```powershell
+Install-Module -Name DSACL  -Scope CurrentUser
+```
+
+## Build Instructions
 
 This module can be loaded as-is by importing DSAcl.psd1. This is mainly intended for development purposes.
 
@@ -38,9 +46,13 @@ Invoke-Build
 
 This will package all code into files located in .\bin\DSACL. That folder is now ready to be installed, copy to any path listed in you PSModulePath environment variable and you are good to ACL!
 
-## PowerShell Gallery
+## Release Notes
 
-Code will be published to gallery as soon as we reach version 1.
+### Unreleased
+
+- Added command *Add-DSACLManageGroupMember*
+- Added command *Set-DSACLOwner*
+- BugFix: *Add-DSACLCustom* Parameter Self will no longer be passed to New-DSAclAccessRule
 
 ## Contributing
 
