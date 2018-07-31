@@ -49,6 +49,7 @@ Describe 'DSACL Unit tests' -Tag 'Unit' {
 
         }
     }
+
     #region Mocks
     Mock Get-LDAPObject -ModuleName DSACL {
         #New-MockObject -Type System.DirectoryServices.DirectoryEntry
@@ -71,12 +72,18 @@ Describe 'DSACL Unit tests' -Tag 'Unit' {
         }
     }
     Set-Alias -Name Add-DSACLAccessRule -Value Mock-Add-DSACLAccessRule -Scope Global
-    # Mock Add-DSACLAccessRule -ModuleName DSACL {
-    #     $ACE
-    # }
+    function global:Mock-Set-Owner {
+        param(
+            $Target,
+            [Parameter(ValueFromPipeline=$true)]
+            $Owner
+        )
+        [pscustomobject]@{Target=$Target;Owner=$Owner}
+    }
+    Set-Alias -Name Set-Owner -Value Mock-Set-Owner -Scope Global
     #endregion Mocks
 
-    Context 'Testing Public Functions' {
+    Context 'Testing Public Functions wrapping Add-DSACLCustom' {
         $ObjectTypeCases = @(
             @{
                 ObjectType = 'Computer'
@@ -191,7 +198,9 @@ Describe 'DSACL Unit tests' -Tag 'Unit' {
                 }
             }
         }
+    }
 
+    Context 'Testing other public functions' {
         Context 'Add-DSACLRenameComputer' {
             It 'Delegates RenameComputer access to DelegateDN without inheritance' {
                 $DSACLParam = @{
@@ -251,7 +260,11 @@ Describe 'DSACL Unit tests' -Tag 'Unit' {
             }
         }
 
-        Context 'Testing creating AccessRukes' {
+        Context 'Add-DSACLManageGroupMember' {
+
+        }
+
+        Context 'Testing creating AccessRules' {
 
         }
     }
