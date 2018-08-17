@@ -13,6 +13,7 @@ $Script:GuidTable = @{
     'gPLink'                = [guid]'f30e3bbe-9ff0-11d1-b603-0000f80367c1'
     'Account Restrictions'  = [guid]'4c164200-20c0-11d0-a768-00aa006e0529'
     'member'                = [guid]'bf9679c0-0de6-11d0-a285-00aa003049e2'
+    'self-membership'       = [guid]'bf9679c0-0de6-11d0-a285-00aa003049e2'
     'Validated write to DNS host name' = [guid]'72e39547-7b18-11d1-adef-00c04fd8d5cd'
     'Validated write to service principal name' = [guid]'f3a64788-5306-11d1-a9c5-0000f80367c1'
 }
