@@ -75,7 +75,7 @@ function Add-DSACLCustom {
 
             $ACE = New-DSACLAccessRule @PSBoundParameters
 
-            Add-DSACLAccessRule -Target $Target -ACE $ACE
+            Set-DSACLAccessRule -Target $Target -ACE $ACE
         }
         catch {
             throw

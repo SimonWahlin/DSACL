@@ -1,4 +1,4 @@
-function Add-DSACLAccessRule {
+function Set-DSACLAccessRule {
     [CmdletBinding()]
     param (
         [Parameter(Mandatory)]
@@ -19,11 +19,6 @@ function Add-DSACLAccessRule {
         }
     }
     end {
-        try {
-            $Target.psbase.CommitChanges()
-        }
-        catch {
-            throw
-        }
+        Set-DSACLObject -DirectoryEntry $Target
     }
 }

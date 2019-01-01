@@ -1,6 +1,7 @@
 param(
     $ModulePath = "$PSScriptRoot\..\.."
 )
+$ErrorActionPreference = 'Stop'
 # Remove trailing slash or backslash
 $ModulePath = $ModulePath -replace '[\\/]*$'
 $ModuleName = Split-Path -Path $ModulePath -Leaf
@@ -12,7 +13,7 @@ try {
     Get-Module -Name $ModuleName | Remove-Module -Force
 }
 catch {
-
+    # Ignore errors
 }
 function Test-ACE ($Ace, $TemplateHash) {
     foreach($key in $TemplateHash.Keys) {
@@ -46,22 +47,26 @@ Describe 'DSACL Unit tests' -Tag 'Unit' {
 
     Context 'Testing Private functions' {
         InModuleScope -ModuleName DSACL {
-
+            # TODO...
         }
     }
 
     #region Mocks
     Mock Get-LDAPObject -ModuleName DSACL {
-        #New-MockObject -Type System.DirectoryServices.DirectoryEntry
         [pscustomobject]@{
             DistinguishedName = $DistinguishedName
             defaultNamingContext = 'N/A'
         }
     }
     Mock Get-SID -ModuleName DSACL {
-        New-Object -TypeName System.Security.Principal.SecurityIdentifier -ArgumentList 'S-1-5-10'
+        if ($DistinguishedName -match 'S(-\d+){2,4}') {
+            $SIDString = $DistinguishedName
+        } else {
+            $SIDString = 'S-1-0-0'
+        }
+        New-Object -TypeName System.Security.Principal.SecurityIdentifier -ArgumentList $SIDString
     }
-    function global:Mock-Add-DSACLAccessRule {
+    function global:Set-MOCKDSACLAccessRule {
         param(
             $Target,
             [Parameter(ValueFromPipeline=$true)]
@@ -71,8 +76,8 @@ Describe 'DSACL Unit tests' -Tag 'Unit' {
             $Ace
         }
     }
-    Set-Alias -Name Add-DSACLAccessRule -Value Mock-Add-DSACLAccessRule -Scope Global
-    function global:Mock-Set-Owner {
+    Set-Alias -Name Set-DSACLAccessRule -Value Set-MOCKDSACLAccessRule -Scope Global
+    function global:Set-MOCKOwner {
         param(
             $Target,
             [Parameter(ValueFromPipeline=$true)]
@@ -80,7 +85,7 @@ Describe 'DSACL Unit tests' -Tag 'Unit' {
         )
         [pscustomobject]@{Target=$Target;Owner=$Owner}
     }
-    Set-Alias -Name Set-Owner -Value Mock-Set-Owner -Scope Global
+    Set-Alias -Name Set-Owner -Value Set-MOCKOwner -Scope Global
     #endregion Mocks
 
     Context 'Testing Public Functions wrapping Add-DSACLCustom' {
@@ -118,7 +123,7 @@ Describe 'DSACL Unit tests' -Tag 'Unit' {
                 InheritanceType = 'None','All'
                 ObjectType = 'ObjectGuid'
                 InheritedObjectType = '00000000-0000-0000-0000-000000000000'
-                Types = 'Computer','Contact','Group','ManagedServiceAccount','User','All'
+                Types = 'Computer', 'Contact', 'Group', 'ManagedServiceAccount', 'User', 'All'
             },
             @{
                 Command = 'Add-DSACLDeleteChild'
@@ -126,7 +131,7 @@ Describe 'DSACL Unit tests' -Tag 'Unit' {
                 InheritanceType = 'None','All'
                 ObjectType = 'ObjectGuid'
                 InheritedObjectType = '00000000-0000-0000-0000-000000000000'
-                Types = 'Computer','Contact','Group','ManagedServiceAccount','User','All'
+                Types = 'Computer', 'Contact', 'Group', 'ManagedServiceAccount', 'User', 'All'
             },
             @{
                 Command = 'Add-DSACLFullControl'
@@ -134,7 +139,7 @@ Describe 'DSACL Unit tests' -Tag 'Unit' {
                 InheritanceType = 'Children','Descendents'
                 ObjectType = '00000000-0000-0000-0000-000000000000'
                 InheritedObjectType = 'ObjectGuid'
-                Types = 'Computer','Contact','Group','ManagedServiceAccount','User','All'
+                Types = 'Computer', 'Contact', 'Group', 'ManagedServiceAccount', 'User', 'All'
             },
             @{
                 Command = 'Add-DSACLResetPassword'
@@ -163,7 +168,7 @@ Describe 'DSACL Unit tests' -Tag 'Unit' {
 
                         # Create expected ACE
                         $ExpectedAce = @{
-                            IdentityReference = 'S-1-5-10'
+                            IdentityReference = 'S-1-0-0'
                             ActiveDirectoryRights = $Command.ActiveDirectoryRights
                             AccessControlType = $AccessType
                             ObjectType = $(if($Command.ObjectType -eq 'ObjectGuid'){$ObjectGuid}else{$Command.ObjectType})
@@ -186,7 +191,7 @@ Describe 'DSACL Unit tests' -Tag 'Unit' {
 
                         # Create expected ACE:
                         $ExpectedAce = @{
-                            IdentityReference = 'S-1-5-10'
+                            IdentityReference = 'S-1-0-0'
                             ActiveDirectoryRights = $Command.ActiveDirectoryRights
                             AccessControlType = $AccessType
                             ObjectType = $(if($Command.ObjectType -eq 'ObjectGuid'){$ObjectGuid}else{$Command.ObjectType})
@@ -202,10 +207,88 @@ Describe 'DSACL Unit tests' -Tag 'Unit' {
 
     Context 'Testing other public functions' {
         Context 'Add-DSACLRenameComputer' {
+
+            It 'Delegates RenameComputer access to DelegateDN with inheritance' {
+                $DSACLParam = @{
+                    TargetDN = 'TESTDN'
+                    DelegateDN = 'TESTDN'
+                    NoInheritance = $False
+                }
+                $ACEs = Add-DSACLRenameComputer @DSACLParam
+                $ExpectedAces = @(
+                    @{
+                        IdentityReference = 'S-1-0-0'
+                        ActiveDirectoryRights = 'WriteProperty'
+                        AccessControlType = 'Allow'
+                        ObjectType = 'bf9679e4-0de6-11d0-a285-00aa003049e2'
+                        InheritanceType = 'Descendents'
+                        InheritedObjectType = 'bf967a86-0de6-11d0-a285-00aa003049e2'
+                    },
+                    @{
+                        IdentityReference = 'S-1-0-0'
+                        ActiveDirectoryRights = 'WriteProperty'
+                        AccessControlType = 'Allow'
+                        ObjectType = 'bf967a0e-0de6-11d0-a285-00aa003049e2'
+                        InheritanceType = 'Descendents'
+                        InheritedObjectType = 'bf967a86-0de6-11d0-a285-00aa003049e2'
+                    },
+                    @{
+                        IdentityReference = 'S-1-0-0'
+                        ActiveDirectoryRights = 'WriteProperty'
+                        AccessControlType = 'Allow'
+                        ObjectType = 'bf96793f-0de6-11d0-a285-00aa003049e2'
+                        InheritanceType = 'Descendents'
+                        InheritedObjectType = 'bf967a86-0de6-11d0-a285-00aa003049e2'
+                    }
+                )
+                0..2 | Foreach-Object -Process {
+                    Test-ACE -Ace $ACEs[$_] -TemplateHash $ExpectedAces[$_] | Should -Be $true
+                }
+            }
+
             It 'Delegates RenameComputer access to DelegateDN without inheritance' {
                 $DSACLParam = @{
                     TargetDN = 'TESTDN'
                     DelegateDN = 'TESTDN'
+                    NoInheritance = $True
+                }
+                $ACEs = Add-DSACLRenameComputer @DSACLParam
+
+                $ExpectedAces = @(
+                    @{
+                        IdentityReference = 'S-1-0-0'
+                        ActiveDirectoryRights = 'WriteProperty'
+                        AccessControlType = 'Allow'
+                        ObjectType = 'bf9679e4-0de6-11d0-a285-00aa003049e2'
+                        InheritanceType = 'Children'
+                        InheritedObjectType = 'bf967a86-0de6-11d0-a285-00aa003049e2'
+                    },
+                    @{
+                        IdentityReference = 'S-1-0-0'
+                        ActiveDirectoryRights = 'WriteProperty'
+                        AccessControlType = 'Allow'
+                        ObjectType = 'bf967a0e-0de6-11d0-a285-00aa003049e2'
+                        InheritanceType = 'Children'
+                        InheritedObjectType = 'bf967a86-0de6-11d0-a285-00aa003049e2'
+                    },
+                    @{
+                        IdentityReference = 'S-1-0-0'
+                        ActiveDirectoryRights = 'WriteProperty'
+                        AccessControlType = 'Allow'
+                        ObjectType = 'bf96793f-0de6-11d0-a285-00aa003049e2'
+                        InheritanceType = 'Children'
+                        InheritedObjectType = 'bf967a86-0de6-11d0-a285-00aa003049e2'
+                    }
+                )
+                0..2 | Foreach-Object -Process {
+                    Test-ACE -Ace $ACEs[$_] -TemplateHash $ExpectedAces[$_] | Should -Be $true
+                }
+            }
+
+            It 'Delegates RenameComputer access to Self without inheritance' {
+                $DSACLParam = @{
+                    TargetDN = 'TESTDN'
+                    Self = $True
                     NoInheritance = $True
                 }
                 $ACEs = Add-DSACLRenameComputer @DSACLParam
@@ -242,6 +325,56 @@ Describe 'DSACL Unit tests' -Tag 'Unit' {
             }
         }
 
+        Context 'Add-DSACLJoinDomain' {
+            It 'Delegates JoinDomain access (existing-computer-accounts) to DelegateDN with inheritance' {
+                # ActiveDirectoryRights : ExtendedRight
+                # InheritanceType       : Descendents
+                # ObjectType            : f3a64788-5306-11d1-a9c5-0000f80367c1
+                # InheritedObjectType   : bf967a86-0de6-11d0-a285-00aa003049e2
+                # ObjectFlags           : ObjectAceTypePresent, InheritedObjectAceTypePresent
+                # AccessControlType     : Allow
+                # IdentityReference     : LAB\DSACLModuleTest
+                # IsInherited           : False
+                # InheritanceFlags      : ContainerInherit
+                # PropagationFlags      : InheritOnly
+
+                # ActiveDirectoryRights : ExtendedRight
+                # InheritanceType       : Descendents
+                # ObjectType            : 00299570-246d-11d0-a768-00aa006e0529
+                # InheritedObjectType   : bf967a86-0de6-11d0-a285-00aa003049e2
+                # ObjectFlags           : ObjectAceTypePresent, InheritedObjectAceTypePresent
+                # AccessControlType     : Allow
+                # IdentityReference     : LAB\DSACLModuleTest
+                # IsInherited           : False
+                # InheritanceFlags      : ContainerInherit
+                # PropagationFlags      : InheritOnly
+
+                # ActiveDirectoryRights : ExtendedRight
+                # InheritanceType       : Descendents
+                # ObjectType            : 72e39547-7b18-11d1-adef-00c04fd8d5cd
+                # InheritedObjectType   : bf967a86-0de6-11d0-a285-00aa003049e2
+                # ObjectFlags           : ObjectAceTypePresent, InheritedObjectAceTypePresent
+                # AccessControlType     : Allow
+                # IdentityReference     : LAB\DSACLModuleTest
+                # IsInherited           : False
+                # InheritanceFlags      : ContainerInherit
+                # PropagationFlags      : InheritOnly
+
+                # ActiveDirectoryRights : ExtendedRight
+                # InheritanceType       : Descendents
+                # ObjectType            : 4c164200-20c0-11d0-a768-00aa006e0529
+                # InheritedObjectType   : bf967a86-0de6-11d0-a285-00aa003049e2
+                # ObjectFlags           : ObjectAceTypePresent, InheritedObjectAceTypePresent
+                # AccessControlType     : Allow
+                # IdentityReference     : LAB\DSACLModuleTest
+                # IsInherited           : False
+                # InheritanceFlags      : ContainerInherit
+                # PropagationFlags      : InheritOnly
+
+
+            }
+        }
+
         Context 'Add-DSACLReplicatingDirectoryChanges' {
             It 'Delegates ReplicatingDirectoryChanges access to DelegateDN' {
                 $DSACLParam = @{
@@ -250,7 +383,7 @@ Describe 'DSACL Unit tests' -Tag 'Unit' {
                 $ACE = Add-DSACLReplicatingDirectoryChanges @DSACLParam
 
                 $ExpectedAce = @{
-                    IdentityReference = 'S-1-5-10'
+                    IdentityReference = 'S-1-0-0'
                     ActiveDirectoryRights = 'ExtendedRight'
                     AccessControlType = 'Allow'
                     ObjectType = '1131f6aa-9c07-11d1-f79f-00c04fc2dcd2'
@@ -258,9 +391,81 @@ Describe 'DSACL Unit tests' -Tag 'Unit' {
                 }
                 Test-ACE -Ace $ACE -TemplateHash $ExpectedAce | Should -Be $true
             }
+
+            It 'Delegates ReplicatingDirectoryChanges-All access to DelegateDN' {
+                $DSACLParam = @{
+                    DelegateDN = 'TESTDN'
+                    AllowReplicateSecrets = $true
+                }
+                $ACE = Add-DSACLReplicatingDirectoryChanges @DSACLParam
+
+                $ExpectedAce = @{
+                    IdentityReference = 'S-1-0-0'
+                    ActiveDirectoryRights = 'ExtendedRight'
+                    AccessControlType = 'Allow'
+                    ObjectType = '1131f6ad-9c07-11d1-f79f-00c04fc2dcd2'
+                    InheritanceType = 'None'
+                }
+                Test-ACE -Ace $ACE -TemplateHash $ExpectedAce | Should -Be $true
+            }
         }
 
         Context 'Add-DSACLManageGroupMember' {
+            It 'Delegates access to manage groups in OU with inheritacnce' {
+                $DSACLParam = @{
+                    DelegateDN = 'TESTDN'
+                    TargetDN = 'TESTDN'
+                }
+                $ACE = Add-DSACLManageGroupMember @DSACLParam
+
+                $ExpectedAce = @{
+                    IdentityReference = 'S-1-0-0'
+                    ActiveDirectoryRights = 'WriteProperty'
+                    AccessControlType = 'Allow'
+                    ObjectType = 'bf9679c0-0de6-11d0-a285-00aa003049e2'
+                    InheritanceType = 'Descendents'
+                    InheritedObjectType = 'bf967a9c-0de6-11d0-a285-00aa003049e2'
+                }
+                Test-ACE -Ace $ACE -TemplateHash $ExpectedAce | Should -Be $true
+            }
+
+            It 'Delegates access to manage groups in OU without inheritacnce' {
+              $DSACLParam = @{
+                    DelegateDN = 'TESTDN'
+                    TargetDN = 'TESTDN'
+                    NoInheritance = $True
+                }
+                $ACE = Add-DSACLManageGroupMember @DSACLParam
+
+                $ExpectedAce = @{
+                    IdentityReference = 'S-1-0-0'
+                    ActiveDirectoryRights = 'WriteProperty'
+                    AccessControlType = 'Allow'
+                    ObjectType = 'bf9679c0-0de6-11d0-a285-00aa003049e2'
+                    InheritanceType = 'Children'
+                    InheritedObjectType = 'bf967a9c-0de6-11d0-a285-00aa003049e2'
+                }
+                Test-ACE -Ace $ACE -TemplateHash $ExpectedAce | Should -Be $true
+            }
+
+            It 'Delegates access to manage a specific group' {
+               $DSACLParam = @{
+                    DelegateDN = 'TESTDN'
+                    TargetDN = 'TESTDN'
+                    DirectOnGroup = $True
+                }
+                $ACE = Add-DSACLManageGroupMember @DSACLParam
+
+                $ExpectedAce = @{
+                    IdentityReference = 'S-1-0-0'
+                    ActiveDirectoryRights = 'WriteProperty'
+                    AccessControlType = 'Allow'
+                    ObjectType = 'bf9679c0-0de6-11d0-a285-00aa003049e2'
+                    InheritanceType = 'None'
+                    InheritedObjectType = '00000000-0000-0000-0000-000000000000'
+                }
+                Test-ACE -Ace $ACE -TemplateHash $ExpectedAce | Should -Be $true
+            }
 
         }
 

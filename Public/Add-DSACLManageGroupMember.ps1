@@ -32,9 +32,9 @@ function Add-DSACLManageGroupMember {
         $DelegateDN,
 
         # Allow or Deny
-        [Parameter(Mandatory)]
+        [Parameter()]
         [System.Security.AccessControl.AccessControlType]
-        $AccessType,
+        $AccessType = 'Allow',
 
         # Sets access right to "Children". Use this to effect all groups in OU but not subOUs
         [Parameter(ParameterSetName='OnContainer')]

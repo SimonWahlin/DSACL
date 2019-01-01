@@ -67,7 +67,7 @@ function Add-DSACLJoinDomain {
 
             'Account Restrictions', 'Validated write to DNS host name', 'Validated write to service principal name' | ForEach-Object -Process {
                 New-DSACLAccessRule -ObjectType $Script:GuidTable[$_] @AceParams
-            } | Add-DSACLAccessRule -Target $Target
+            } | Set-DSACLAccessRule -Target $Target
 
         }
         catch {

@@ -14,7 +14,7 @@ function Set-Owner {
         try {
             $Owner = Get-SID -DistinguishedName $OwnerDN
             $Target.psbase.ObjectSecurity.SetOwner($Owner)
-            $Target.psbase.CommitChanges()
+            Set-DSACLObject -DirectoryEntry $Target
         }
         catch {
             throw
