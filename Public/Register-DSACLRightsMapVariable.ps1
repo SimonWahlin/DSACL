@@ -1,4 +1,4 @@
-function Register-DSACLRightsMapVariables {
+function Register-DSACLRightsMapVariable {
     [CmdletBinding()]
     param(
         [Parameter(DontShow)]
