@@ -69,6 +69,14 @@ function Add-DSACLJoinDomain {
                 New-DSACLAccessRule -ObjectType $Script:GuidTable[$_] @AceParams
             } | Set-DSACLAccessRule -Target $Target
 
+            if($AllowCreate.IsPresent) {
+                Add-DSACLCreateChild -TargetDN $TargetDN -DelegateDN $DelegateDN -ObjectTypeName Computer -NoInheritance:$NoInheritance
+            }
+
+            if($AllowDelete.IsPresent) {
+                Add-DSACLDeleteChild -TargetDN $TargetDN -DelegateDN $DelegateDN -ObjectTypeName Computer -NoInheritance:$NoInheritance.IsPresent
+            }
+
         }
         catch {
             throw

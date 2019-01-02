@@ -1,4 +1,10 @@
 function Register-DSACLRightsMapVariables {
+    [CmdletBinding()]
+    param(
+        [Parameter(DontShow)]
+        [String]
+        $Scope = 'Global'
+    )
     $rootDSE = New-Object -TypeName System.DirectoryServices.DirectoryEntry -ArgumentList 'LDAP://RootDSE'
     $GuidMap = @{}
     $RightsMap = @{}
@@ -25,9 +31,9 @@ function Register-DSACLRightsMapVariables {
         $extendedGuidMap[$_.rightsGUID]=$_.displayName
     }
     $(
-        New-Variable -Scope Global -Name DSACLRightsMap -Value $RightsMap -Description 'Maps basic AD permissions to GUIDs' -Option ReadOnly -Force -PassThru
-        New-Variable -Scope Global -Name DSACLExtendedRightsMap -Value $extendedRightsMap -Description 'Maps extended properties AD permissions to GUIDs' -Option ReadOnly -Force -PassThru
-        New-Variable -Scope Global -Name DSACLGuidMap -Value $GuidMap -Description 'Maps GUIDs to AD permissions' -Option ReadOnly -Force -PassThru
-        New-Variable -Scope Global -Name DSACLExtendedGuidMap -Value $extendedGuidMap -Description 'Maps GUIDs to extended properties AD permissions' -Option ReadOnly -Force -PassThru
+        New-Variable -Scope $Scope -Name DSACLRightsMap -Value $RightsMap -Description 'Maps basic AD permissions to GUIDs' -Option ReadOnly -Force -PassThru
+        New-Variable -Scope $Scope -Name DSACLExtendedRightsMap -Value $extendedRightsMap -Description 'Maps extended properties AD permissions to GUIDs' -Option ReadOnly -Force -PassThru
+        New-Variable -Scope $Scope -Name DSACLGuidMap -Value $GuidMap -Description 'Maps GUIDs to AD permissions' -Option ReadOnly -Force -PassThru
+        New-Variable -Scope $Scope -Name DSACLExtendedGuidMap -Value $extendedGuidMap -Description 'Maps GUIDs to extended properties AD permissions' -Option ReadOnly -Force -PassThru
     ) | Select-Object -Property Name, Description
 }
