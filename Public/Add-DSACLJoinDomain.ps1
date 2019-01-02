@@ -1,15 +1,14 @@
 <#
     .SYNOPSIS
-    Give $DelegateDN rights to join computers in target (usually an OU).
+    Give DelegateDN rights to join computers in target (usually an OU).
 
     .EXAMPLE
     Add-DSACLJoinDomain -TargetDN $ComputersOU -DelegateDN $JoinDomainAccounts -AccessType Allow
     Will give the group with DistinguishedName in $JoinDomainAccounts rights to join computers to
     the domain. Requires a computer account to be created already.
 
-    Use switch -AllowCreate to allow to create computer objects in OU and thereby join without a
-    pre-existing computer object. -AllowDelete will give rights to move account away from this
-    location (requires allow create on destination). Add -NoInheritance do disable inheritance.
+    Use switch -AllowCreate to allow to create computer objects in OU and join without a
+    pre-existing computer object. Add -NoInheritance do disable the access to ineherit to sub-OUs.
 #>
 function Add-DSACLJoinDomain {
     [CmdletBinding()]
@@ -24,15 +23,10 @@ function Add-DSACLJoinDomain {
         [String]
         $DelegateDN,
 
-        # Sets access right to "This object only"
+        # Allow creating computer objects, this allows to join computers without a pre-staged computer account
         [Parameter()]
         [Switch]
         $AllowCreate,
-
-        # Sets access right to "This object only"
-        [Parameter()]
-        [Switch]
-        $AllowDelete,
 
         # Sets access right to "This object only"
         [Parameter()]
@@ -55,26 +49,44 @@ function Add-DSACLJoinDomain {
                 $InheritanceType = [System.DirectoryServices.ActiveDirectorySecurityInheritance]'Descendents'
             }
 
+            # Joining to existing object requires reset password
             Add-DSACLResetPassword -TargetDN $TargetDN -DelegateDN $DelegateDN -ObjectTypeName Computer -AccessType Allow @InheritanceParam
 
+            # Gives access to enable/disable computer objects
             $AceParams = @{
                 Identity              = $DelegateSID
-                ActiveDirectoryRights = 'ExtendedRight'
+                ActiveDirectoryRights = 'WriteProperty'
                 AccessControlType     = 'Allow'
+                ObjectType            = $Script:GuidTable['Account Restrictions']
                 InheritanceType       = $InheritanceType
                 InheritedObjectType   = $Script:GuidTable['Computer']
             }
+            New-DSACLAccessRule @AceParams | Set-DSACLAccessRule -Target $Target
 
-            'Account Restrictions', 'Validated write to DNS host name', 'Validated write to service principal name' | ForEach-Object -Process {
-                New-DSACLAccessRule -ObjectType $Script:GuidTable[$_] @AceParams
-            } | Set-DSACLAccessRule -Target $Target
+            # Allow updating DNS host name
+            $AceParams = @{
+                Identity              = $DelegateSID
+                ActiveDirectoryRights = 'WriteProperty'
+                AccessControlType     = 'Allow'
+                ObjectType            = $Script:GuidTable['Validated write to DNS host name']
+                InheritanceType       = $InheritanceType
+                InheritedObjectType   = $Script:GuidTable['Computer']
+            }
+            New-DSACLAccessRule @AceParams | Set-DSACLAccessRule -Target $Target
+
+            # Allow updating service principal names
+            $AceParams = @{
+                Identity              = $DelegateSID
+                ActiveDirectoryRights = 'WriteProperty'
+                AccessControlType     = 'Allow'
+                ObjectType            = $Script:GuidTable['Validated write to service principal name']
+                InheritanceType       = $InheritanceType
+                InheritedObjectType   = $Script:GuidTable['Computer']
+            }
+            New-DSACLAccessRule @AceParams | Set-DSACLAccessRule -Target $Target
 
             if($AllowCreate.IsPresent) {
                 Add-DSACLCreateChild -TargetDN $TargetDN -DelegateDN $DelegateDN -ObjectTypeName Computer -NoInheritance:$NoInheritance
-            }
-
-            if($AllowDelete.IsPresent) {
-                Add-DSACLDeleteChild -TargetDN $TargetDN -DelegateDN $DelegateDN -ObjectTypeName Computer -NoInheritance:$NoInheritance.IsPresent
             }
 
         }
