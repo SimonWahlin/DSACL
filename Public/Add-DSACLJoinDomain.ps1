@@ -63,27 +63,15 @@ function Add-DSACLJoinDomain {
             }
             New-DSACLAccessRule @AceParams | Set-DSACLAccessRule -Target $Target
 
-            # Allow updating DNS host name
-            $AceParams = @{
-                Identity              = $DelegateSID
-                ActiveDirectoryRights = 'WriteProperty'
-                AccessControlType     = 'Allow'
-                ObjectType            = $Script:GuidTable['Validated write to DNS host name']
-                InheritanceType       = $InheritanceType
-                InheritedObjectType   = $Script:GuidTable['Computer']
+            $WriteParams = @{
+                TargetDN       = $TargetDN
+                DelegateDN     = $DelegateDN
+                ObjectTypeName = 'Computer'
+                AccessType     = 'Allow'
+                NoInheritance  = $NoInheritance
             }
-            New-DSACLAccessRule @AceParams | Set-DSACLAccessRule -Target $Target
-
-            # Allow updating service principal names
-            $AceParams = @{
-                Identity              = $DelegateSID
-                ActiveDirectoryRights = 'WriteProperty'
-                AccessControlType     = 'Allow'
-                ObjectType            = $Script:GuidTable['Validated write to service principal name']
-                InheritanceType       = $InheritanceType
-                InheritedObjectType   = $Script:GuidTable['Computer']
-            }
-            New-DSACLAccessRule @AceParams | Set-DSACLAccessRule -Target $Target
+            Add-DSACLWriteServicePrincipalName @WriteParams
+            Add-DSACLWriteDNSHostName @WriteParams
 
             if($AllowCreate.IsPresent) {
                 Add-DSACLCreateChild -TargetDN $TargetDN -DelegateDN $DelegateDN -ObjectTypeName Computer -NoInheritance:$NoInheritance

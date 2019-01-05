@@ -3,6 +3,7 @@ $Script:GuidTable = @{
     'Contact'                                   = [guid]'5cb41ed0-0e4c-11d0-a286-00aa003049e2'
     'Group'                                     = [guid]'bf967a9c-0de6-11d0-a285-00aa003049e2'
     'ManagedServiceAccount'                     = [guid]'ce206244-5827-4a86-ba1c-1c0c386c1b64'
+    'GroupManagedServiceAccount'                = [guid]'7b8b558a-93a5-4af7-adca-c017e67f1057'
     'User'                                      = [guid]'bf967aba-0de6-11d0-a285-00aa003049e2'
     'OrganizationalUnit'                        = [guid]'bf967aa5-0de6-11d0-a285-00aa003049e2'
     'All'                                       = [guid]'00000000-0000-0000-0000-000000000000'
@@ -22,3 +23,5 @@ $Script:DefaultContainersPatternTable = @{
     Computers = '^(?<prefix>B:32:AA312825768811D1ADED00C04FD8D5CD:)(?<DN>.+)$'
     Users     = '^(?<prefix>B:32:A9D1CA15768811D1ADED00C04FD8D5CD:)(?<DN>.+)$'
 }
+
+#$Script:RightsMapLoaded = $false

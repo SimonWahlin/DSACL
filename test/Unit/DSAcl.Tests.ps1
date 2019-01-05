@@ -107,6 +107,10 @@ Describe 'DSACL Unit tests' -Tag 'Unit' {
                 ObjectGuid = 'ce206244-5827-4a86-ba1c-1c0c386c1b64'
             },
             @{
+                ObjectType = 'GroupManagedServiceAccount'
+                ObjectGuid = '7b8b558a-93a5-4af7-adca-c017e67f1057'
+            },
+            @{
                 ObjectType = 'User'
                 ObjectGuid = 'bf967aba-0de6-11d0-a285-00aa003049e2'
             },
@@ -123,7 +127,7 @@ Describe 'DSACL Unit tests' -Tag 'Unit' {
                 InheritanceType = 'None','All'
                 ObjectType = 'ObjectGuid'
                 InheritedObjectType = '00000000-0000-0000-0000-000000000000'
-                Types = 'Computer', 'Contact', 'Group', 'ManagedServiceAccount', 'User', 'All'
+                Types = 'Computer', 'Contact', 'Group', 'ManagedServiceAccount', 'GroupManagedServiceAccount', 'User', 'All'
             },
             @{
                 Command = 'Add-DSACLDeleteChild'
@@ -131,7 +135,7 @@ Describe 'DSACL Unit tests' -Tag 'Unit' {
                 InheritanceType = 'None','All'
                 ObjectType = 'ObjectGuid'
                 InheritedObjectType = '00000000-0000-0000-0000-000000000000'
-                Types = 'Computer', 'Contact', 'Group', 'ManagedServiceAccount', 'User', 'All'
+                Types = 'Computer', 'Contact', 'Group', 'ManagedServiceAccount', 'GroupManagedServiceAccount', 'User', 'All'
             },
             @{
                 Command = 'Add-DSACLFullControl'
@@ -139,7 +143,7 @@ Describe 'DSACL Unit tests' -Tag 'Unit' {
                 InheritanceType = 'Children','Descendents'
                 ObjectType = '00000000-0000-0000-0000-000000000000'
                 InheritedObjectType = 'ObjectGuid'
-                Types = 'Computer', 'Contact', 'Group', 'ManagedServiceAccount', 'User', 'All'
+                Types = 'Computer', 'Contact', 'Group', 'ManagedServiceAccount', 'GroupManagedServiceAccount', 'User', 'All'
             },
             @{
                 Command = 'Add-DSACLResetPassword'
@@ -147,7 +151,7 @@ Describe 'DSACL Unit tests' -Tag 'Unit' {
                 ObjectType = '00299570-246d-11d0-a768-00aa006e0529'
                 InheritanceType = 'Children','Descendents'
                 InheritedObjectType = 'ObjectGuid'
-                Types = 'Computer','User','ManagedServiceAccount'
+                Types = 'Computer','User','ManagedServiceAccount', 'GroupManagedServiceAccount'
             }
         )
         foreach($Command in $Commands) {
@@ -327,50 +331,6 @@ Describe 'DSACL Unit tests' -Tag 'Unit' {
 
         Context 'Add-DSACLJoinDomain' {
             It 'Delegates JoinDomain access (existing-computer-accounts) to DelegateDN with inheritance' {
-                # ActiveDirectoryRights : ExtendedRight
-                # InheritanceType       : Descendents
-                # ObjectType            : f3a64788-5306-11d1-a9c5-0000f80367c1
-                # InheritedObjectType   : bf967a86-0de6-11d0-a285-00aa003049e2
-                # ObjectFlags           : ObjectAceTypePresent, InheritedObjectAceTypePresent
-                # AccessControlType     : Allow
-                # IdentityReference     : LAB\DSACLModuleTest
-                # IsInherited           : False
-                # InheritanceFlags      : ContainerInherit
-                # PropagationFlags      : InheritOnly
-
-                # ActiveDirectoryRights : ExtendedRight
-                # InheritanceType       : Descendents
-                # ObjectType            : 00299570-246d-11d0-a768-00aa006e0529
-                # InheritedObjectType   : bf967a86-0de6-11d0-a285-00aa003049e2
-                # ObjectFlags           : ObjectAceTypePresent, InheritedObjectAceTypePresent
-                # AccessControlType     : Allow
-                # IdentityReference     : LAB\DSACLModuleTest
-                # IsInherited           : False
-                # InheritanceFlags      : ContainerInherit
-                # PropagationFlags      : InheritOnly
-
-                # ActiveDirectoryRights : ExtendedRight
-                # InheritanceType       : Descendents
-                # ObjectType            : 72e39547-7b18-11d1-adef-00c04fd8d5cd
-                # InheritedObjectType   : bf967a86-0de6-11d0-a285-00aa003049e2
-                # ObjectFlags           : ObjectAceTypePresent, InheritedObjectAceTypePresent
-                # AccessControlType     : Allow
-                # IdentityReference     : LAB\DSACLModuleTest
-                # IsInherited           : False
-                # InheritanceFlags      : ContainerInherit
-                # PropagationFlags      : InheritOnly
-
-                # ActiveDirectoryRights : ExtendedRight
-                # InheritanceType       : Descendents
-                # ObjectType            : 4c164200-20c0-11d0-a768-00aa006e0529
-                # InheritedObjectType   : bf967a86-0de6-11d0-a285-00aa003049e2
-                # ObjectFlags           : ObjectAceTypePresent, InheritedObjectAceTypePresent
-                # AccessControlType     : Allow
-                # IdentityReference     : LAB\DSACLModuleTest
-                # IsInherited           : False
-                # InheritanceFlags      : ContainerInherit
-                # PropagationFlags      : InheritOnly
-
 
             }
         }
@@ -473,13 +433,6 @@ Describe 'DSACL Unit tests' -Tag 'Unit' {
 
         }
     }
-    # TargetDN              = $TargetDN
-    # DelegateDN            = $DelegateDN
-    # ActiveDirectoryRights = 'ExtendedRight'
-    # AccessControlType     = $AccessType
-    # ObjectType            = $Script:GuidTable['ResetPassword']
-    # InheritanceType       = $InheritanceType
-    # InheritedObjectType   = $ObjectType
 
 }
 

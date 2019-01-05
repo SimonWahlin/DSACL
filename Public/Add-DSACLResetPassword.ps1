@@ -24,7 +24,7 @@ function Add-DSACLResetPassword {
 
         # Object type to give full control over
         [Parameter(Mandatory,ParameterSetName='ByTypeName')]
-        [ValidateSet('User', 'Computer', 'ManagedServiceAccount')]
+        [ValidateSet('User', 'Computer', 'ManagedServiceAccount', 'GroupManagedServiceAccount')]
         [String]
         $ObjectTypeName,
 

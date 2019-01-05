@@ -24,7 +24,7 @@ function Add-DSACLFullControl {
 
         # Object type to give full control over
         [Parameter(Mandatory,ParameterSetName='ByTypeName')]
-        [ValidateSet('Computer', 'Contact', 'Group', 'ManagedServiceAccount', 'User', 'All')]
+        [ValidateSet('Computer', 'Contact', 'Group', 'ManagedServiceAccount', 'GroupManagedServiceAccount', 'User', 'All')]
         [String]
         $ObjectTypeName,
 

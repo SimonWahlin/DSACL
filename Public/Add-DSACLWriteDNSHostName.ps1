@@ -1,14 +1,13 @@
 <#
 .SYNOPSIS
-Give Delegate rights to create objects of selected type in target (usually an OU)
+Delegate rights to SET DNSHostName on objects of selected type in target (usually an OU)
 
 .EXAMPLE
-Add-DSACLCreateChild -TargetDN $UsersOU -DelegateDN $UserAdminGroup -ObjectTypeName User -AccessType Allow
-Will give the group with DistinguishedName in $UserAdminGroup access to create user objects in
-the OU with DistinguishedName in $UsersOU and all sub-OUs. Add -NoInheritance do disable inheritance.
-
+Add-DSACLWriteDNSHostName -TargetDN $ComputersOU -DelegateDN $ComputerAdminGroup -ObjectTypeName Computer -AccessType Allow
+Will give the group with DistinguishedName in $ComputerAdminGroup rights to SET DNSHostName of computer objects in
+the OU with DistinguishedName in $ComputersOU and all sub-OUs. Add -NoInheritance to disable inheritance.
 #>
-function Add-DSACLCreateChild {
+function Add-DSACLWriteDNSHostName {
     [CmdletBinding(DefaultParameterSetName='ByTypeName')]
     param (
         # DistinguishedName of object to modify ACL on. Usually an OU.
@@ -25,7 +24,7 @@ function Add-DSACLCreateChild {
 
         # Object type to give full control over
         [Parameter(Mandatory,ParameterSetName='ByTypeName')]
-        [ValidateSet('Computer', 'Contact', 'Group', 'ManagedServiceAccount', 'GroupManagedServiceAccount', 'User','All')]
+        [ValidateSet('Computer', 'ManagedServiceAccount','GroupManagedServiceAccount')]
         [String]
         $ObjectTypeName,
 
@@ -35,10 +34,10 @@ function Add-DSACLCreateChild {
         $ObjectTypeGuid,
 
         # Allow or Deny
-        [Parameter(ParameterSetName='ByTypeName')]
-        [Parameter(ParameterSetName='ByGuid')]
+        [Parameter(Mandatory,ParameterSetName='ByTypeName')]
+        [Parameter(Mandatory,ParameterSetName='ByGuid')]
         [System.Security.AccessControl.AccessControlType]
-        $AccessType = 'Allow',
+        $AccessType,
 
         # Sets access right to "This object only"
         [Parameter(ParameterSetName='ByTypeName')]
@@ -50,28 +49,28 @@ function Add-DSACLCreateChild {
     process {
         try {
             if ($NoInheritance.IsPresent) {
-                $InheritanceType = [System.DirectoryServices.ActiveDirectorySecurityInheritance]'None'
-            }
-            else {
-                $InheritanceType = [System.DirectoryServices.ActiveDirectorySecurityInheritance]'All'
-            }
-            switch ($PSCmdlet.ParameterSetName) {
-                'ByTypeName' { $ObjectType = $Script:GuidTable[$ObjectTypeName]}
-                'ByGuid'     { $ObjectType = $ObjectTypeGuid }
+                $InheritanceType = [System.DirectoryServices.ActiveDirectorySecurityInheritance]'Children'
+            } else {
+                $InheritanceType = [System.DirectoryServices.ActiveDirectorySecurityInheritance]'Descendents'
             }
 
-            $Params = @{
+            switch ($PSCmdlet.ParameterSetName) {
+                'ByTypeName' { $InheritanceObjectType = $Script:GuidTable[$ObjectTypeName]}
+                'ByGuid'     { $InheritanceObjectType = $ObjectTypeGuid }
+            }
+
+            $AceParams = @{
                 TargetDN              = $TargetDN
                 DelegateDN            = $DelegateDN
-                ActiveDirectoryRights = 'CreateChild'
-                AccessControlType     = $AccessType
-                ObjectType            = $ObjectType
+                ActiveDirectoryRights = 'WriteProperty'
+                AccessControlType     = 'Allow'
+                ObjectType            = $Script:GuidTable['Validated write to DNS host name']
                 InheritanceType       = $InheritanceType
+                InheritedObjectType   = $InheritanceObjectType
             }
-            Add-DSACLCustom @Params
+            Add-DSACLCustom @AceParams
 
-        }
-        catch {
+        } catch {
             throw
         }
     }

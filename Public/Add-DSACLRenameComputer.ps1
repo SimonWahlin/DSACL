@@ -1,15 +1,22 @@
 <#
 .SYNOPSIS
-Give Delegate rights to rename computers in target (usually an OU)
+Give Delegate rights to rename objects in target (usually an OU)
 
 .EXAMPLE
-Add-DSACLRenameComputer -TargetDN $ComputersOU -DelegateDN $ComputerAdminGroup -AccessType Allow
+Add-DSACLRenameObject -ObjectTypeName Computer -TargetDN $ComputersOU -DelegateDN $ComputerAdminGroup -AccessType Allow
 Will give the group with DistinguishedName in $ComputerAdminGroup rights to rename computers in
 the OU with DistinguishedName in $ComputersOU and all sub-OUs. Add -NoInheritance do disable inheritance.
 #>
-function Add-DSACLRenameComputer {
+function Add-DSACLRenameObject {
     [CmdletBinding(DefaultParameterSetName='Delegate')]
     param (
+        # Object type to allow being renamed
+        [Parameter(Mandatory,ParameterSetName='Delegate')]
+        [Parameter(Mandatory,ParameterSetName='Self')]
+        [ValidateSet('Computer', 'Contact', 'Group', 'ManagedServiceAccount', 'GroupManagedServiceAccount', 'User','All')]
+        [String]
+        $ObjectTypeName,
+
         # DistinguishedName of object to modify ACL on. Usually an OU.
         [Parameter(Mandatory,ParameterSetName='Delegate')]
         [Parameter(Mandatory,ParameterSetName='Self')]
@@ -55,7 +62,7 @@ function Add-DSACLRenameComputer {
                 Identity = $DelegateSID
                 ActiveDirectoryRights = 'WriteProperty'
                 AccessControlType = 'Allow'
-                InheritedObjectType   = $Script:GuidTable['Computer']
+                InheritedObjectType   = $Script:GuidTable[$ObjectTypeName]
                 InheritanceType       = $InheritanceType
             }
 

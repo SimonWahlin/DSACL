@@ -103,6 +103,10 @@ Describe "Integration testing in domain: $DomainDN" -Tag Integration {
                 ObjectGuid = 'ce206244-5827-4a86-ba1c-1c0c386c1b64'
             },
             @{
+                ObjectType = 'GroupManagedServiceAccount'
+                ObjectGuid = '7b8b558a-93a5-4af7-adca-c017e67f1057'
+            },
+            @{
                 ObjectType = 'User'
                 ObjectGuid = 'bf967aba-0de6-11d0-a285-00aa003049e2'
             },
@@ -119,7 +123,7 @@ Describe "Integration testing in domain: $DomainDN" -Tag Integration {
                 InheritanceType = 'None','All'
                 ObjectType = 'ObjectGuid'
                 InheritedObjectType = '00000000-0000-0000-0000-000000000000'
-                Types = 'Computer', 'Contact', 'Group', 'ManagedServiceAccount', 'User', 'All'
+                Types = 'Computer', 'Contact', 'Group', 'ManagedServiceAccount', 'GroupManagedServiceAccount', 'User', 'All'
             },
             @{
                 Command = 'Add-DSACLDeleteChild'
@@ -127,7 +131,7 @@ Describe "Integration testing in domain: $DomainDN" -Tag Integration {
                 InheritanceType = 'None','All'
                 ObjectType = 'ObjectGuid'
                 InheritedObjectType = '00000000-0000-0000-0000-000000000000'
-                Types = 'Computer', 'Contact', 'Group', 'ManagedServiceAccount', 'User', 'All'
+                Types = 'Computer', 'Contact', 'Group', 'ManagedServiceAccount', 'GroupManagedServiceAccount', 'User', 'All'
             },
             @{
                 Command = 'Add-DSACLFullControl'
@@ -135,7 +139,7 @@ Describe "Integration testing in domain: $DomainDN" -Tag Integration {
                 InheritanceType = 'Children','Descendents'
                 ObjectType = '00000000-0000-0000-0000-000000000000'
                 InheritedObjectType = 'ObjectGuid'
-                Types = 'Computer', 'Contact', 'Group', 'ManagedServiceAccount', 'User', 'All'
+                Types = 'Computer', 'Contact', 'Group', 'ManagedServiceAccount', 'GroupManagedServiceAccount', 'User', 'All'
             },
             @{
                 Command = 'Add-DSACLResetPassword'
@@ -143,7 +147,7 @@ Describe "Integration testing in domain: $DomainDN" -Tag Integration {
                 ObjectType = '00299570-246d-11d0-a768-00aa006e0529'
                 InheritanceType = 'Children','Descendents'
                 InheritedObjectType = 'ObjectGuid'
-                Types = 'Computer','User','ManagedServiceAccount'
+                Types = 'Computer','User','ManagedServiceAccount', 'GroupManagedServiceAccount'
             }
         )
         foreach($Command in $Commands) {
