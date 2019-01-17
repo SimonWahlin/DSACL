@@ -1,13 +1,20 @@
 <#
 .SYNOPSIS
-Delegate rights to SET DNSHostName on objects of selected type in target (usually an OU)
+Delegate rights to write to the property set "Account Restrictions" on objects of selected type in target (usually an OU)
+
+.DESCRIPTION
+Delegate rights to write to the property set "Account Restrictions" on objects of selected type in target (usually an OU)
+
+A property set is a set of attributes that can be used to minimize the amount of ACE's to create. The property set
+"Account Restrictions". More information about this set can be found here: https://docs.microsoft.com/en-us/windows/desktop/adschema/r-user-account-restrictions
 
 .EXAMPLE
-Add-DSACLWriteDNSHostName -TargetDN $ComputersOU -DelegateDN $ComputerAdminGroup -ObjectTypeName Computer -AccessType Allow
-Will give the group with DistinguishedName in $ComputerAdminGroup rights to SET DNSHostName of computer objects in
-the OU with DistinguishedName in $ComputersOU and all sub-OUs. Add -NoInheritance to disable inheritance.
+Add-DSACLWriteAccountRestrictions -TargetDN $UsersOU -DelegateDN $UserAdminGroup -ObjectTypeName User -AccessType Allow
+Will give the group with DistinguishedName in $UserAdminGroup rights to SET SPN of user objects in
+the OU with DistinguishedName in $UsersOU and all sub-OUs. Add -NoInheritance to disable inheritance.
 #>
-function Add-DSACLWriteDNSHostName {
+
+function Add-DSACLWriteAccountRestrictions {
     [CmdletBinding(DefaultParameterSetName='ByTypeName')]
     param (
         # DistinguishedName of object to modify ACL on. Usually an OU.
@@ -24,7 +31,7 @@ function Add-DSACLWriteDNSHostName {
 
         # Object type to give full control over
         [Parameter(Mandatory,ParameterSetName='ByTypeName')]
-        [ValidateSet('Computer', 'ManagedServiceAccount','GroupManagedServiceAccount')]
+        [ValidateSet('User', 'Computer', 'ManagedServiceAccount','GroupManagedServiceAccount')]
         [String]
         $ObjectTypeName,
 
@@ -34,26 +41,21 @@ function Add-DSACLWriteDNSHostName {
         $ObjectTypeGuid,
 
         # Allow or Deny
-        [Parameter(ParameterSetName='ByTypeName')]
-        [Parameter(ParameterSetName='ByGuid')]
+        [Parameter(Mandatory,ParameterSetName='ByTypeName')]
+        [Parameter(Mandatory,ParameterSetName='ByGuid')]
         [System.Security.AccessControl.AccessControlType]
-        $AccessType = 'Allow',
+        $AccessType,
 
         # Sets access right to "This object only"
         [Parameter(ParameterSetName='ByTypeName')]
         [Parameter(ParameterSetName='ByGuid')]
         [Switch]
-        $NoInheritance,
-
-        # Only effects validated writes
-        [Parameter(ParameterSetName='ByTypeName')]
-        [Parameter(ParameterSetName='ByGuid')]
-        [Switch]
-        $ValidatedOnly
+        $NoInheritance
     )
 
     process {
         try {
+
             if ($NoInheritance.IsPresent) {
                 $InheritanceType = [System.DirectoryServices.ActiveDirectorySecurityInheritance]'Children'
             } else {
@@ -65,20 +67,12 @@ function Add-DSACLWriteDNSHostName {
                 'ByGuid'     { $InheritanceObjectType = $ObjectTypeGuid }
             }
 
-            if($ValidatedOnly.IsPresent) {
-                $ObjectType = $Script:GuidTable['Validated write to DNS host name']
-                $ActiveDirectoryRights = [System.DirectoryServices.ActiveDirectoryRights]::Self
-            } else {
-                $ObjectType = $Script:GuidTable['DNS Host Name Attributes']
-                $ActiveDirectoryRights = [System.DirectoryServices.ActiveDirectoryRights]::WriteProperty
-            }
-
             $AceParams = @{
                 TargetDN              = $TargetDN
                 DelegateDN            = $DelegateDN
-                ActiveDirectoryRights = $ActiveDirectoryRights
+                ActiveDirectoryRights = 'WriteProperty'
                 AccessControlType     = 'Allow'
-                ObjectType            = $ObjectType
+                ObjectType            = $Script:GuidTable['Account Restrictions']
                 InheritanceType       = $InheritanceType
                 InheritedObjectType   = $InheritanceObjectType
             }

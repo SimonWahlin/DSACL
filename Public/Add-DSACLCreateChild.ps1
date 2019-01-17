@@ -3,7 +3,7 @@
 Give Delegate rights to create objects of selected type in target (usually an OU)
 
 .EXAMPLE
-Add-DSACLCreateChild -TargetDN $UsersOU -DelegateDN $UserAdminGroup -ObjectTypeName User -AccessType Allow
+Add-DSACLCreateChild -TargetDN $UsersOU -DelegateDN $UserAdminGroup -ObjectTypeName User
 Will give the group with DistinguishedName in $UserAdminGroup access to create user objects in
 the OU with DistinguishedName in $UsersOU and all sub-OUs. Add -NoInheritance do disable inheritance.
 

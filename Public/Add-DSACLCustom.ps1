@@ -13,6 +13,7 @@ function Add-DSACLCustom {
         # DistinguishedName of object to modify ACL on. Usually an OU.
         [Parameter(Mandatory,ParameterSetName='Delegate')]
         [Parameter(Mandatory,ParameterSetName='Self')]
+        [Parameter(Mandatory,ParameterSetName='Sid')]
         [String]
         $TargetDN,
 
@@ -26,33 +27,42 @@ function Add-DSACLCustom {
         [String]
         $DelegateDN,
 
+        [Parameter(Mandatory,ParameterSetName='Sid')]
+        [String]
+        $SID,
+
         # List of access rights that should be applied
         [Parameter(Mandatory,ParameterSetName='Delegate')]
         [Parameter(Mandatory,ParameterSetName='Self')]
+        [Parameter(Mandatory,ParameterSetName='Sid')]
         [System.DirectoryServices.ActiveDirectoryRights[]]
         $ActiveDirectoryRights,
 
         # Sets allow or deny
         [Parameter(Mandatory,ParameterSetName='Delegate')]
         [Parameter(Mandatory,ParameterSetName='Self')]
+        [Parameter(Mandatory,ParameterSetName='Sid')]
         [System.Security.AccessControl.AccessControlType]
         $AccessControlType,
 
         # Sets guid where access right should apply
         [Parameter(ParameterSetName='Delegate')]
         [Parameter(ParameterSetName='Self')]
+        [Parameter(ParameterSetName='Sid')]
         [Guid]
         $ObjectType,
 
         # Sets if and how this rule should be inherited
         [Parameter(ParameterSetName='Delegate')]
         [Parameter(ParameterSetName='Self')]
+        [Parameter(ParameterSetName='Sid')]
         [System.DirectoryServices.ActiveDirectorySecurityInheritance]
         $InheritanceType,
 
         # Sets guid of object types that should inherit this rule
         [Parameter(ParameterSetName='Delegate')]
         [Parameter(ParameterSetName='Self')]
+        [Parameter(ParameterSetName='Sid')]
         [Guid]
         $InheritedObjectType
 
@@ -66,11 +76,13 @@ function Add-DSACLCustom {
                     $DelegateSID = Get-SID -DistinguishedName $DelegateDN
                 }
                 'Self' { $DelegateSID = New-Object -TypeName System.Security.Principal.SecurityIdentifier -ArgumentList 'S-1-5-10' }
+                'Sid' { $DelegateSID = New-Object -TypeName System.Security.Principal.SecurityIdentifier -ArgumentList $SID }
             }
 
             $null = $PSBoundParameters.Remove('Self')
             $null = $PSBoundParameters.Remove('TargetDN')
             $null = $PSBoundParameters.Remove('DelegateDN')
+            $null = $PSBoundParameters.Remove('SID')
             $PSBoundParameters.Add('Identity',$DelegateSID)
 
             $ACE = New-DSACLAccessRule @PSBoundParameters

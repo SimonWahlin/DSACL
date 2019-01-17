@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Configuration>
+    <ViewDefinitions>
+        <View>
+            <Name>ActiveDirectoryAccessRule</Name>
+            <ViewSelectedBy>
+                <TypeName>System.DirectoryServices.ActiveDirectoryAccessRule</TypeName>
+            </ViewSelectedBy>
+            <TableControl>
+                <TableHeaders>
+                    <TableColumnHeader>
+                        <Label>AccessControlType</Label>
+                    </TableColumnHeader>
+                    <TableColumnHeader>
+                        <Label>ActiveDirectoryRights</Label>
+                        <Width>26</Width>
+                    </TableColumnHeader>
+                    <TableColumnHeader>
+                        <Label>ObjectType</Label>
+                    </TableColumnHeader>
+                    <TableColumnHeader>
+                        <Label>InheritedObjectType</Label>
+                    </TableColumnHeader>
+                    <TableColumnHeader>
+                        <Label>InheritanceType</Label>
+                    </TableColumnHeader>
+                    <TableColumnHeader>
+                        <Label>IdentityReference</Label>
+                        <Width>4</Width>
+                    </TableColumnHeader>
+                    <TableColumnHeader>
+                        <Label>IsInherited</Label>
+                    </TableColumnHeader>
+                </TableHeaders>
+                <TableRowEntries>
+                    <TableRowEntry>
+                        <TableColumnItems>
+                            <TableColumnItem>
+                                <PropertyName>AccessControlType</PropertyName>
+                            </TableColumnItem>
+                            <TableColumnItem>
+                                <ScriptBlock>
+                                    $Width = 26
+                                    $S = ($_.ActiveDirectoryRights | % ToString) -join ','
+                                    $S = $S -replace '(?-i)[a-z\s]'
+                                    if ($S.length -gt $Width) {
+                                        $S='{0}...'-f $S.SubString(0,$Width-3)
+                                    };
+                                    return $S;
+                                </ScriptBlock>
+                            </TableColumnItem>
+                            <TableColumnItem>
+                                <ScriptBlock>ConvertFrom-DSACLObjectTypeGuid -ACE $_</ScriptBlock>
+                            </TableColumnItem>
+                            <TableColumnItem>
+                                <ScriptBlock>ConvertFrom-DSACLInheritedObjectTypeGuid -ACE $_</ScriptBlock>
+                            </TableColumnItem>
+                            <TableColumnItem>
+                                <PropertyName>InheritanceType</PropertyName>
+                            </TableColumnItem>
+                            <TableColumnItem>
+                                <PropertyName>IdentityReference</PropertyName>
+                            </TableColumnItem>
+                            <TableColumnItem>
+                                <PropertyName>IsInherited</PropertyName>
+                            </TableColumnItem>
+                        </TableColumnItems>
+                    </TableRowEntry>
+                </TableRowEntries>
+            </TableControl>
+        </View>
+    </ViewDefinitions>
+</Configuration>

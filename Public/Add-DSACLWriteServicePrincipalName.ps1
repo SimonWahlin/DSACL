@@ -43,7 +43,13 @@ function Add-DSACLWriteServicePrincipalName {
         [Parameter(ParameterSetName='ByTypeName')]
         [Parameter(ParameterSetName='ByGuid')]
         [Switch]
-        $NoInheritance
+        $NoInheritance,
+
+        # Only effects validated writes
+        [Parameter(ParameterSetName='ByTypeName')]
+        [Parameter(ParameterSetName='ByGuid')]
+        [Switch]
+        $ValidatedOnly
     )
 
     process {
@@ -60,12 +66,18 @@ function Add-DSACLWriteServicePrincipalName {
                 'ByGuid'     { $InheritanceObjectType = $ObjectTypeGuid }
             }
 
+            if($ValidatedOnly.IsPresent) {
+                $ActiveDirectoryRights = 'Self'
+            } else {
+                $ActiveDirectoryRights = 'WriteProperty'
+            }
+
             $AceParams = @{
                 TargetDN              = $TargetDN
                 DelegateDN            = $DelegateDN
-                ActiveDirectoryRights = 'WriteProperty'
+                ActiveDirectoryRights = $ActiveDirectoryRights
                 AccessControlType     = 'Allow'
-                ObjectType            = $Script:GuidTable['Validated write to service principal name']
+                ObjectType            = $Script:GuidTable['servicePrincipalName']
                 InheritanceType       = $InheritanceType
                 InheritedObjectType   = $InheritanceObjectType
             }

@@ -34,10 +34,10 @@ function Add-DSACLResetPassword {
         $ObjectTypeGuid,
 
         # Allow or Deny
-        [Parameter(Mandatory,ParameterSetName='ByTypeName')]
-        [Parameter(Mandatory,ParameterSetName='ByGuid')]
+        [Parameter(ParameterSetName='ByTypeName')]
+        [Parameter(ParameterSetName='ByGuid')]
         [System.Security.AccessControl.AccessControlType]
-        $AccessType,
+        $AccessType = 'Allow',
 
         # Sets access right to "This object only"
         [Parameter(ParameterSetName='ByTypeName')]

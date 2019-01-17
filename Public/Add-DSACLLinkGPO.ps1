@@ -21,9 +21,9 @@ function Add-DSACLLinkGPO {
         $DelegateDN,
 
         # Allow or Deny
-        [Parameter(Mandatory)]
+        [Parameter()]
         [System.Security.AccessControl.AccessControlType]
-        $AccessType,
+        $AccessType = 'Allow',
 
         # Sets access right to "This object only"
         [Parameter()]
@@ -42,11 +42,11 @@ function Add-DSACLLinkGPO {
             }
 
             if ($NoInheritance.IsPresent) {
-                $Params['InheritanceType'] = [System.DirectoryServices.ActiveDirectorySecurityInheritance]'None'
+                $Params['InheritanceType'] = [System.DirectoryServices.ActiveDirectorySecurityInheritance]::None
             }
             else {
-                $Params['InheritanceType'] = [System.DirectoryServices.ActiveDirectorySecurityInheritance]'Descendents'
-                $Params['InheritanceObjectType'] = $Script:GuidTable['OrganizationalUnit']
+                $Params['InheritanceType'] = [System.DirectoryServices.ActiveDirectorySecurityInheritance]::All
+                $Params['InheritedObjectType'] = $Script:GuidTable['OrganizationalUnit']
             }
 
             Add-DSACLCustom @Params

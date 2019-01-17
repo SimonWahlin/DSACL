@@ -1,27 +1,18 @@
 <#
 .SYNOPSIS
-Give Delegate rights to manage members in group(s).
+Give Delegate rights to groups manager to manage members in group(s).
+Note that this access stays with the user if the manager changes.
 
 .EXAMPLE
-Add-DSACLManageGroupMember -TargetDN $GroupsOU -DelegateDN $AccessAdminGroup -AccessType Allow
-Will give the group with DistinguishedName in $AccessAdminGroup access to manage members
-of any group in the OU with DistinguishedName in $GroupsOU and all sub-OUs. Add -NoInheritance do disable inheritance.
-
-.EXAMPLE
-Add-DSACLManageGroupMember -TargetDN $GroupsOU -DelegateDN $AccessAdminGroup -AccessType Allow -NoInheritance
-Will give the group with DistinguishedName in $AccessAdminGroup access to manage members
-of any group in the OU with DistinguishedName in $GroupsOU. Will not effect groups in sub-OUs.
-
-.EXAMPLE
-Add-DSACLManageGroupMember -TargetDN $SpecialGroup -DelegateDN $AccessAdminGroup -AccessType Allow -DirectOnGroup
-Will give the group with DistinguishedName in $AccessAdminGroup access to manage members
-of the group in with DistinguishedName in $SpecialGroup.
+Add-DSACLManagerCanUpdateGroupMember -TargetDN $Group
+Will give the current manager of the group in $Group access to manage members.
+Note that this access stays with the user if the manager changes.
 
 #>
 function Add-DSACLManagerCanUpdateGroupMember {
     [CmdletBinding(DefaultParameterSetName='OnContainer')]
     param (
-        # DistinguishedName of object to modify ACL on. Usually an OU.
+        # DistinguishedName of object to modify ACL on. Has to be a group.
         [Parameter(Mandatory,ValueFromPipeline,ValueFromPipelineByPropertyName)]
         [String]
         $TargetDN
@@ -29,14 +20,13 @@ function Add-DSACLManagerCanUpdateGroupMember {
 
     process {
         try {
-            $Params = @{
-                TargetDN              = $TargetDN
-                DelegateDN            = $DelegateDN
-                ActiveDirectoryRights = 'WriteProperty','ExtendedRight'
-                AccessControlType     = $Script:GuidTable['self-membership']
-                InheritanceType       = 'None'
+            $Group = Get-LDAPObject -DistinguishedName $TargetDN
+            if($Group.objectClass -notcontains 'group') {
+                throw 'Target has to be a group.'
             }
-            Add-DSACLCustom @Params
+            $DelegateDN = $Group.managedBy
+
+            Add-DSACLManageGroupMember -TargetDN $TargetDN -DelegateDN $DelegateDN -DirectOnGroup
         }
         catch {
             throw

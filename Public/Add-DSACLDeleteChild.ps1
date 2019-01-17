@@ -3,7 +3,7 @@
 Give Delegate rights to delete objects of selected type in target (usually an OU)
 
 .EXAMPLE
-Add-DSACLDeleteChild -TargetDN $UsersOU -DelegateDN $UserAdminGroup -ObjectTypeName User -AccessType Allow
+Add-DSACLDeleteChild -TargetDN $UsersOU -DelegateDN $UserAdminGroup -ObjectTypeName User
 Will give the group with DistinguishedName in $UserAdminGroup access to delete user objects in
 the OU with DistinguishedName in $UsersOU and all sub-OUs. Add -NoInheritance do disable inheritance.
 
@@ -50,10 +50,10 @@ function Add-DSACLDeleteChild {
     process {
         try {
             if ($NoInheritance.IsPresent) {
-                $InheritanceType = [System.DirectoryServices.ActiveDirectorySecurityInheritance]'None'
+                $InheritanceType = [System.DirectoryServices.ActiveDirectorySecurityInheritance]::Children
             }
             else {
-                $InheritanceType = [System.DirectoryServices.ActiveDirectorySecurityInheritance]'All'
+                $InheritanceType = [System.DirectoryServices.ActiveDirectorySecurityInheritance]::Descendents
             }
             switch ($PSCmdlet.ParameterSetName) {
                 'ByTypeName' { $ObjectType = $Script:GuidTable[$ObjectTypeName]}
@@ -63,10 +63,11 @@ function Add-DSACLDeleteChild {
             $Params = @{
                 TargetDN              = $TargetDN
                 DelegateDN            = $DelegateDN
-                ActiveDirectoryRights = 'DeleteChild'
+                ActiveDirectoryRights = 'Delete', 'DeleteTree'
                 AccessControlType     = $AccessType
-                ObjectType            = $ObjectType
+                ObjectType            = $Script:GuidTable['All']
                 InheritanceType       = $InheritanceType
+                InheritedObjectType   = $ObjectType
             }
             Add-DSACLCustom @Params
 

@@ -37,32 +37,6 @@ function Add-DSACLJoinDomain {
     process {
         try {
 
-            $Target = Get-LDAPObject -DistinguishedName $TargetDN
-            $DelegateSID = Get-SID -DistinguishedName $DelegateDN
-
-            $InheritanceParam = @{}
-            if ($NoInheritance.IsPresent) {
-                $InheritanceType = [System.DirectoryServices.ActiveDirectorySecurityInheritance]'Children'
-                $InheritanceParam['NoInheritance'] = $true
-            }
-            else {
-                $InheritanceType = [System.DirectoryServices.ActiveDirectorySecurityInheritance]'Descendents'
-            }
-
-            # Joining to existing object requires reset password
-            Add-DSACLResetPassword -TargetDN $TargetDN -DelegateDN $DelegateDN -ObjectTypeName Computer -AccessType Allow @InheritanceParam
-
-            # Gives access to enable/disable computer objects
-            $AceParams = @{
-                Identity              = $DelegateSID
-                ActiveDirectoryRights = 'WriteProperty'
-                AccessControlType     = 'Allow'
-                ObjectType            = $Script:GuidTable['Account Restrictions']
-                InheritanceType       = $InheritanceType
-                InheritedObjectType   = $Script:GuidTable['Computer']
-            }
-            New-DSACLAccessRule @AceParams | Set-DSACLAccessRule -Target $Target
-
             $WriteParams = @{
                 TargetDN       = $TargetDN
                 DelegateDN     = $DelegateDN
@@ -70,6 +44,8 @@ function Add-DSACLJoinDomain {
                 AccessType     = 'Allow'
                 NoInheritance  = $NoInheritance
             }
+            Add-DSACLResetPassword @WriteParams
+            Add-DSACLWriteAccountRestrictions @WriteParams
             Add-DSACLWriteServicePrincipalName @WriteParams
             Add-DSACLWriteDNSHostName @WriteParams
 

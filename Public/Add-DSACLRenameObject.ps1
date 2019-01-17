@@ -12,21 +12,14 @@ function Add-DSACLRenameObject {
     param (
         # Object type to allow being renamed
         [Parameter(Mandatory,ParameterSetName='Delegate')]
-        [Parameter(Mandatory,ParameterSetName='Self')]
         [ValidateSet('Computer', 'Contact', 'Group', 'ManagedServiceAccount', 'GroupManagedServiceAccount', 'User','All')]
         [String]
         $ObjectTypeName,
 
         # DistinguishedName of object to modify ACL on. Usually an OU.
         [Parameter(Mandatory,ParameterSetName='Delegate')]
-        [Parameter(Mandatory,ParameterSetName='Self')]
         [String]
         $TargetDN,
-
-        # Give access to "Self" instead of a user or group
-        [Parameter(Mandatory,ParameterSetName='Self')]
-        [Switch]
-        $Self,
 
         # DistinguishedName of group or user to give permissions to.
         [Parameter(Mandatory,ParameterSetName='Delegate')]
@@ -35,7 +28,6 @@ function Add-DSACLRenameObject {
 
         # Sets access right to "This object only"
         [Parameter(ParameterSetName='Delegate')]
-        [Parameter(ParameterSetName='Self')]
         [Switch]
         $NoInheritance
     )
@@ -43,32 +35,46 @@ function Add-DSACLRenameObject {
     process {
         try {
 
-            $Target = Get-LDAPObject -DistinguishedName $TargetDN
-            switch ($PSCmdlet.ParameterSetName) {
-                'Delegate' {
-                    $DelegateSID = Get-SID -DistinguishedName $DelegateDN
-                }
-                'Self' { $DelegateSID = New-Object -TypeName System.Security.Principal.SecurityIdentifier -ArgumentList 'S-1-5-10' }
-            }
+            $null = $PSBoundParameters.Remove('ObjectTypeName')
+            $null = $PSBoundParameters.Remove('NoInheritance')
 
             if ($NoInheritance.IsPresent) {
-                $InheritanceType = [System.DirectoryServices.ActiveDirectorySecurityInheritance]'Children'
+                $InheritanceType = [System.DirectoryServices.ActiveDirectorySecurityInheritance]::Children
             }
             else {
-                $InheritanceType = [System.DirectoryServices.ActiveDirectorySecurityInheritance]'Descendents'
+                $InheritanceType = [System.DirectoryServices.ActiveDirectorySecurityInheritance]::Descendents
             }
 
             $AceParams = @{
-                Identity = $DelegateSID
                 ActiveDirectoryRights = 'WriteProperty'
-                AccessControlType = 'Allow'
-                InheritedObjectType   = $Script:GuidTable[$ObjectTypeName]
+                AccessControlType     = 'Allow'
                 InheritanceType       = $InheritanceType
+                InheritedObjectType   = $Script:GuidTable[$ObjectTypeName]
             }
 
             'distinguishedName', 'name', 'CN' | ForEach-Object -Process {
-                New-DSACLAccessRule -ObjectType $Script:GuidTable[$_] @AceParams
-            } | Set-DSACLAccessRule -Target $Target
+                Add-DSACLCustom -ObjectType $Script:GuidTable[$_] @AceParams @PSBoundParameters
+            }
+
+            if($ObjectTypeName -eq 'Computer') {
+
+                'Account Restrictions' ,'sAMAccountName' | ForEach-Object -Process {
+                    Add-DSACLCustom -ObjectType $Script:GuidTable[$_] @AceParams @PSBoundParameters
+                }
+
+                $WriteParams = @{
+                    TargetDN       = $TargetDN
+                    DelegateDN     = $DelegateDN
+                    ObjectTypeName = 'Computer'
+                    AccessType     = 'Allow'
+                    NoInheritance  = $NoInheritance.IsPresent
+                }
+                Add-DSACLWriteDNSHostName @WriteParams
+                Add-DSACLWriteServicePrincipalName @WriteParams
+
+            }
+
+
 
         }
         catch {

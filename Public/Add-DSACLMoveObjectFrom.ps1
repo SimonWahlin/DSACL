@@ -7,7 +7,7 @@ Moving also requires create-child rights in target container.
 Delegates the rights to rename and delete objects in TargetDN.
 #>
 
-function Move-DSACLObjectFrom {
+function Add-DSACLMoveObjectFrom {
     [CmdletBinding()]
     param (
         # Object type to allow being moved
@@ -33,7 +33,7 @@ function Move-DSACLObjectFrom {
         try {
             $ErrorActionPreference = 'Stop'
             Add-DSACLRenameObject @PSBoundParameters
-            Add-DSACLDeleteChild @PSBoundParameters -AccessType Allow
+            Add-DSACLDeleteChild @PSBoundParameters
         } catch {
             throw
         }
