@@ -1,11 +1,16 @@
 function ConvertFrom-DSACLInheritedObjectTypeGuid {
-    [CmdletBinding()]
+    [CmdletBinding(DefaultParameterSetName='Access')]
     param (
-        [Parameter(Mandatory,ValueFromPipeline,ValueFromPipelineByPropertyName)]
+        [Parameter(Mandatory, ParameterSetName='Access', ValueFromPipeline)]
         [Alias('ACE')]
         [Alias('Access')]
         [System.DirectoryServices.ActiveDirectoryAccessRule]
-        $AccessRule
+        $AccessRule,
+
+        [Parameter(Mandatory, ParameterSetName='Audit', ValueFromPipeline)]
+        [Alias('Audit')]
+        [System.DirectoryServices.ActiveDirectoryAuditRule]
+        $AuditRule
     )
 
     begin {
@@ -18,20 +23,33 @@ function ConvertFrom-DSACLInheritedObjectTypeGuid {
     }
 
     process {
-        if($AccessRule.ObjectFlags.HasFlag([System.Security.AccessControl.ObjectAceFlags]::InheritedObjectAceTypePresent)) {
 
-            if ($DSACLClassGuid.ContainsKey($AccessRule.InheritedObjectType.ToString())) {
-                return $DSACLClassGuid[$AccessRule.InheritedObjectType.ToString()]
+        switch($PSCmdlet.ParameterSetName) {
+            'Access' {
+                $ObjectFlags = $AccessRule.ObjectFlags
+                $InheritedObjectType = $AccessRule.InheritedObjectType
             }
 
-            if ($DSACLAttributeGuid.ContainsKey($AccessRule.InheritedObjectType.ToString())) {
-                return $DSACLAttributeGuid[$AccessRule.InheritedObjectType.ToString()]
+            'Audit' {
+                $ObjectFlags = $AuditRule.ObjectFlags
+                $InheritedObjectType = $AuditRule.InheritedObjectType
+            }
+        }
+        if ($ObjectFlags.HasFlag([System.Security.AccessControl.ObjectAceFlags]::InheritedObjectAceTypePresent)) {
+
+            if ($Script:DSACLClassGuid.ContainsKey($InheritedObjectType.ToString())) {
+                return $Script:DSACLClassGuid[$InheritedObjectType.ToString()]
             }
 
-            return $AccessRule.InheritedObjectType.ToString()
+            if ($Script:DSACLAttributeGuid.ContainsKey($InheritedObjectType.ToString())) {
+                return $Script:DSACLAttributeGuid[$InheritedObjectType.ToString()]
+            }
+
+            return $InheritedObjectType.ToString()
         }
         else {
             return 'All'
         }
+
     }
 }
