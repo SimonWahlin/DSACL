@@ -122,51 +122,124 @@ Describe 'DSACL Unit tests' -Tag 'Unit' {
 
         $Commands = @(
             @{
+                Name = 'CreateChild'
                 Command = 'Add-DSACLCreateChild'
                 ActiveDirectoryRights = 'CreateChild'
-                InheritanceType = 'None','All'
+                InheritanceType = 'All'
                 ObjectType = 'ObjectGuid'
                 InheritedObjectType = '00000000-0000-0000-0000-000000000000'
                 Types = 'Computer', 'Contact', 'Group', 'ManagedServiceAccount', 'GroupManagedServiceAccount', 'User', 'All'
             },
             @{
+                Name = 'CreateChild with NoInheritance'
+                Command = 'Add-DSACLCreateChild'
+                Params = @{'NoInheritance'=$True}
+                ActiveDirectoryRights = 'CreateChild'
+                InheritanceType = 'None'
+                ObjectType = 'ObjectGuid'
+                InheritedObjectType = '00000000-0000-0000-0000-000000000000'
+                Types = 'Computer', 'Contact', 'Group', 'ManagedServiceAccount', 'GroupManagedServiceAccount', 'User', 'All'
+            },
+            @{
+                Name = 'DeleteChild'
                 Command = 'Add-DSACLDeleteChild'
-                ActiveDirectoryRights = 'DeleteChild'
-                InheritanceType = 'None','All'
-                ObjectType = 'ObjectGuid'
-                InheritedObjectType = '00000000-0000-0000-0000-000000000000'
-                Types = 'Computer', 'Contact', 'Group', 'ManagedServiceAccount', 'GroupManagedServiceAccount', 'User', 'All'
-            },
-            @{
-                Command = 'Add-DSACLFullControl'
-                ActiveDirectoryRights = 'GenericAll'
-                InheritanceType = 'Children','Descendents'
+                ActiveDirectoryRights = 'Delete'
+                InheritanceType = 'Descendents'
                 ObjectType = '00000000-0000-0000-0000-000000000000'
                 InheritedObjectType = 'ObjectGuid'
                 Types = 'Computer', 'Contact', 'Group', 'ManagedServiceAccount', 'GroupManagedServiceAccount', 'User', 'All'
             },
             @{
+                Name = 'DeleteChild with IncludeChildren'
+                Command = 'Add-DSACLDeleteChild'
+                Params = @{'IncludeChildren'=$True}
+                ActiveDirectoryRights = 'Delete', 'DeleteTree'
+                InheritanceType = 'Descendents'
+                ObjectType = '00000000-0000-0000-0000-000000000000'
+                InheritedObjectType = 'ObjectGuid'
+                Types = 'Computer', 'Contact', 'Group', 'ManagedServiceAccount', 'GroupManagedServiceAccount', 'User', 'All'
+            },
+            @{
+                Name = 'DeleteChild with NoInheritance'
+                Command = 'Add-DSACLDeleteChild'
+                Params = @{'NoInheritance'=$True}
+                ActiveDirectoryRights = 'Delete'
+                InheritanceType = 'Children'
+                ObjectType = '00000000-0000-0000-0000-000000000000'
+                InheritedObjectType = 'ObjectGuid'
+                Types = 'Computer', 'Contact', 'Group', 'ManagedServiceAccount', 'GroupManagedServiceAccount', 'User', 'All'
+            },
+            @{
+                Name = 'DeleteChild with IncludeChildren and NoInheritance'
+                Command = 'Add-DSACLDeleteChild'
+                Params = @{'IncludeChildren'=$True;'NoInheritance'=$True}
+                ActiveDirectoryRights = 'Delete', 'DeleteTree'
+                InheritanceType = 'Children'
+                ObjectType = '00000000-0000-0000-0000-000000000000'
+                InheritedObjectType = 'ObjectGuid'
+                Types = 'Computer', 'Contact', 'Group', 'ManagedServiceAccount', 'GroupManagedServiceAccount', 'User', 'All'
+            },
+            @{
+                Name = 'FullControl'
+                Command = 'Add-DSACLFullControl'
+                ActiveDirectoryRights = 'GenericAll'
+                InheritanceType = 'Descendents'
+                ObjectType = '00000000-0000-0000-0000-000000000000'
+                InheritedObjectType = 'ObjectGuid'
+                Types = 'Computer', 'Contact', 'Group', 'ManagedServiceAccount', 'GroupManagedServiceAccount', 'User', 'All'
+            },
+            @{
+                Name = 'FullControl with NoInheritance'
+                Command = 'Add-DSACLFullControl'
+                Params = @{'NoInheritance'=$True}
+                ActiveDirectoryRights = 'GenericAll'
+                InheritanceType = 'Children'
+                ObjectType = '00000000-0000-0000-0000-000000000000'
+                InheritedObjectType = 'ObjectGuid'
+                Types = 'Computer', 'Contact', 'Group', 'ManagedServiceAccount', 'GroupManagedServiceAccount', 'User', 'All'
+            },
+            @{
+                Name = 'ResetPassword'
                 Command = 'Add-DSACLResetPassword'
                 ActiveDirectoryRights = 'ExtendedRight'
                 ObjectType = '00299570-246d-11d0-a768-00aa006e0529'
-                InheritanceType = 'Children','Descendents'
+                InheritanceType = 'Descendents'
+                InheritedObjectType = 'ObjectGuid'
+                Types = 'Computer','User','ManagedServiceAccount', 'GroupManagedServiceAccount'
+            },
+            @{
+                Name = 'ResetPassword with NoInheritance'
+                Command = 'Add-DSACLResetPassword'
+                Params = @{'NoInheritance'=$True}
+                ActiveDirectoryRights = 'ExtendedRight'
+                ObjectType = '00299570-246d-11d0-a768-00aa006e0529'
+                InheritanceType = 'Children'
                 InheritedObjectType = 'ObjectGuid'
                 Types = 'Computer','User','ManagedServiceAccount', 'GroupManagedServiceAccount'
             }
         )
         foreach($Command in $Commands) {
-            Context $Command.Command {
+            Context $Command.Name {
                 $TestCases = $ObjectTypeCases.Where({$_.ObjectType -in $Command.Types})
                 foreach($AccessType in @('Allow','Deny')) {
-                    It "Delegates access to $AccessType $($Command.ActiveDirectoryRights) on <ObjectType> without inheritance" -TestCases $TestCases {
-                        param($ObjectType,$ObjectGuid)
+
+                    It "$AccessType $($Command.Name) on <ObjectType>" -TestCases $TestCases {
+                        param(
+                            $ObjectType,
+                            $ObjectGuid
+                        )
+
                         $DSACLParam = @{
                             TargetDN = 'TESTDN'
                             DelegateDN = 'TESTDN'
                             ObjectTypeName = $ObjectType
                             AccessType = $AccessType
-                            NoInheritance = $True
                         }
+
+                        foreach($Key in $Command.Params.Keys) {
+                            $DSACLParam.Add($Key,$Command.Params[$Key])
+                        }
+
                         # Generate ACE
                         $ACE = & $Command.Command @DSACLParam
 
@@ -176,33 +249,10 @@ Describe 'DSACL Unit tests' -Tag 'Unit' {
                             ActiveDirectoryRights = $Command.ActiveDirectoryRights
                             AccessControlType = $AccessType
                             ObjectType = $(if($Command.ObjectType -eq 'ObjectGuid'){$ObjectGuid}else{$Command.ObjectType})
-                            InheritanceType = [System.DirectoryServices.ActiveDirectorySecurityInheritance]$Command.InheritanceType[0]
+                            InheritanceType = [System.DirectoryServices.ActiveDirectorySecurityInheritance]$Command.InheritanceType
                             InheritedObjectType = $(if($Command.InheritedObjectType -eq 'ObjectGuid'){$ObjectGuid}else{$Command.InheritedObjectType})
                         }
                         Test-ACE -Ace $ACE -TemplateHash $ExpectedAce | Should -Be $true
-                    }
-
-                    It "Delegates access to $AccessType $($Command.ActiveDirectoryRights) on <ObjectType> with inheritance" -TestCases $TestCases {
-                        param($ObjectType,$ObjectGuid)
-                        $DSACLParam = @{
-                            TargetDN = 'TESTDN'
-                            DelegateDN = 'TESTDN'
-                            ObjectTypeName = $ObjectType
-                            AccessType = $AccessType
-                        }
-                        # Generate ACE
-                        $ACE = & $Command.Command @DSACLParam
-
-                        # Create expected ACE:
-                        $ExpectedAce = @{
-                            IdentityReference = 'S-1-0-0'
-                            ActiveDirectoryRights = $Command.ActiveDirectoryRights
-                            AccessControlType = $AccessType
-                            ObjectType = $(if($Command.ObjectType -eq 'ObjectGuid'){$ObjectGuid}else{$Command.ObjectType})
-                            InheritanceType = [System.DirectoryServices.ActiveDirectorySecurityInheritance]$Command.InheritanceType[1]
-                            InheritedObjectType = $(if($Command.InheritedObjectType -eq 'ObjectGuid'){$ObjectGuid}else{$Command.InheritedObjectType})
-                        }
-                        Test-ACE -Ace $Ace -TemplateHash $ExpectedAce | Should -Be $true
                     }
                 }
             }
@@ -217,114 +267,141 @@ Describe 'DSACL Unit tests' -Tag 'Unit' {
                     TargetDN = 'TESTDN'
                     DelegateDN = 'TESTDN'
                     NoInheritance = $False
+                    ObjectTypeName = 'Computer'
                 }
-                $ACEs = Add-DSACLRenameComputer @DSACLParam
+                $ACEs = Add-DSACLRenameObject @DSACLParam
                 $ExpectedAces = @(
                     @{
-                        IdentityReference = 'S-1-0-0'
+                        IdentityReference     = 'S-1-0-0'
                         ActiveDirectoryRights = 'WriteProperty'
-                        AccessControlType = 'Allow'
-                        ObjectType = 'bf9679e4-0de6-11d0-a285-00aa003049e2'
-                        InheritanceType = 'Descendents'
-                        InheritedObjectType = 'bf967a86-0de6-11d0-a285-00aa003049e2'
+                        AccessControlType     = 'Allow'
+                        ObjectType            = 'bf9679e4-0de6-11d0-a285-00aa003049e2'
+                        InheritedObjectType   = 'bf967a86-0de6-11d0-a285-00aa003049e2'
+                        InheritanceType       = 'Descendents'
                     },
                     @{
-                        IdentityReference = 'S-1-0-0'
+                        IdentityReference     = 'S-1-0-0'
                         ActiveDirectoryRights = 'WriteProperty'
-                        AccessControlType = 'Allow'
-                        ObjectType = 'bf967a0e-0de6-11d0-a285-00aa003049e2'
-                        InheritanceType = 'Descendents'
-                        InheritedObjectType = 'bf967a86-0de6-11d0-a285-00aa003049e2'
+                        AccessControlType     = 'Allow'
+                        ObjectType            = 'bf967a0e-0de6-11d0-a285-00aa003049e2'
+                        InheritedObjectType   = 'bf967a86-0de6-11d0-a285-00aa003049e2'
+                        InheritanceType       = 'Descendents'
                     },
                     @{
-                        IdentityReference = 'S-1-0-0'
+                        IdentityReference     = 'S-1-0-0'
                         ActiveDirectoryRights = 'WriteProperty'
-                        AccessControlType = 'Allow'
-                        ObjectType = 'bf96793f-0de6-11d0-a285-00aa003049e2'
-                        InheritanceType = 'Descendents'
-                        InheritedObjectType = 'bf967a86-0de6-11d0-a285-00aa003049e2'
+                        AccessControlType     = 'Allow'
+                        ObjectType            = 'bf96793f-0de6-11d0-a285-00aa003049e2'
+                        InheritedObjectType   = 'bf967a86-0de6-11d0-a285-00aa003049e2'
+                        InheritanceType       = 'Descendents'
+                    },
+                    @{
+                        IdentityReference     = 'S-1-0-0'
+                        ActiveDirectoryRights = 'WriteProperty'
+                        AccessControlType     = 'Allow'
+                        ObjectType            = '4c164200-20c0-11d0-a768-00aa006e0529'
+                        InheritedObjectType   = 'bf967a86-0de6-11d0-a285-00aa003049e2'
+                        InheritanceType       = 'Descendents'
+                    },
+                    @{
+                        IdentityReference     = 'S-1-0-0'
+                        ActiveDirectoryRights = 'WriteProperty'
+                        AccessControlType     = 'Allow'
+                        ObjectType            = '3e0abfd0-126a-11d0-a060-00aa006c33ed'
+                        InheritedObjectType   = 'bf967a86-0de6-11d0-a285-00aa003049e2'
+                        InheritanceType       = 'Descendents'
+                    },
+                    @{
+                        IdentityReference     = 'S-1-0-0'
+                        ActiveDirectoryRights = 'WriteProperty'
+                        AccessControlType     = 'Allow'
+                        ObjectType            = '72e39547-7b18-11d1-adef-00c04fd8d5cd'
+                        InheritedObjectType   = 'bf967a86-0de6-11d0-a285-00aa003049e2'
+                        InheritanceType       = 'Descendents'
+                    },
+                    @{
+                        IdentityReference     = 'S-1-0-0'
+                        ActiveDirectoryRights = 'WriteProperty'
+                        AccessControlType     = 'Allow'
+                        ObjectType            = 'f3a64788-5306-11d1-a9c5-0000f80367c1'
+                        InheritedObjectType   = 'bf967a86-0de6-11d0-a285-00aa003049e2'
+                        InheritanceType       = 'Descendents'
                     }
                 )
-                0..2 | Foreach-Object -Process {
-                    Test-ACE -Ace $ACEs[$_] -TemplateHash $ExpectedAces[$_] | Should -Be $true
+                for ($i = 0; $i -lt $ACEs.Count; $i++) {
+                    Test-ACE -Ace $ACEs[$i] -TemplateHash $ExpectedAces[$i] | Should -Be $true
                 }
             }
 
-            It 'Delegates RenameComputer access to DelegateDN without inheritance' {
+            It 'Delegates Rename Computer access to DelegateDN without inheritance' {
                 $DSACLParam = @{
                     TargetDN = 'TESTDN'
                     DelegateDN = 'TESTDN'
                     NoInheritance = $True
+                    ObjectTypeName = 'Computer'
                 }
-                $ACEs = Add-DSACLRenameComputer @DSACLParam
+                $ACEs = Add-DSACLRenameObject @DSACLParam
 
                 $ExpectedAces = @(
                     @{
-                        IdentityReference = 'S-1-0-0'
+                        IdentityReference     = 'S-1-0-0'
                         ActiveDirectoryRights = 'WriteProperty'
-                        AccessControlType = 'Allow'
-                        ObjectType = 'bf9679e4-0de6-11d0-a285-00aa003049e2'
-                        InheritanceType = 'Children'
-                        InheritedObjectType = 'bf967a86-0de6-11d0-a285-00aa003049e2'
+                        AccessControlType     = 'Allow'
+                        ObjectType            = 'bf9679e4-0de6-11d0-a285-00aa003049e2'
+                        InheritedObjectType   = 'bf967a86-0de6-11d0-a285-00aa003049e2'
+                        InheritanceType       = 'Children'
                     },
                     @{
-                        IdentityReference = 'S-1-0-0'
+                        IdentityReference     = 'S-1-0-0'
                         ActiveDirectoryRights = 'WriteProperty'
-                        AccessControlType = 'Allow'
-                        ObjectType = 'bf967a0e-0de6-11d0-a285-00aa003049e2'
-                        InheritanceType = 'Children'
-                        InheritedObjectType = 'bf967a86-0de6-11d0-a285-00aa003049e2'
+                        AccessControlType     = 'Allow'
+                        ObjectType            = 'bf967a0e-0de6-11d0-a285-00aa003049e2'
+                        InheritedObjectType   = 'bf967a86-0de6-11d0-a285-00aa003049e2'
+                        InheritanceType       = 'Children'
                     },
                     @{
-                        IdentityReference = 'S-1-0-0'
+                        IdentityReference     = 'S-1-0-0'
                         ActiveDirectoryRights = 'WriteProperty'
-                        AccessControlType = 'Allow'
-                        ObjectType = 'bf96793f-0de6-11d0-a285-00aa003049e2'
-                        InheritanceType = 'Children'
-                        InheritedObjectType = 'bf967a86-0de6-11d0-a285-00aa003049e2'
+                        AccessControlType     = 'Allow'
+                        ObjectType            = 'bf96793f-0de6-11d0-a285-00aa003049e2'
+                        InheritedObjectType   = 'bf967a86-0de6-11d0-a285-00aa003049e2'
+                        InheritanceType       = 'Children'
+                    },
+                    @{
+                        IdentityReference     = 'S-1-0-0'
+                        ActiveDirectoryRights = 'WriteProperty'
+                        AccessControlType     = 'Allow'
+                        ObjectType            = '4c164200-20c0-11d0-a768-00aa006e0529'
+                        InheritedObjectType   = 'bf967a86-0de6-11d0-a285-00aa003049e2'
+                        InheritanceType       = 'Children'
+                    },
+                    @{
+                        IdentityReference     = 'S-1-0-0'
+                        ActiveDirectoryRights = 'WriteProperty'
+                        AccessControlType     = 'Allow'
+                        ObjectType            = '3e0abfd0-126a-11d0-a060-00aa006c33ed'
+                        InheritedObjectType   = 'bf967a86-0de6-11d0-a285-00aa003049e2'
+                        InheritanceType       = 'Children'
+                    },
+                    @{
+                        IdentityReference     = 'S-1-0-0'
+                        ActiveDirectoryRights = 'WriteProperty'
+                        AccessControlType     = 'Allow'
+                        ObjectType            = '72e39547-7b18-11d1-adef-00c04fd8d5cd'
+                        InheritedObjectType   = 'bf967a86-0de6-11d0-a285-00aa003049e2'
+                        InheritanceType       = 'Children'
+                    },
+                    @{
+                        IdentityReference     = 'S-1-0-0'
+                        ActiveDirectoryRights = 'WriteProperty'
+                        AccessControlType     = 'Allow'
+                        ObjectType            = 'f3a64788-5306-11d1-a9c5-0000f80367c1'
+                        InheritedObjectType   = 'bf967a86-0de6-11d0-a285-00aa003049e2'
+                        InheritanceType       = 'Children'
                     }
                 )
-                0..2 | Foreach-Object -Process {
-                    Test-ACE -Ace $ACEs[$_] -TemplateHash $ExpectedAces[$_] | Should -Be $true
-                }
-            }
-
-            It 'Delegates RenameComputer access to Self without inheritance' {
-                $DSACLParam = @{
-                    TargetDN = 'TESTDN'
-                    Self = $True
-                    NoInheritance = $True
-                }
-                $ACEs = Add-DSACLRenameComputer @DSACLParam
-
-                $ExpectedAces = @(
-                    @{
-                        IdentityReference = 'S-1-5-10'
-                        ActiveDirectoryRights = 'WriteProperty'
-                        AccessControlType = 'Allow'
-                        ObjectType = 'bf9679e4-0de6-11d0-a285-00aa003049e2'
-                        InheritanceType = 'Children'
-                        InheritedObjectType = 'bf967a86-0de6-11d0-a285-00aa003049e2'
-                    },
-                    @{
-                        IdentityReference = 'S-1-5-10'
-                        ActiveDirectoryRights = 'WriteProperty'
-                        AccessControlType = 'Allow'
-                        ObjectType = 'bf967a0e-0de6-11d0-a285-00aa003049e2'
-                        InheritanceType = 'Children'
-                        InheritedObjectType = 'bf967a86-0de6-11d0-a285-00aa003049e2'
-                    },
-                    @{
-                        IdentityReference = 'S-1-5-10'
-                        ActiveDirectoryRights = 'WriteProperty'
-                        AccessControlType = 'Allow'
-                        ObjectType = 'bf96793f-0de6-11d0-a285-00aa003049e2'
-                        InheritanceType = 'Children'
-                        InheritedObjectType = 'bf967a86-0de6-11d0-a285-00aa003049e2'
-                    }
-                )
-                0..2 | Foreach-Object -Process {
-                    Test-ACE -Ace $ACEs[$_] -TemplateHash $ExpectedAces[$_] | Should -Be $true
+                for ($i = 0; $i -lt $ACEs.Count; $i++) {
+                    Test-ACE -Ace $ACEs[$i] -TemplateHash $ExpectedAces[$i] | Should -Be $true
                 }
             }
         }
