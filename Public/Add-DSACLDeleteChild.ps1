@@ -25,7 +25,7 @@ function Add-DSACLDeleteChild {
 
         # Object type to give full control over
         [Parameter(Mandatory,ParameterSetName='ByTypeName')]
-        [ValidateSet('Computer', 'Contact', 'Group', 'ManagedServiceAccount', 'User','All')]
+        [ValidateSet('Computer', 'Contact', 'Group', 'ManagedServiceAccount', 'GroupManagedServiceAccount', 'User','All')]
         [String]
         $ObjectTypeName,
 
@@ -44,7 +44,14 @@ function Add-DSACLDeleteChild {
         [Parameter(ParameterSetName='ByTypeName')]
         [Parameter(ParameterSetName='ByGuid')]
         [Switch]
-        $NoInheritance
+        $NoInheritance,
+
+        # Adds DeleteTree right allowing to delete an object and all its child objects in one operation.
+        # This is often required for deleting computer objects
+        [Parameter(ParameterSetName='ByTypeName')]
+        [Parameter(ParameterSetName='ByGuid')]
+        [Switch]
+        $IncludeChildren
     )
 
     process {
@@ -60,10 +67,17 @@ function Add-DSACLDeleteChild {
                 'ByGuid'     { $ObjectType = $ObjectTypeGuid }
             }
 
+            if ($IncludeChildren.IsPresent) {
+                $ActiveDirectoryRights = 'Delete', 'DeleteTree'
+            }
+            else {
+                $ActiveDirectoryRights = 'Delete'
+            }
+
             $Params = @{
                 TargetDN              = $TargetDN
                 DelegateDN            = $DelegateDN
-                ActiveDirectoryRights = 'Delete', 'DeleteTree'
+                ActiveDirectoryRights = $ActiveDirectoryRights
                 AccessControlType     = $AccessType
                 ObjectType            = $Script:GuidTable['All']
                 InheritanceType       = $InheritanceType
