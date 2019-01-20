@@ -24,16 +24,18 @@ Install-Module -Name DSACL  -Scope CurrentUser
 
 ## Build Instructions
 
-This module can be loaded as-is by importing DSAcl.psd1. This is mainly intended for development purposes.
+This module can be loaded as-is by importing DSAcl.psd1. This is mainly intended for development purposes or for testing the latest build.
 
-To speed up module load time and minimize the amount of files that needs to be signed, distributed and installed, this module contains a build script that will package up the module into three files:
+To speed up module load time and minimize the amount of files that needs to be signed, distributed and installed, this module contains a build script that will package up the module into four files:
 
+- DSACL.format.ps1xml
 - DSAcl.psd1
 - DSACL.psm1
 - license.txt
 
 To build the module, make sure you have the following pre-req modules:
 
+- ModuleBuilder (Required Version 1.0.0)
 - Pester (Required Version 4.1.1)
 - InvokeBuild (Required Version 3.2.1)
 - PowerShellGet (Required Version 1.6.0)

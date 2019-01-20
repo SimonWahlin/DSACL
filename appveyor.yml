@@ -8,7 +8,7 @@ matrix:
 
 # Scripts that run after cloning
 install:
-  - ps: Install-Module -Name InvokeBuild, PowerShellGet, Pester -SkipPublisherCheck -Force
+  - ps: Install-Module -Name InvokeBuild, PowerShellGet, Pester, ModuleBuilder -SkipPublisherCheck -Force
 build_script:
   - ps: |
       $ErrorActionPreference = 'Stop'

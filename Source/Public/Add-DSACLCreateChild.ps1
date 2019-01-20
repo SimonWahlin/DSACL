@@ -1,14 +1,14 @@
 <#
 .SYNOPSIS
-Give Delegate rights to delete objects of selected type in target (usually an OU)
+Give Delegate rights to create objects of selected type in target (usually an OU)
 
 .EXAMPLE
-Add-DSACLDeleteChild -TargetDN $UsersOU -DelegateDN $UserAdminGroup -ObjectTypeName User -AccessType Allow
-Will give the group with DistinguishedName in $UserAdminGroup access to delete user objects in
+Add-DSACLCreateChild -TargetDN $UsersOU -DelegateDN $UserAdminGroup -ObjectTypeName User
+Will give the group with DistinguishedName in $UserAdminGroup access to create user objects in
 the OU with DistinguishedName in $UsersOU and all sub-OUs. Add -NoInheritance do disable inheritance.
 
 #>
-function Add-DSACLDeleteChild {
+function Add-DSACLCreateChild {
     [CmdletBinding(DefaultParameterSetName='ByTypeName')]
     param (
         # DistinguishedName of object to modify ACL on. Usually an OU.
@@ -25,7 +25,7 @@ function Add-DSACLDeleteChild {
 
         # Object type to give full control over
         [Parameter(Mandatory,ParameterSetName='ByTypeName')]
-        [ValidateSet('Computer', 'Contact', 'Group', 'ManagedServiceAccount', 'User','All')]
+        [ValidateSet('Computer', 'Contact', 'Group', 'ManagedServiceAccount', 'GroupManagedServiceAccount', 'User','All')]
         [String]
         $ObjectTypeName,
 
@@ -63,7 +63,7 @@ function Add-DSACLDeleteChild {
             $Params = @{
                 TargetDN              = $TargetDN
                 DelegateDN            = $DelegateDN
-                ActiveDirectoryRights = 'DeleteChild'
+                ActiveDirectoryRights = 'CreateChild'
                 AccessControlType     = $AccessType
                 ObjectType            = $ObjectType
                 InheritanceType       = $InheritanceType

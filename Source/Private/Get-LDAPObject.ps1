@@ -35,7 +35,7 @@ function Get-LDAPObject {
             $DirectoryEntry | Format-List
         }
         catch {
-            throw 'Object not found!'
+            throw "Object not found: $DistinguishedName"
         }
         return $DirectoryEntry
     }

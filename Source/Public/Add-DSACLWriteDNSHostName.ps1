@@ -1,13 +1,13 @@
 <#
 .SYNOPSIS
-Delegate rights to SET ServicePrincipalName (SPN) on objects of selected type in target (usually an OU)
+Delegate rights to SET DNSHostName on objects of selected type in target (usually an OU)
 
 .EXAMPLE
-Add-DSACLWriteServicePrincipalName -TargetDN $UsersOU -DelegateDN $UserAdminGroup -ObjectTypeName User -AccessType Allow
-Will give the group with DistinguishedName in $UserAdminGroup rights to SET SPN of user objects in
-the OU with DistinguishedName in $UsersOU and all sub-OUs. Add -NoInheritance to disable inheritance.
+Add-DSACLWriteDNSHostName -TargetDN $ComputersOU -DelegateDN $ComputerAdminGroup -ObjectTypeName Computer -AccessType Allow
+Will give the group with DistinguishedName in $ComputerAdminGroup rights to SET DNSHostName of computer objects in
+the OU with DistinguishedName in $ComputersOU and all sub-OUs. Add -NoInheritance to disable inheritance.
 #>
-function Add-DSACLWriteServicePrincipalName {
+function Add-DSACLWriteDNSHostName {
     [CmdletBinding(DefaultParameterSetName='ByTypeName')]
     param (
         # DistinguishedName of object to modify ACL on. Usually an OU.
@@ -24,7 +24,7 @@ function Add-DSACLWriteServicePrincipalName {
 
         # Object type to give full control over
         [Parameter(Mandatory,ParameterSetName='ByTypeName')]
-        [ValidateSet('User', 'Computer', 'ManagedServiceAccount','GroupManagedServiceAccount')]
+        [ValidateSet('Computer', 'ManagedServiceAccount','GroupManagedServiceAccount')]
         [String]
         $ObjectTypeName,
 
@@ -34,21 +34,26 @@ function Add-DSACLWriteServicePrincipalName {
         $ObjectTypeGuid,
 
         # Allow or Deny
-        [Parameter(Mandatory,ParameterSetName='ByTypeName')]
-        [Parameter(Mandatory,ParameterSetName='ByGuid')]
+        [Parameter(ParameterSetName='ByTypeName')]
+        [Parameter(ParameterSetName='ByGuid')]
         [System.Security.AccessControl.AccessControlType]
-        $AccessType,
+        $AccessType = 'Allow',
 
         # Sets access right to "This object only"
         [Parameter(ParameterSetName='ByTypeName')]
         [Parameter(ParameterSetName='ByGuid')]
         [Switch]
-        $NoInheritance
+        $NoInheritance,
+
+        # Only effects validated writes
+        [Parameter(ParameterSetName='ByTypeName')]
+        [Parameter(ParameterSetName='ByGuid')]
+        [Switch]
+        $ValidatedOnly
     )
 
     process {
         try {
-
             if ($NoInheritance.IsPresent) {
                 $InheritanceType = [System.DirectoryServices.ActiveDirectorySecurityInheritance]'Children'
             } else {
@@ -60,12 +65,20 @@ function Add-DSACLWriteServicePrincipalName {
                 'ByGuid'     { $InheritanceObjectType = $ObjectTypeGuid }
             }
 
+            if($ValidatedOnly.IsPresent) {
+                $ObjectType = $Script:GuidTable['Validated write to DNS host name']
+                $ActiveDirectoryRights = [System.DirectoryServices.ActiveDirectoryRights]::Self
+            } else {
+                $ObjectType = $Script:GuidTable['DNS Host Name Attributes']
+                $ActiveDirectoryRights = [System.DirectoryServices.ActiveDirectoryRights]::WriteProperty
+            }
+
             $AceParams = @{
                 TargetDN              = $TargetDN
                 DelegateDN            = $DelegateDN
-                ActiveDirectoryRights = 'WriteProperty'
+                ActiveDirectoryRights = $ActiveDirectoryRights
                 AccessControlType     = 'Allow'
-                ObjectType            = $Script:GuidTable['Validated write to service principal name']
+                ObjectType            = $ObjectType
                 InheritanceType       = $InheritanceType
                 InheritedObjectType   = $InheritanceObjectType
             }
