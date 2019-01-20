@@ -1,12 +1,10 @@
 param(
-    $ModulePath = "$PSScriptRoot\..\.."
+    $ModulePath = "$PSScriptRoot\..\..\Source\",
+    $ModuleName = 'DSACL'
 )
 $ErrorActionPreference = 'Stop'
 # Remove trailing slash or backslash
 $ModulePath = $ModulePath -replace '[\\/]*$'
-$ModuleName = Split-Path -Path $ModulePath -Leaf
-$ModuleManifestName = 'DSAcl.psd1'
-$ModuleManifestPath = Join-Path -Path $ModulePath -ChildPath $ModuleManifestName
 
 # Clean up
 try {
@@ -24,12 +22,8 @@ function Test-ACE ($Ace, $TemplateHash) {
     return $true
 }
 Describe 'Core Module Tests' -Tags 'CoreModule', 'Unit' {
-    It 'Passes Test-ModuleManifest' {
-        {Test-ModuleManifest -Path $ModuleManifestPath -ErrorAction Stop} | Should -Not -Throw
-    }
-
     It 'Loads from module path without errors' {
-        {Import-Module "$ModulePath" -ErrorAction Stop} | Should -Not -Throw
+        {Import-Module "$ModulePath\$ModuleName.psd1" -ErrorAction Stop} | Should -Not -Throw
     }
     AfterAll {
         Get-Module -Name $ModuleName | Remove-Module -Force
@@ -38,7 +32,7 @@ Describe 'Core Module Tests' -Tags 'CoreModule', 'Unit' {
 
 Describe 'DSACL Unit tests' -Tag 'Unit' {
     BeforeAll {
-        Import-Module $ModulePath
+        Import-Module "$ModulePath\$ModuleName.psd1"
     }
 
     AfterAll {
