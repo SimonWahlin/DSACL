@@ -3,7 +3,7 @@
 #Requires -Modules @{ModuleName='Pester';ModuleVersion='4.1.1'}
 #Requires -Modules @{ModuleName='ModuleBuilder';ModuleVersion='1.0.0'}
 
-$Script:IsAppveyor = $env:APPVEYOR -ne $null
+$Script:IsAppveyor = $null -ne $env:APPVEYOR
 $Script:ModuleName = Get-Item -Path $BuildRoot | Select-Object -ExpandProperty Name
 Get-Module -Name $ModuleName | Remove-Module -Force
 
@@ -19,8 +19,19 @@ task TestCode {
 
 task CompilePSM {
     Write-Build Yellow "`n`n`nCompiling all code into single psm1"
+    try {
+        $BuildParams = @{}
+        if((Get-Command -ErrorAction stop -Name gitversion)) {
+            $GitVersion = gitversion | ConvertFrom-Json | Select-Object -Expand FullSemVer
+            $GitVersion = gitversion | ConvertFrom-Json | Select-Object -Expand InformationalVersion
+            $BuildParams['SemVer'] = $GitVersion
+        }
+    }
+    catch{
+        Write-Warning -Message 'gitversion not found, keeping current version'
+    }
     Push-Location -Path "$BuildRoot\Source" -StackName 'InvokeBuildTask'
-    $Script:CompileResult = Build-Module -Passthru
+    $Script:CompileResult = Build-Module @BuildParams -Passthru
     Get-ChildItem -Path "$BuildRoot\license*" | Copy-Item -Destination $Script:CompileResult.ModuleBase
     Pop-Location -StackName 'InvokeBuildTask'
 }
@@ -37,12 +48,15 @@ task TestBuild {
 
     if($TestResult.FailedCount -gt 0) {
         Write-Warning -Message "Failing Tests:"
-        $TestResult.TestResult.Where{$_.Result -eq 'Failed'}.Name | ForEach-Object -Process {Write-Warning -Message "$_"}
+        $TestResult.TestResult.Where{$_.Result -eq 'Failed'} | ForEach-Object -Process {
+            Write-Warning -Message $_.Name
+            Write-Verbose -Message $_.FailureMessage -Verbose
+        }
         throw 'Tests failed'
     }
 
     $CodeCoverageResult = $TestResult | Convert-CodeCoverage -SourceRoot "$PSScriptRoot\Source" -Relative
-    $Coverage | Group-Object -Property SourceFile | Sort-Object -Property Count | Select-Object -Property Count, Name -Last 10
+    $CodeCoverageResult | Group-Object -Property SourceFile | Sort-Object -Property Count | Select-Object -Property Count, Name -Last 10
 }
 
 task . Clean, TestCode, Build
