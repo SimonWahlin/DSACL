@@ -74,8 +74,6 @@ function Add-DSACLRenameObject {
 
             }
 
-
-
         }
         catch {
             throw
