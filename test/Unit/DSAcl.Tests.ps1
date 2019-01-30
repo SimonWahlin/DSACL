@@ -500,8 +500,76 @@ Describe 'DSACL Unit tests' -Tag 'Unit' {
 
         }
 
-        Context 'Testing creating AccessRules' {
+        Context 'Creating AccessRules' {
 
+        }
+
+        Context 'Register-DSACLRightsMapVariable' {
+            Mock Find-LDAPObject -ModuleName DSACL -ParameterFilter {$LDAPFilter -eq '(&(objectclass=controlAccessRight)(rightsGUID=*)(validAccesses=256))'} {
+                [pscustomobject]@{
+                    'displayName' = 'extended'
+                    'rightsGUID' = [guid]::Empty
+                }
+                [pscustomobject]@{
+                    'displayName' = 'extended1'
+                    'rightsGUID' = [guid]'00000000-0000-0000-0000-000000000001'
+                }
+            }
+
+            Mock Find-LDAPObject -ModuleName DSACL -ParameterFilter {$LDAPFilter -eq '(&(objectclass=controlAccessRight)(rightsGUID=*)(validAccesses=8))'} {
+                [pscustomobject]@{
+                    'displayName' = 'validated'
+                    'rightsGUID' = [guid]::Empty
+                }
+                [pscustomobject]@{
+                    'displayName' = 'validated1'
+                    'rightsGUID' = [guid]'00000000-0000-0000-0000-000000000001'
+                }
+            }
+
+            Mock Find-LDAPObject -ModuleName DSACL -ParameterFilter {$LDAPFilter -eq '(&(objectclass=controlAccessRight)(rightsGUID=*)(validAccesses=48))'} {
+                [pscustomobject]@{
+                    'displayName' = 'propertyset'
+                    'rightsGUID' = [guid]::Empty
+                }
+                [pscustomobject]@{
+                    'displayName' = 'propertyset1'
+                    'rightsGUID' = [guid]'00000000-0000-0000-0000-000000000001'
+                }
+            }
+
+            Mock Find-LDAPObject -ModuleName DSACL -ParameterFilter {$LDAPFilter -eq '(&(objectClass=classSchema)(schemaIDGUID=*))'} {
+                [pscustomobject]@{
+                    'lDAPDisplayName' = 'class'
+                    'schemaIDGUID' = [guid]::Empty
+                }
+                [pscustomobject]@{
+                    'lDAPDisplayName' = 'class1'
+                    'schemaIDGUID' = [guid]'00000000-0000-0000-0000-000000000001'
+                }
+            }
+
+            Mock Find-LDAPObject -ModuleName DSACL -ParameterFilter {$LDAPFilter -eq '(&(objectClass=attributeSchema)(schemaIDGUID=*))'} {
+                [pscustomobject]@{
+                    'lDAPDisplayName' = 'attribute'
+                    'schemaIDGUID' = [guid]::Empty
+                }
+                [pscustomobject]@{
+                    'lDAPDisplayName' = 'attribute1'
+                    'schemaIDGUID' = [guid]'00000000-0000-0000-0000-000000000001'
+                }
+            }
+
+            BeforeAll {
+                # Make sure no DSACL variables are present
+                Get-Variable -Name DSACL* -Scope Global | Remove-Variable -Scope Global -Force
+            }
+
+            It 'Registers 10 variables' {
+                Register-DSACLRightsMapVariable -Scope Global
+                $Variables = Get-Variable -Name DSACL* -Scope Global
+                $Variables.Count | Should -Be 10
+            }
         }
     }
 
