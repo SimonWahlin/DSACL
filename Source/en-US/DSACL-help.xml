@@ -6,11 +6,11 @@
       <command:verb>Add</command:verb>
       <command:noun>DSACLCreateChild</command:noun>
       <maml:description>
-        <maml:para>{{ Fill in the Synopsis }}</maml:para>
+        <maml:para>Give Delegate rights to create objects of selected type in target (usually an OU)</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>{{ Fill in the Description }}</maml:para>
+      <maml:para>Give Delegate rights to create objects of selected type in target (usually an Organizational Unit)</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
@@ -18,7 +18,7 @@
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>AccessType</maml:name>
           <maml:description>
-            <maml:para>{{ Fill AccessType Description }}</maml:para>
+            <maml:para>Specifies if the Access Control Entry is Allow or Deny</maml:para>
           </maml:description>
           <command:parameterValueGroup>
             <command:parameterValue required="false" command:variableLength="false">Allow</command:parameterValue>
@@ -34,7 +34,7 @@
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
           <maml:name>DelegateDN</maml:name>
           <maml:description>
-            <maml:para>{{ Fill DelegateDN Description }}</maml:para>
+            <maml:para>DistinguishedName to delegate to</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -46,7 +46,7 @@
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>NoInheritance</maml:name>
           <maml:description>
-            <maml:para>{{ Fill NoInheritance Description }}</maml:para>
+            <maml:para>Switch parameter that disables Inheritance when delegating</maml:para>
           </maml:description>
           <dev:type>
             <maml:name>SwitchParameter</maml:name>
@@ -57,7 +57,7 @@
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>ObjectTypeGuid</maml:name>
           <maml:description>
-            <maml:para>{{ Fill ObjectTypeGuid Description }}</maml:para>
+            <maml:para>ObjectType guid is used for custom object types</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">Guid</command:parameterValue>
           <dev:type>
@@ -69,7 +69,7 @@
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName, ByValue)" position="named" aliases="none">
           <maml:name>TargetDN</maml:name>
           <maml:description>
-            <maml:para>{{ Fill TargetDN Description }}</maml:para>
+            <maml:para>DistinguishedName of object to modify ACL on, usually an OU</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -84,7 +84,7 @@
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>AccessType</maml:name>
           <maml:description>
-            <maml:para>{{ Fill AccessType Description }}</maml:para>
+            <maml:para>Specifies if the Access Control Entry is Allow or Deny</maml:para>
           </maml:description>
           <command:parameterValueGroup>
             <command:parameterValue required="false" command:variableLength="false">Allow</command:parameterValue>
@@ -100,7 +100,7 @@
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
           <maml:name>DelegateDN</maml:name>
           <maml:description>
-            <maml:para>{{ Fill DelegateDN Description }}</maml:para>
+            <maml:para>DistinguishedName to delegate to</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -112,7 +112,7 @@
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>NoInheritance</maml:name>
           <maml:description>
-            <maml:para>{{ Fill NoInheritance Description }}</maml:para>
+            <maml:para>Switch parameter that disables Inheritance when delegating</maml:para>
           </maml:description>
           <dev:type>
             <maml:name>SwitchParameter</maml:name>
@@ -123,7 +123,7 @@
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>ObjectTypeName</maml:name>
           <maml:description>
-            <maml:para>{{ Fill ObjectTypeName Description }}</maml:para>
+            <maml:para>Object type to give full control over</maml:para>
           </maml:description>
           <command:parameterValueGroup>
             <command:parameterValue required="false" command:variableLength="false">Computer</command:parameterValue>
@@ -144,7 +144,7 @@
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName, ByValue)" position="named" aliases="none">
           <maml:name>TargetDN</maml:name>
           <maml:description>
-            <maml:para>{{ Fill TargetDN Description }}</maml:para>
+            <maml:para>DistinguishedName of object to modify ACL on, usually an OU</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -159,7 +159,7 @@
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>AccessType</maml:name>
         <maml:description>
-          <maml:para>{{ Fill AccessType Description }}</maml:para>
+          <maml:para>Specifies if the Access Control Entry is Allow or Deny</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">AccessControlType</command:parameterValue>
         <dev:type>
@@ -171,7 +171,7 @@
       <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
         <maml:name>DelegateDN</maml:name>
         <maml:description>
-          <maml:para>{{ Fill DelegateDN Description }}</maml:para>
+          <maml:para>DistinguishedName to delegate to</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -183,7 +183,7 @@
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>NoInheritance</maml:name>
         <maml:description>
-          <maml:para>{{ Fill NoInheritance Description }}</maml:para>
+          <maml:para>Switch parameter that disables Inheritance when delegating</maml:para>
         </maml:description>
         <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
         <dev:type>
@@ -195,7 +195,7 @@
       <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>ObjectTypeGuid</maml:name>
         <maml:description>
-          <maml:para>{{ Fill ObjectTypeGuid Description }}</maml:para>
+          <maml:para>ObjectType guid is used for custom object types</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">Guid</command:parameterValue>
         <dev:type>
@@ -207,7 +207,7 @@
       <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>ObjectTypeName</maml:name>
         <maml:description>
-          <maml:para>{{ Fill ObjectTypeName Description }}</maml:para>
+          <maml:para>Object type to give full control over</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -219,7 +219,7 @@
       <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName, ByValue)" position="named" aliases="none">
         <maml:name>TargetDN</maml:name>
         <maml:description>
-          <maml:para>{{ Fill TargetDN Description }}</maml:para>
+          <maml:para>DistinguishedName of object to modify ACL on, usually an OU</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -257,9 +257,9 @@
     <command:examples>
       <command:example>
         <maml:title>-------------------------- Example 1 --------------------------</maml:title>
-        <dev:code>PS C:\&gt; {{ Add example code here }}</dev:code>
+        <dev:code>PS C:\&gt; Add-DSACLCreateChild -TargetDN $UsersOU -DelegateDN $UserAdminGroup -ObjectTypeName User</dev:code>
         <dev:remarks>
-          <maml:para>{{ Add example description here }}</maml:para>
+          <maml:para>Will give the group with DistinguishedName in $UserAdminGroup access to create user objects in the OU with DistinguishedName in $UsersOU and all sub-OUs. Add -NoInheritance do disable inheritance.</maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>
@@ -271,11 +271,11 @@
       <command:verb>Add</command:verb>
       <command:noun>DSACLCustom</command:noun>
       <maml:description>
-        <maml:para>{{ Fill in the Synopsis }}</maml:para>
+        <maml:para>Give Delegate custom rights in target (usually an OU)</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>{{ Fill in the Description }}</maml:para>
+      <maml:para>Used to delegate any custom rights in Active Directory. Requires knowledge of creating ActiveDirectoryAccessRules, please use with caution.</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
@@ -283,7 +283,7 @@
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>AccessControlType</maml:name>
           <maml:description>
-            <maml:para>{{ Fill AccessControlType Description }}</maml:para>
+            <maml:para>Specifies if the Access Control Entry is Allow or Deny</maml:para>
           </maml:description>
           <command:parameterValueGroup>
             <command:parameterValue required="false" command:variableLength="false">Allow</command:parameterValue>
@@ -299,7 +299,7 @@
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>ActiveDirectoryRights</maml:name>
           <maml:description>
-            <maml:para>{{ Fill ActiveDirectoryRights Description }}</maml:para>
+            <maml:para>List of access rights that should be applied</maml:para>
           </maml:description>
           <command:parameterValueGroup>
             <command:parameterValue required="false" command:variableLength="false">CreateChild</command:parameterValue>
@@ -332,7 +332,7 @@
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>DelegateDN</maml:name>
           <maml:description>
-            <maml:para>{{ Fill DelegateDN Description }}</maml:para>
+            <maml:para>DistinguishedName of group or user to give permissions to.</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -344,7 +344,7 @@
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>InheritanceType</maml:name>
           <maml:description>
-            <maml:para>{{ Fill InheritanceType Description }}</maml:para>
+            <maml:para>Sets if and how this rule should be inherited</maml:para>
           </maml:description>
           <command:parameterValueGroup>
             <command:parameterValue required="false" command:variableLength="false">None</command:parameterValue>
@@ -363,7 +363,7 @@
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>InheritedObjectType</maml:name>
           <maml:description>
-            <maml:para>{{ Fill InheritedObjectType Description }}</maml:para>
+            <maml:para>Sets guid of object types that should inherit this rule</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">Guid</command:parameterValue>
           <dev:type>
@@ -375,7 +375,7 @@
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>ObjectType</maml:name>
           <maml:description>
-            <maml:para>{{ Fill ObjectType Description }}</maml:para>
+            <maml:para>Sets guid where access right should apply</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">Guid</command:parameterValue>
           <dev:type>
@@ -387,7 +387,7 @@
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>TargetDN</maml:name>
           <maml:description>
-            <maml:para>{{ Fill TargetDN Description }}</maml:para>
+            <maml:para>DistinguishedName of object to modify ACL on. Usually an OU.</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -402,7 +402,7 @@
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>AccessControlType</maml:name>
           <maml:description>
-            <maml:para>{{ Fill AccessControlType Description }}</maml:para>
+            <maml:para>Specifies if the Access Control Entry is Allow or Deny</maml:para>
           </maml:description>
           <command:parameterValueGroup>
             <command:parameterValue required="false" command:variableLength="false">Allow</command:parameterValue>
@@ -418,7 +418,7 @@
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>ActiveDirectoryRights</maml:name>
           <maml:description>
-            <maml:para>{{ Fill ActiveDirectoryRights Description }}</maml:para>
+            <maml:para>List of access rights that should be applied</maml:para>
           </maml:description>
           <command:parameterValueGroup>
             <command:parameterValue required="false" command:variableLength="false">CreateChild</command:parameterValue>
@@ -451,7 +451,7 @@
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>InheritanceType</maml:name>
           <maml:description>
-            <maml:para>{{ Fill InheritanceType Description }}</maml:para>
+            <maml:para>Sets if and how this rule should be inherited</maml:para>
           </maml:description>
           <command:parameterValueGroup>
             <command:parameterValue required="false" command:variableLength="false">None</command:parameterValue>
@@ -470,7 +470,7 @@
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>InheritedObjectType</maml:name>
           <maml:description>
-            <maml:para>{{ Fill InheritedObjectType Description }}</maml:para>
+            <maml:para>Sets guid of object types that should inherit this rule</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">Guid</command:parameterValue>
           <dev:type>
@@ -482,7 +482,7 @@
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>ObjectType</maml:name>
           <maml:description>
-            <maml:para>{{ Fill ObjectType Description }}</maml:para>
+            <maml:para>Sets guid where access right should apply</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">Guid</command:parameterValue>
           <dev:type>
@@ -494,7 +494,7 @@
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>SID</maml:name>
           <maml:description>
-            <maml:para>{{ Fill SID Description }}</maml:para>
+            <maml:para>Specify Secure Identifier (SID)</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -506,7 +506,7 @@
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>TargetDN</maml:name>
           <maml:description>
-            <maml:para>{{ Fill TargetDN Description }}</maml:para>
+            <maml:para>DistinguishedName of object to modify ACL on. Usually an OU.</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -521,7 +521,7 @@
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>AccessControlType</maml:name>
           <maml:description>
-            <maml:para>{{ Fill AccessControlType Description }}</maml:para>
+            <maml:para>Specifies if the Access Control Entry is Allow or Deny</maml:para>
           </maml:description>
           <command:parameterValueGroup>
             <command:parameterValue required="false" command:variableLength="false">Allow</command:parameterValue>
@@ -537,7 +537,7 @@
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>ActiveDirectoryRights</maml:name>
           <maml:description>
-            <maml:para>{{ Fill ActiveDirectoryRights Description }}</maml:para>
+            <maml:para>List of access rights that should be applied</maml:para>
           </maml:description>
           <command:parameterValueGroup>
             <command:parameterValue required="false" command:variableLength="false">CreateChild</command:parameterValue>
@@ -570,7 +570,7 @@
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>InheritanceType</maml:name>
           <maml:description>
-            <maml:para>{{ Fill InheritanceType Description }}</maml:para>
+            <maml:para>Sets if and how this rule should be inherited</maml:para>
           </maml:description>
           <command:parameterValueGroup>
             <command:parameterValue required="false" command:variableLength="false">None</command:parameterValue>
@@ -589,7 +589,7 @@
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>InheritedObjectType</maml:name>
           <maml:description>
-            <maml:para>{{ Fill InheritedObjectType Description }}</maml:para>
+            <maml:para>Sets guid of object types that should inherit this rule</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">Guid</command:parameterValue>
           <dev:type>
@@ -601,7 +601,7 @@
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>ObjectType</maml:name>
           <maml:description>
-            <maml:para>{{ Fill ObjectType Description }}</maml:para>
+            <maml:para>Sets guid where access right should apply</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">Guid</command:parameterValue>
           <dev:type>
@@ -613,7 +613,7 @@
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>Self</maml:name>
           <maml:description>
-            <maml:para>{{ Fill Self Description }}</maml:para>
+            <maml:para>Give access to "Self" instead of a user or group</maml:para>
           </maml:description>
           <dev:type>
             <maml:name>SwitchParameter</maml:name>
@@ -624,7 +624,7 @@
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>TargetDN</maml:name>
           <maml:description>
-            <maml:para>{{ Fill TargetDN Description }}</maml:para>
+            <maml:para>DistinguishedName of object to modify ACL on. Usually an OU.</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -639,7 +639,7 @@
       <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>AccessControlType</maml:name>
         <maml:description>
-          <maml:para>{{ Fill AccessControlType Description }}</maml:para>
+          <maml:para>Specifies if the Access Control Entry is Allow or Deny</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">AccessControlType</command:parameterValue>
         <dev:type>
@@ -651,7 +651,7 @@
       <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>ActiveDirectoryRights</maml:name>
         <maml:description>
-          <maml:para>{{ Fill ActiveDirectoryRights Description }}</maml:para>
+          <maml:para>List of access rights that should be applied</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">ActiveDirectoryRights[]</command:parameterValue>
         <dev:type>
@@ -663,7 +663,7 @@
       <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>DelegateDN</maml:name>
         <maml:description>
-          <maml:para>{{ Fill DelegateDN Description }}</maml:para>
+          <maml:para>DistinguishedName of group or user to give permissions to.</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -675,7 +675,7 @@
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>InheritanceType</maml:name>
         <maml:description>
-          <maml:para>{{ Fill InheritanceType Description }}</maml:para>
+          <maml:para>Sets if and how this rule should be inherited</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">ActiveDirectorySecurityInheritance</command:parameterValue>
         <dev:type>
@@ -687,7 +687,7 @@
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>InheritedObjectType</maml:name>
         <maml:description>
-          <maml:para>{{ Fill InheritedObjectType Description }}</maml:para>
+          <maml:para>Sets guid of object types that should inherit this rule</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">Guid</command:parameterValue>
         <dev:type>
@@ -699,7 +699,7 @@
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>ObjectType</maml:name>
         <maml:description>
-          <maml:para>{{ Fill ObjectType Description }}</maml:para>
+          <maml:para>Sets guid where access right should apply</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">Guid</command:parameterValue>
         <dev:type>
@@ -711,7 +711,7 @@
       <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>SID</maml:name>
         <maml:description>
-          <maml:para>{{ Fill SID Description }}</maml:para>
+          <maml:para>Specify Secure Identifier (SID)</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -723,7 +723,7 @@
       <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>Self</maml:name>
         <maml:description>
-          <maml:para>{{ Fill Self Description }}</maml:para>
+          <maml:para>Give access to "Self" instead of a user or group</maml:para>
         </maml:description>
         <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
         <dev:type>
@@ -735,7 +735,7 @@
       <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>TargetDN</maml:name>
         <maml:description>
-          <maml:para>{{ Fill TargetDN Description }}</maml:para>
+          <maml:para>DistinguishedName of object to modify ACL on. Usually an OU.</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -787,11 +787,11 @@
       <command:verb>Add</command:verb>
       <command:noun>DSACLDeleteChild</command:noun>
       <maml:description>
-        <maml:para>{{ Fill in the Synopsis }}</maml:para>
+        <maml:para>Give Delegate rights to delete objects of selected type in target (usually an OU)</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>{{ Fill in the Description }}</maml:para>
+      <maml:para>Give Delegate rights to delete objects of selected type in target (usually an OU)</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
@@ -799,7 +799,7 @@
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>AccessType</maml:name>
           <maml:description>
-            <maml:para>{{ Fill AccessType Description }}</maml:para>
+            <maml:para>Specifies if the Access Control Entry is Allow or Deny</maml:para>
           </maml:description>
           <command:parameterValueGroup>
             <command:parameterValue required="false" command:variableLength="false">Allow</command:parameterValue>
@@ -815,7 +815,7 @@
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
           <maml:name>DelegateDN</maml:name>
           <maml:description>
-            <maml:para>{{ Fill DelegateDN Description }}</maml:para>
+            <maml:para>DistinguishedName of group or user to give permissions to.</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -827,7 +827,8 @@
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>IncludeChildren</maml:name>
           <maml:description>
-            <maml:para>{{ Fill IncludeChildren Description }}</maml:para>
+            <maml:para>Adds DeleteTree right allowing to delete an object and all its child objects in one operation</maml:para>
+            <maml:para>This is often required for deleting computer objects</maml:para>
           </maml:description>
           <dev:type>
             <maml:name>SwitchParameter</maml:name>
@@ -838,7 +839,7 @@
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>NoInheritance</maml:name>
           <maml:description>
-            <maml:para>{{ Fill NoInheritance Description }}</maml:para>
+            <maml:para>Sets access right to "This object only"</maml:para>
           </maml:description>
           <dev:type>
             <maml:name>SwitchParameter</maml:name>
@@ -849,7 +850,7 @@
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>ObjectTypeGuid</maml:name>
           <maml:description>
-            <maml:para>{{ Fill ObjectTypeGuid Description }}</maml:para>
+            <maml:para>ObjectType guid, used for custom object types</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">Guid</command:parameterValue>
           <dev:type>
@@ -861,7 +862,7 @@
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName, ByValue)" position="named" aliases="none">
           <maml:name>TargetDN</maml:name>
           <maml:description>
-            <maml:para>{{ Fill TargetDN Description }}</maml:para>
+            <maml:para>DistinguishedName of object to modify ACL on. Usually an OU.</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -876,7 +877,7 @@
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>AccessType</maml:name>
           <maml:description>
-            <maml:para>{{ Fill AccessType Description }}</maml:para>
+            <maml:para>Specifies if the Access Control Entry is Allow or Deny</maml:para>
           </maml:description>
           <command:parameterValueGroup>
             <command:parameterValue required="false" command:variableLength="false">Allow</command:parameterValue>
@@ -892,7 +893,7 @@
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
           <maml:name>DelegateDN</maml:name>
           <maml:description>
-            <maml:para>{{ Fill DelegateDN Description }}</maml:para>
+            <maml:para>DistinguishedName of group or user to give permissions to.</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -904,7 +905,8 @@
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>IncludeChildren</maml:name>
           <maml:description>
-            <maml:para>{{ Fill IncludeChildren Description }}</maml:para>
+            <maml:para>Adds DeleteTree right allowing to delete an object and all its child objects in one operation</maml:para>
+            <maml:para>This is often required for deleting computer objects</maml:para>
           </maml:description>
           <dev:type>
             <maml:name>SwitchParameter</maml:name>
@@ -915,7 +917,7 @@
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>NoInheritance</maml:name>
           <maml:description>
-            <maml:para>{{ Fill NoInheritance Description }}</maml:para>
+            <maml:para>Sets access right to "This object only"</maml:para>
           </maml:description>
           <dev:type>
             <maml:name>SwitchParameter</maml:name>
@@ -926,7 +928,7 @@
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>ObjectTypeName</maml:name>
           <maml:description>
-            <maml:para>{{ Fill ObjectTypeName Description }}</maml:para>
+            <maml:para>Object type to give full control over</maml:para>
           </maml:description>
           <command:parameterValueGroup>
             <command:parameterValue required="false" command:variableLength="false">Computer</command:parameterValue>
@@ -947,7 +949,7 @@
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName, ByValue)" position="named" aliases="none">
           <maml:name>TargetDN</maml:name>
           <maml:description>
-            <maml:para>{{ Fill TargetDN Description }}</maml:para>
+            <maml:para>DistinguishedName of object to modify ACL on. Usually an OU.</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -962,7 +964,7 @@
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>AccessType</maml:name>
         <maml:description>
-          <maml:para>{{ Fill AccessType Description }}</maml:para>
+          <maml:para>Specifies if the Access Control Entry is Allow or Deny</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">AccessControlType</command:parameterValue>
         <dev:type>
@@ -974,7 +976,7 @@
       <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
         <maml:name>DelegateDN</maml:name>
         <maml:description>
-          <maml:para>{{ Fill DelegateDN Description }}</maml:para>
+          <maml:para>DistinguishedName of group or user to give permissions to.</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -986,7 +988,8 @@
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>IncludeChildren</maml:name>
         <maml:description>
-          <maml:para>{{ Fill IncludeChildren Description }}</maml:para>
+          <maml:para>Adds DeleteTree right allowing to delete an object and all its child objects in one operation</maml:para>
+          <maml:para>This is often required for deleting computer objects</maml:para>
         </maml:description>
         <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
         <dev:type>
@@ -998,7 +1001,7 @@
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>NoInheritance</maml:name>
         <maml:description>
-          <maml:para>{{ Fill NoInheritance Description }}</maml:para>
+          <maml:para>Sets access right to "This object only"</maml:para>
         </maml:description>
         <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
         <dev:type>
@@ -1010,7 +1013,7 @@
       <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>ObjectTypeGuid</maml:name>
         <maml:description>
-          <maml:para>{{ Fill ObjectTypeGuid Description }}</maml:para>
+          <maml:para>ObjectType guid, used for custom object types</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">Guid</command:parameterValue>
         <dev:type>
@@ -1022,7 +1025,7 @@
       <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>ObjectTypeName</maml:name>
         <maml:description>
-          <maml:para>{{ Fill ObjectTypeName Description }}</maml:para>
+          <maml:para>Object type to give full control over</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -1034,7 +1037,7 @@
       <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName, ByValue)" position="named" aliases="none">
         <maml:name>TargetDN</maml:name>
         <maml:description>
-          <maml:para>{{ Fill TargetDN Description }}</maml:para>
+          <maml:para>DistinguishedName of object to modify ACL on. Usually an OU.</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -1072,9 +1075,9 @@
     <command:examples>
       <command:example>
         <maml:title>-------------------------- Example 1 --------------------------</maml:title>
-        <dev:code>PS C:\&gt; {{ Add example code here }}</dev:code>
+        <dev:code>PS C:\&gt; Add-DSACLDeleteChild -TargetDN $UsersOU -DelegateDN $UserAdminGroup -ObjectTypeName User</dev:code>
         <dev:remarks>
-          <maml:para>{{ Add example description here }}</maml:para>
+          <maml:para>Will give the group with DistinguishedName in $UserAdminGroup access to delete user objects in the OU with DistinguishedName in $UsersOU and all sub-OUs. Add -NoInheritance do disable inheritance.</maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>
@@ -1086,11 +1089,11 @@
       <command:verb>Add</command:verb>
       <command:noun>DSACLFullControl</command:noun>
       <maml:description>
-        <maml:para>{{ Fill in the Synopsis }}</maml:para>
+        <maml:para>Give Delegate FullControl rights on objects of selected type in target (usually an OU)</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>{{ Fill in the Description }}</maml:para>
+      <maml:para>Give Delegate FullControl rights on objects of selected type in target (usually an OU)</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
@@ -1098,7 +1101,7 @@
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>AccessType</maml:name>
           <maml:description>
-            <maml:para>{{ Fill AccessType Description }}</maml:para>
+            <maml:para>Specifies if the Access Control Entry is Allow or Deny</maml:para>
           </maml:description>
           <command:parameterValueGroup>
             <command:parameterValue required="false" command:variableLength="false">Allow</command:parameterValue>
@@ -1114,7 +1117,7 @@
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
           <maml:name>DelegateDN</maml:name>
           <maml:description>
-            <maml:para>{{ Fill DelegateDN Description }}</maml:para>
+            <maml:para>DistinguishedName of group or user to give permissions to.</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -1126,7 +1129,7 @@
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>NoInheritance</maml:name>
           <maml:description>
-            <maml:para>{{ Fill NoInheritance Description }}</maml:para>
+            <maml:para>Sets access right to "This object only"</maml:para>
           </maml:description>
           <dev:type>
             <maml:name>SwitchParameter</maml:name>
@@ -1137,7 +1140,7 @@
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>ObjectTypeGuid</maml:name>
           <maml:description>
-            <maml:para>{{ Fill ObjectTypeGuid Description }}</maml:para>
+            <maml:para>ObjectType guid, used for custom object types</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">Guid</command:parameterValue>
           <dev:type>
@@ -1149,7 +1152,7 @@
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName, ByValue)" position="named" aliases="none">
           <maml:name>TargetDN</maml:name>
           <maml:description>
-            <maml:para>{{ Fill TargetDN Description }}</maml:para>
+            <maml:para>DistinguishedName of object to modify ACL on. Usually an OU.</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -1164,7 +1167,7 @@
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>AccessType</maml:name>
           <maml:description>
-            <maml:para>{{ Fill AccessType Description }}</maml:para>
+            <maml:para>Specifies if the Access Control Entry is Allow or Deny</maml:para>
           </maml:description>
           <command:parameterValueGroup>
             <command:parameterValue required="false" command:variableLength="false">Allow</command:parameterValue>
@@ -1180,7 +1183,7 @@
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
           <maml:name>DelegateDN</maml:name>
           <maml:description>
-            <maml:para>{{ Fill DelegateDN Description }}</maml:para>
+            <maml:para>DistinguishedName of group or user to give permissions to.</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -1192,7 +1195,7 @@
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>NoInheritance</maml:name>
           <maml:description>
-            <maml:para>{{ Fill NoInheritance Description }}</maml:para>
+            <maml:para>Sets access right to "This object only"</maml:para>
           </maml:description>
           <dev:type>
             <maml:name>SwitchParameter</maml:name>
@@ -1203,7 +1206,7 @@
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>ObjectTypeName</maml:name>
           <maml:description>
-            <maml:para>{{ Fill ObjectTypeName Description }}</maml:para>
+            <maml:para>Object type to give full control over</maml:para>
           </maml:description>
           <command:parameterValueGroup>
             <command:parameterValue required="false" command:variableLength="false">Computer</command:parameterValue>
@@ -1224,7 +1227,7 @@
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName, ByValue)" position="named" aliases="none">
           <maml:name>TargetDN</maml:name>
           <maml:description>
-            <maml:para>{{ Fill TargetDN Description }}</maml:para>
+            <maml:para>DistinguishedName of object to modify ACL on. Usually an OU.</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -1239,7 +1242,7 @@
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>AccessType</maml:name>
         <maml:description>
-          <maml:para>{{ Fill AccessType Description }}</maml:para>
+          <maml:para>Specifies if the Access Control Entry is Allow or Deny</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">AccessControlType</command:parameterValue>
         <dev:type>
@@ -1251,7 +1254,7 @@
       <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
         <maml:name>DelegateDN</maml:name>
         <maml:description>
-          <maml:para>{{ Fill DelegateDN Description }}</maml:para>
+          <maml:para>DistinguishedName of group or user to give permissions to.</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -1263,7 +1266,7 @@
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>NoInheritance</maml:name>
         <maml:description>
-          <maml:para>{{ Fill NoInheritance Description }}</maml:para>
+          <maml:para>Sets access right to "This object only"</maml:para>
         </maml:description>
         <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
         <dev:type>
@@ -1275,7 +1278,7 @@
       <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>ObjectTypeGuid</maml:name>
         <maml:description>
-          <maml:para>{{ Fill ObjectTypeGuid Description }}</maml:para>
+          <maml:para>ObjectType guid, used for custom object types</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">Guid</command:parameterValue>
         <dev:type>
@@ -1287,7 +1290,7 @@
       <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>ObjectTypeName</maml:name>
         <maml:description>
-          <maml:para>{{ Fill ObjectTypeName Description }}</maml:para>
+          <maml:para>Object type to give full control over</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -1299,7 +1302,7 @@
       <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName, ByValue)" position="named" aliases="none">
         <maml:name>TargetDN</maml:name>
         <maml:description>
-          <maml:para>{{ Fill TargetDN Description }}</maml:para>
+          <maml:para>DistinguishedName of object to modify ACL on. Usually an OU.</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -1337,9 +1340,9 @@
     <command:examples>
       <command:example>
         <maml:title>-------------------------- Example 1 --------------------------</maml:title>
-        <dev:code>PS C:\&gt; {{ Add example code here }}</dev:code>
+        <dev:code>PS C:\&gt; Add-DSACLFullControl -TargetDN $UsersOU -DelegateDN $UserAdminGroup -ObjectTypeName User -AccessType Allow</dev:code>
         <dev:remarks>
-          <maml:para>{{ Add example description here }}</maml:para>
+          <maml:para>Will give the group with DistinguishedName in $UserAdminGroup FullControl of user objects in the OU with DistinguishedName in $UsersOU and all sub-OUs. Add -NoInheritance do disable inheritance.</maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>
@@ -1351,11 +1354,11 @@
       <command:verb>Add</command:verb>
       <command:noun>DSACLJoinDomain</command:noun>
       <maml:description>
-        <maml:para>{{ Fill in the Synopsis }}</maml:para>
+        <maml:para>Give DelegateDN rights to join computers in target (usually an OU).</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>{{ Fill in the Description }}</maml:para>
+      <maml:para>Give DelegateDN rights to join computers in target (usually an OU).</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
@@ -1363,7 +1366,7 @@
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="0" aliases="none">
           <maml:name>TargetDN</maml:name>
           <maml:description>
-            <maml:para>{{ Fill TargetDN Description }}</maml:para>
+            <maml:para>DistinguishedName of object to modify ACL on. Usually an OU.</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -1375,7 +1378,7 @@
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
           <maml:name>DelegateDN</maml:name>
           <maml:description>
-            <maml:para>{{ Fill DelegateDN Description }}</maml:para>
+            <maml:para>DistinguishedName of group or user to give permissions to.</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -1387,7 +1390,7 @@
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>AllowCreate</maml:name>
           <maml:description>
-            <maml:para>{{ Fill AllowCreate Description }}</maml:para>
+            <maml:para>Allow creating computer objects, this allows to join computers without a pre-staged computer account</maml:para>
           </maml:description>
           <dev:type>
             <maml:name>SwitchParameter</maml:name>
@@ -1398,7 +1401,7 @@
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>NoInheritance</maml:name>
           <maml:description>
-            <maml:para>{{ Fill NoInheritance Description }}</maml:para>
+            <maml:para>Sets access right to "This object only"</maml:para>
           </maml:description>
           <dev:type>
             <maml:name>SwitchParameter</maml:name>
@@ -1412,7 +1415,7 @@
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>AllowCreate</maml:name>
         <maml:description>
-          <maml:para>{{ Fill AllowCreate Description }}</maml:para>
+          <maml:para>Allow creating computer objects, this allows to join computers without a pre-staged computer account</maml:para>
         </maml:description>
         <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
         <dev:type>
@@ -1424,7 +1427,7 @@
       <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
         <maml:name>DelegateDN</maml:name>
         <maml:description>
-          <maml:para>{{ Fill DelegateDN Description }}</maml:para>
+          <maml:para>DistinguishedName of group or user to give permissions to.</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -1436,7 +1439,7 @@
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>NoInheritance</maml:name>
         <maml:description>
-          <maml:para>{{ Fill NoInheritance Description }}</maml:para>
+          <maml:para>Sets access right to "This object only"</maml:para>
         </maml:description>
         <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
         <dev:type>
@@ -1448,7 +1451,7 @@
       <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="0" aliases="none">
         <maml:name>TargetDN</maml:name>
         <maml:description>
-          <maml:para>{{ Fill TargetDN Description }}</maml:para>
+          <maml:para>DistinguishedName of object to modify ACL on. Usually an OU.</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -1486,9 +1489,9 @@
     <command:examples>
       <command:example>
         <maml:title>-------------------------- Example 1 --------------------------</maml:title>
-        <dev:code>PS C:\&gt; {{ Add example code here }}</dev:code>
+        <dev:code>PS C:\&gt; Add-DSACLJoinDomain -TargetDN $ComputersOU -DelegateDN $JoinDomainAccounts -AccessType Allow</dev:code>
         <dev:remarks>
-          <maml:para>{{ Add example description here }}</maml:para>
+          <maml:para>Will give the group with DistinguishedName in $JoinDomainAccounts rights to join computers to the domain. Requires a computer account to be created already.</maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>
@@ -1500,11 +1503,11 @@
       <command:verb>Add</command:verb>
       <command:noun>DSACLLinkGPO</command:noun>
       <maml:description>
-        <maml:para>{{ Fill in the Synopsis }}</maml:para>
+        <maml:para>Delegate rights to link GPO on target (usually an OU)</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>{{ Fill in the Description }}</maml:para>
+      <maml:para>Delegate rights to link GPO on target (usually an OU)</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
@@ -1512,7 +1515,7 @@
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName, ByValue)" position="0" aliases="none">
           <maml:name>TargetDN</maml:name>
           <maml:description>
-            <maml:para>{{ Fill TargetDN Description }}</maml:para>
+            <maml:para>DistinguishedName of object to modify ACL on. Usually an OU.</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -1524,7 +1527,7 @@
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="1" aliases="none">
           <maml:name>DelegateDN</maml:name>
           <maml:description>
-            <maml:para>{{ Fill DelegateDN Description }}</maml:para>
+            <maml:para>DistinguishedName of group or user to give permissions to.</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -1536,7 +1539,7 @@
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
           <maml:name>AccessType</maml:name>
           <maml:description>
-            <maml:para>{{ Fill AccessType Description }}</maml:para>
+            <maml:para>Allow or Deny</maml:para>
           </maml:description>
           <command:parameterValueGroup>
             <command:parameterValue required="false" command:variableLength="false">Allow</command:parameterValue>
@@ -1552,7 +1555,7 @@
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>NoInheritance</maml:name>
           <maml:description>
-            <maml:para>{{ Fill NoInheritance Description }}</maml:para>
+            <maml:para>Sets access right to "This object only"</maml:para>
           </maml:description>
           <dev:type>
             <maml:name>SwitchParameter</maml:name>
@@ -1566,7 +1569,7 @@
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
         <maml:name>AccessType</maml:name>
         <maml:description>
-          <maml:para>{{ Fill AccessType Description }}</maml:para>
+          <maml:para>Allow or Deny</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">AccessControlType</command:parameterValue>
         <dev:type>
@@ -1578,7 +1581,7 @@
       <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="1" aliases="none">
         <maml:name>DelegateDN</maml:name>
         <maml:description>
-          <maml:para>{{ Fill DelegateDN Description }}</maml:para>
+          <maml:para>DistinguishedName of group or user to give permissions to.</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -1590,7 +1593,7 @@
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>NoInheritance</maml:name>
         <maml:description>
-          <maml:para>{{ Fill NoInheritance Description }}</maml:para>
+          <maml:para>Sets access right to "This object only"</maml:para>
         </maml:description>
         <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
         <dev:type>
@@ -1602,7 +1605,7 @@
       <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName, ByValue)" position="0" aliases="none">
         <maml:name>TargetDN</maml:name>
         <maml:description>
-          <maml:para>{{ Fill TargetDN Description }}</maml:para>
+          <maml:para>DistinguishedName of object to modify ACL on. Usually an OU.</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -1640,9 +1643,9 @@
     <command:examples>
       <command:example>
         <maml:title>-------------------------- Example 1 --------------------------</maml:title>
-        <dev:code>PS C:\&gt; {{ Add example code here }}</dev:code>
+        <dev:code>PS C:\&gt; Add-DSACLLinkGPO -TargetDN $UsersOU -DelegateDN $GPAdmin -AccessType Allow</dev:code>
         <dev:remarks>
-          <maml:para>{{ Add example description here }}</maml:para>
+          <maml:para>Will give the group with DistinguishedName in $GPAdmin rights to link GPOs on the OU with DistinguishedName in $UsersOU and all sub-OUs. Add -NoInheritance to disable inheritance.</maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>
@@ -1654,11 +1657,11 @@
       <command:verb>Add</command:verb>
       <command:noun>DSACLManageGroupMember</command:noun>
       <maml:description>
-        <maml:para>{{ Fill in the Synopsis }}</maml:para>
+        <maml:para>Give Delegate rights to manage members in group(s).</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>{{ Fill in the Description }}</maml:para>
+      <maml:para>Give Delegate rights to manage members in group(s).</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
@@ -1666,7 +1669,7 @@
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>AccessType</maml:name>
           <maml:description>
-            <maml:para>{{ Fill AccessType Description }}</maml:para>
+            <maml:para>Allow or Deny</maml:para>
           </maml:description>
           <command:parameterValueGroup>
             <command:parameterValue required="false" command:variableLength="false">Allow</command:parameterValue>
@@ -1682,7 +1685,7 @@
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
           <maml:name>DelegateDN</maml:name>
           <maml:description>
-            <maml:para>{{ Fill DelegateDN Description }}</maml:para>
+            <maml:para>DistinguishedName of group or user to give permissions to.</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -1694,7 +1697,7 @@
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>DirectOnGroup</maml:name>
           <maml:description>
-            <maml:para>{{ Fill DirectOnGroup Description }}</maml:para>
+            <maml:para>Sets access right to "This object only", use this when TargetDN is a group.</maml:para>
           </maml:description>
           <dev:type>
             <maml:name>SwitchParameter</maml:name>
@@ -1705,7 +1708,7 @@
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName, ByValue)" position="named" aliases="none">
           <maml:name>TargetDN</maml:name>
           <maml:description>
-            <maml:para>{{ Fill TargetDN Description }}</maml:para>
+            <maml:para>DistinguishedName of object to modify ACL on. Usually an OU.</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -1720,7 +1723,7 @@
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>AccessType</maml:name>
           <maml:description>
-            <maml:para>{{ Fill AccessType Description }}</maml:para>
+            <maml:para>Allow or Deny</maml:para>
           </maml:description>
           <command:parameterValueGroup>
             <command:parameterValue required="false" command:variableLength="false">Allow</command:parameterValue>
@@ -1736,7 +1739,7 @@
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
           <maml:name>DelegateDN</maml:name>
           <maml:description>
-            <maml:para>{{ Fill DelegateDN Description }}</maml:para>
+            <maml:para>DistinguishedName of group or user to give permissions to.</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -1748,7 +1751,7 @@
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>NoInheritance</maml:name>
           <maml:description>
-            <maml:para>{{ Fill NoInheritance Description }}</maml:para>
+            <maml:para>Sets access right to "Children". Use this to effect all groups in OU but not subOUs</maml:para>
           </maml:description>
           <dev:type>
             <maml:name>SwitchParameter</maml:name>
@@ -1759,7 +1762,7 @@
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName, ByValue)" position="named" aliases="none">
           <maml:name>TargetDN</maml:name>
           <maml:description>
-            <maml:para>{{ Fill TargetDN Description }}</maml:para>
+            <maml:para>DistinguishedName of object to modify ACL on. Usually an OU.</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -1774,7 +1777,7 @@
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>AccessType</maml:name>
         <maml:description>
-          <maml:para>{{ Fill AccessType Description }}</maml:para>
+          <maml:para>Allow or Deny</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">AccessControlType</command:parameterValue>
         <dev:type>
@@ -1786,7 +1789,7 @@
       <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
         <maml:name>DelegateDN</maml:name>
         <maml:description>
-          <maml:para>{{ Fill DelegateDN Description }}</maml:para>
+          <maml:para>DistinguishedName of group or user to give permissions to.</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -1798,7 +1801,7 @@
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>DirectOnGroup</maml:name>
         <maml:description>
-          <maml:para>{{ Fill DirectOnGroup Description }}</maml:para>
+          <maml:para>Sets access right to "This object only", use this when TargetDN is a group.</maml:para>
         </maml:description>
         <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
         <dev:type>
@@ -1810,7 +1813,7 @@
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>NoInheritance</maml:name>
         <maml:description>
-          <maml:para>{{ Fill NoInheritance Description }}</maml:para>
+          <maml:para>Sets access right to "Children". Use this to effect all groups in OU but not subOUs</maml:para>
         </maml:description>
         <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
         <dev:type>
@@ -1822,7 +1825,7 @@
       <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName, ByValue)" position="named" aliases="none">
         <maml:name>TargetDN</maml:name>
         <maml:description>
-          <maml:para>{{ Fill TargetDN Description }}</maml:para>
+          <maml:para>DistinguishedName of object to modify ACL on. Usually an OU.</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -1860,9 +1863,23 @@
     <command:examples>
       <command:example>
         <maml:title>-------------------------- Example 1 --------------------------</maml:title>
-        <dev:code>PS C:\&gt; {{ Add example code here }}</dev:code>
+        <dev:code>PS C:\&gt; Add-DSACLManageGroupMember -TargetDN $GroupsOU -DelegateDN $AccessAdminGroup -AccessType Allow</dev:code>
         <dev:remarks>
-          <maml:para>{{ Add example description here }}</maml:para>
+          <maml:para>Will give the group with DistinguishedName in $AccessAdminGroup access to manage members of any group in the OU with DistinguishedName in $GroupsOU and all sub-OUs. Add -NoInheritance do disable inheritance.</maml:para>
+        </dev:remarks>
+      </command:example>
+      <command:example>
+        <maml:title>-------------------------- Example 2 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; Add-DSACLManageGroupMember -TargetDN $GroupsOU -DelegateDN $AccessAdminGroup -AccessType Allow -NoInheritance</dev:code>
+        <dev:remarks>
+          <maml:para>Will give the group with DistinguishedName in $AccessAdminGroup access to manage members of any group in the OU with DistinguishedName in $GroupsOU. Will not effect groups in sub-OUs.</maml:para>
+        </dev:remarks>
+      </command:example>
+      <command:example>
+        <maml:title>-------------------------- Example 3 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; Add-DSACLManageGroupMember -TargetDN $SpecialGroup -DelegateDN $AccessAdminGroup -AccessType Allow -DirectOnGroup</dev:code>
+        <dev:remarks>
+          <maml:para>Will give the group with DistinguishedName in $AccessAdminGroup access to manage members of the group in with DistinguishedName in $SpecialGroup.</maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>
@@ -1874,11 +1891,11 @@
       <command:verb>Add</command:verb>
       <command:noun>DSACLManagerCanUpdateGroupMember</command:noun>
       <maml:description>
-        <maml:para>{{ Fill in the Synopsis }}</maml:para>
+        <maml:para>Give Delegate rights to groups manager to manage members in group(s). Note that this access stays with the user if the manager changes.</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>{{ Fill in the Description }}</maml:para>
+      <maml:para>Give Delegate rights to groups manager to manage members in group(s). Note that this access stays with the user if the manager changes.</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
@@ -1886,7 +1903,7 @@
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName, ByValue)" position="0" aliases="none">
           <maml:name>TargetDN</maml:name>
           <maml:description>
-            <maml:para>{{ Fill TargetDN Description }}</maml:para>
+            <maml:para>DistinguishedName of object to modify ACL on. Has to be a group.</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -1901,7 +1918,7 @@
       <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName, ByValue)" position="0" aliases="none">
         <maml:name>TargetDN</maml:name>
         <maml:description>
-          <maml:para>{{ Fill TargetDN Description }}</maml:para>
+          <maml:para>DistinguishedName of object to modify ACL on. Has to be a group.</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -1939,9 +1956,9 @@
     <command:examples>
       <command:example>
         <maml:title>-------------------------- Example 1 --------------------------</maml:title>
-        <dev:code>PS C:\&gt; {{ Add example code here }}</dev:code>
+        <dev:code>PS C:\&gt; Add-DSACLManagerCanUpdateGroupMember -TargetDN $Group</dev:code>
         <dev:remarks>
-          <maml:para>{{ Add example description here }}</maml:para>
+          <maml:para>Will give the current manager of the group in $Group access to manage members. Note that this access stays with the user if the manager changes.</maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>
@@ -1953,11 +1970,11 @@
       <command:verb>Add</command:verb>
       <command:noun>DSACLMoveObjectFrom</command:noun>
       <maml:description>
-        <maml:para>{{ Fill in the Synopsis }}</maml:para>
+        <maml:para>Delegates right to move object of type ObjectTypeName from TargetDN. Moving also requires create-child rights in target container.</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>{{ Fill in the Description }}</maml:para>
+      <maml:para>Delegates the rights to rename and delete objects in TargetDN.</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
@@ -1965,7 +1982,7 @@
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="0" aliases="none">
           <maml:name>ObjectTypeName</maml:name>
           <maml:description>
-            <maml:para>{{ Fill ObjectTypeName Description }}</maml:para>
+            <maml:para>Object type to allow being moved</maml:para>
           </maml:description>
           <command:parameterValueGroup>
             <command:parameterValue required="false" command:variableLength="false">Computer</command:parameterValue>
@@ -1986,7 +2003,7 @@
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName, ByValue)" position="1" aliases="none">
           <maml:name>TargetDN</maml:name>
           <maml:description>
-            <maml:para>{{ Fill TargetDN Description }}</maml:para>
+            <maml:para>DistinguishedName of object to modify ACL on. Usually an OU.</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">Object</command:parameterValue>
           <dev:type>
@@ -1998,7 +2015,7 @@
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="2" aliases="none">
           <maml:name>DelegateDN</maml:name>
           <maml:description>
-            <maml:para>{{ Fill DelegateDN Description }}</maml:para>
+            <maml:para>DistinguishedName of group or user to give permissions to.</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">Object</command:parameterValue>
           <dev:type>
@@ -2010,7 +2027,7 @@
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>NoInheritance</maml:name>
           <maml:description>
-            <maml:para>{{ Fill NoInheritance Description }}</maml:para>
+            <maml:para>Sets access right to "This object only"</maml:para>
           </maml:description>
           <dev:type>
             <maml:name>SwitchParameter</maml:name>
@@ -2024,7 +2041,7 @@
       <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="2" aliases="none">
         <maml:name>DelegateDN</maml:name>
         <maml:description>
-          <maml:para>{{ Fill DelegateDN Description }}</maml:para>
+          <maml:para>DistinguishedName of group or user to give permissions to.</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">Object</command:parameterValue>
         <dev:type>
@@ -2036,7 +2053,7 @@
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>NoInheritance</maml:name>
         <maml:description>
-          <maml:para>{{ Fill NoInheritance Description }}</maml:para>
+          <maml:para>Sets access right to "This object only"</maml:para>
         </maml:description>
         <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
         <dev:type>
@@ -2048,7 +2065,7 @@
       <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="0" aliases="none">
         <maml:name>ObjectTypeName</maml:name>
         <maml:description>
-          <maml:para>{{ Fill ObjectTypeName Description }}</maml:para>
+          <maml:para>Object type to allow being moved</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -2060,7 +2077,7 @@
       <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName, ByValue)" position="1" aliases="none">
         <maml:name>TargetDN</maml:name>
         <maml:description>
-          <maml:para>{{ Fill TargetDN Description }}</maml:para>
+          <maml:para>DistinguishedName of object to modify ACL on. Usually an OU.</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">Object</command:parameterValue>
         <dev:type>
@@ -2112,7 +2129,7 @@
       <command:verb>Add</command:verb>
       <command:noun>DSACLRenameObject</command:noun>
       <maml:description>
-        <maml:para>{{ Fill in the Synopsis }}</maml:para>
+        <maml:para>Give Delegate rights to rename objects in target (usually an OU)</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
@@ -2124,7 +2141,7 @@
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>DelegateDN</maml:name>
           <maml:description>
-            <maml:para>{{ Fill DelegateDN Description }}</maml:para>
+            <maml:para>DistinguishedName of group or user to give permissions to.</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -2136,7 +2153,7 @@
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>NoInheritance</maml:name>
           <maml:description>
-            <maml:para>{{ Fill NoInheritance Description }}</maml:para>
+            <maml:para>Sets access right to "This object only"</maml:para>
           </maml:description>
           <dev:type>
             <maml:name>SwitchParameter</maml:name>
@@ -2147,7 +2164,7 @@
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>ObjectTypeName</maml:name>
           <maml:description>
-            <maml:para>{{ Fill ObjectTypeName Description }}</maml:para>
+            <maml:para>Object type to allow being renamed</maml:para>
           </maml:description>
           <command:parameterValueGroup>
             <command:parameterValue required="false" command:variableLength="false">Computer</command:parameterValue>
@@ -2168,7 +2185,7 @@
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>TargetDN</maml:name>
           <maml:description>
-            <maml:para>{{ Fill TargetDN Description }}</maml:para>
+            <maml:para>DistinguishedName of object to modify ACL on. Usually an OU.</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -2183,7 +2200,7 @@
       <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>DelegateDN</maml:name>
         <maml:description>
-          <maml:para>{{ Fill DelegateDN Description }}</maml:para>
+          <maml:para>DistinguishedName of group or user to give permissions to.</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -2195,7 +2212,7 @@
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>NoInheritance</maml:name>
         <maml:description>
-          <maml:para>{{ Fill NoInheritance Description }}</maml:para>
+          <maml:para>Sets access right to "This object only"</maml:para>
         </maml:description>
         <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
         <dev:type>
@@ -2207,7 +2224,7 @@
       <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>ObjectTypeName</maml:name>
         <maml:description>
-          <maml:para>{{ Fill ObjectTypeName Description }}</maml:para>
+          <maml:para>Object type to allow being renamed</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -2219,7 +2236,7 @@
       <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>TargetDN</maml:name>
         <maml:description>
-          <maml:para>{{ Fill TargetDN Description }}</maml:para>
+          <maml:para>DistinguishedName of object to modify ACL on. Usually an OU.</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -2257,9 +2274,9 @@
     <command:examples>
       <command:example>
         <maml:title>-------------------------- Example 1 --------------------------</maml:title>
-        <dev:code>PS C:\&gt; {{ Add example code here }}</dev:code>
+        <dev:code>PS C:\&gt; Add-DSACLRenameObject -ObjectTypeName Computer -TargetDN $ComputersOU -DelegateDN $ComputerAdminGroup -AccessType Allow</dev:code>
         <dev:remarks>
-          <maml:para>{{ Add example description here }}</maml:para>
+          <maml:para>Will give the group with DistinguishedName in $ComputerAdminGroup rights to rename computers in the OU with DistinguishedName in $ComputersOU and all sub-OUs. Add -NoInheritance do disable inheritance.</maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>
@@ -2271,11 +2288,11 @@
       <command:verb>Add</command:verb>
       <command:noun>DSACLReplicatingDirectoryChanges</command:noun>
       <maml:description>
-        <maml:para>{{ Fill in the Synopsis }}</maml:para>
+        <maml:para>Give Delegate "Replicating Directory Changes" rights on domain with DistinguishedName in target</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>{{ Fill in the Description }}</maml:para>
+      <maml:para>Give Delegate "Replicating Directory Changes" rights on domain with DistinguishedName in target</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
@@ -2283,7 +2300,7 @@
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="0" aliases="none">
           <maml:name>DelegateDN</maml:name>
           <maml:description>
-            <maml:para>{{ Fill DelegateDN Description }}</maml:para>
+            <maml:para>DistinguishedName of group or user to give permissions to.</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -2295,7 +2312,7 @@
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>AllowReplicateSecrets</maml:name>
           <maml:description>
-            <maml:para>{{ Fill AllowReplicateSecrets Description }}</maml:para>
+            <maml:para>Allow replicating secrets, like passwords (Corresponds to "Replicating Directory Changes All")</maml:para>
           </maml:description>
           <dev:type>
             <maml:name>SwitchParameter</maml:name>
@@ -2309,7 +2326,7 @@
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>AllowReplicateSecrets</maml:name>
         <maml:description>
-          <maml:para>{{ Fill AllowReplicateSecrets Description }}</maml:para>
+          <maml:para>Allow replicating secrets, like passwords (Corresponds to "Replicating Directory Changes All")</maml:para>
         </maml:description>
         <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
         <dev:type>
@@ -2321,7 +2338,7 @@
       <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="0" aliases="none">
         <maml:name>DelegateDN</maml:name>
         <maml:description>
-          <maml:para>{{ Fill DelegateDN Description }}</maml:para>
+          <maml:para>DistinguishedName of group or user to give permissions to.</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -2359,9 +2376,9 @@
     <command:examples>
       <command:example>
         <maml:title>-------------------------- Example 1 --------------------------</maml:title>
-        <dev:code>PS C:\&gt; {{ Add example code here }}</dev:code>
+        <dev:code>PS C:\&gt; Add-DSACLReplicatingDirectoryChanges -DelegateDN $AADCServiceAccount</dev:code>
         <dev:remarks>
-          <maml:para>{{ Add example description here }}</maml:para>
+          <maml:para>Will give the service account with DistinguishedName in $AADCServiceAccount the right "Replicating Directory Changes". Add -AllowReplicateSecrets to grant "Replicating Directory Changes All" instead..</maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>
@@ -2373,11 +2390,11 @@
       <command:verb>Add</command:verb>
       <command:noun>DSACLResetPassword</command:noun>
       <maml:description>
-        <maml:para>{{ Fill in the Synopsis }}</maml:para>
+        <maml:para>Delegate ResetPassword rights on objects of selected type in target (usually an OU)</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>{{ Fill in the Description }}</maml:para>
+      <maml:para>Delegate ResetPassword rights on objects of selected type in target (usually an OU)</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
@@ -2385,7 +2402,7 @@
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>AccessType</maml:name>
           <maml:description>
-            <maml:para>{{ Fill AccessType Description }}</maml:para>
+            <maml:para>Allow or Deny</maml:para>
           </maml:description>
           <command:parameterValueGroup>
             <command:parameterValue required="false" command:variableLength="false">Allow</command:parameterValue>
@@ -2401,7 +2418,7 @@
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
           <maml:name>DelegateDN</maml:name>
           <maml:description>
-            <maml:para>{{ Fill DelegateDN Description }}</maml:para>
+            <maml:para>DistinguishedName of group or user to give permissions to.</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -2413,7 +2430,7 @@
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>NoInheritance</maml:name>
           <maml:description>
-            <maml:para>{{ Fill NoInheritance Description }}</maml:para>
+            <maml:para>Sets access right to "This object only"</maml:para>
           </maml:description>
           <dev:type>
             <maml:name>SwitchParameter</maml:name>
@@ -2424,7 +2441,7 @@
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>ObjectTypeGuid</maml:name>
           <maml:description>
-            <maml:para>{{ Fill ObjectTypeGuid Description }}</maml:para>
+            <maml:para>ObjectType guid, used for custom object types</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">Guid</command:parameterValue>
           <dev:type>
@@ -2436,7 +2453,7 @@
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName, ByValue)" position="named" aliases="none">
           <maml:name>TargetDN</maml:name>
           <maml:description>
-            <maml:para>{{ Fill TargetDN Description }}</maml:para>
+            <maml:para>DistinguishedName of object to modify ACL on. Usually an OU.</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -2451,7 +2468,7 @@
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>AccessType</maml:name>
           <maml:description>
-            <maml:para>{{ Fill AccessType Description }}</maml:para>
+            <maml:para>Allow or Deny</maml:para>
           </maml:description>
           <command:parameterValueGroup>
             <command:parameterValue required="false" command:variableLength="false">Allow</command:parameterValue>
@@ -2467,7 +2484,7 @@
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
           <maml:name>DelegateDN</maml:name>
           <maml:description>
-            <maml:para>{{ Fill DelegateDN Description }}</maml:para>
+            <maml:para>DistinguishedName of group or user to give permissions to.</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -2479,7 +2496,7 @@
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>NoInheritance</maml:name>
           <maml:description>
-            <maml:para>{{ Fill NoInheritance Description }}</maml:para>
+            <maml:para>Sets access right to "This object only"</maml:para>
           </maml:description>
           <dev:type>
             <maml:name>SwitchParameter</maml:name>
@@ -2490,7 +2507,7 @@
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>ObjectTypeName</maml:name>
           <maml:description>
-            <maml:para>{{ Fill ObjectTypeName Description }}</maml:para>
+            <maml:para>Object type to give full control over</maml:para>
           </maml:description>
           <command:parameterValueGroup>
             <command:parameterValue required="false" command:variableLength="false">User</command:parameterValue>
@@ -2508,7 +2525,7 @@
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName, ByValue)" position="named" aliases="none">
           <maml:name>TargetDN</maml:name>
           <maml:description>
-            <maml:para>{{ Fill TargetDN Description }}</maml:para>
+            <maml:para>DistinguishedName of object to modify ACL on. Usually an OU.</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -2523,7 +2540,7 @@
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>AccessType</maml:name>
         <maml:description>
-          <maml:para>{{ Fill AccessType Description }}</maml:para>
+          <maml:para>Allow or Deny</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">AccessControlType</command:parameterValue>
         <dev:type>
@@ -2535,7 +2552,7 @@
       <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
         <maml:name>DelegateDN</maml:name>
         <maml:description>
-          <maml:para>{{ Fill DelegateDN Description }}</maml:para>
+          <maml:para>DistinguishedName of group or user to give permissions to.</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -2547,7 +2564,7 @@
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>NoInheritance</maml:name>
         <maml:description>
-          <maml:para>{{ Fill NoInheritance Description }}</maml:para>
+          <maml:para>Sets access right to "This object only"</maml:para>
         </maml:description>
         <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
         <dev:type>
@@ -2559,7 +2576,7 @@
       <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>ObjectTypeGuid</maml:name>
         <maml:description>
-          <maml:para>{{ Fill ObjectTypeGuid Description }}</maml:para>
+          <maml:para>ObjectType guid, used for custom object types</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">Guid</command:parameterValue>
         <dev:type>
@@ -2571,7 +2588,7 @@
       <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>ObjectTypeName</maml:name>
         <maml:description>
-          <maml:para>{{ Fill ObjectTypeName Description }}</maml:para>
+          <maml:para>Object type to give full control over</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -2583,7 +2600,7 @@
       <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName, ByValue)" position="named" aliases="none">
         <maml:name>TargetDN</maml:name>
         <maml:description>
-          <maml:para>{{ Fill TargetDN Description }}</maml:para>
+          <maml:para>DistinguishedName of object to modify ACL on. Usually an OU.</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -2621,9 +2638,9 @@
     <command:examples>
       <command:example>
         <maml:title>-------------------------- Example 1 --------------------------</maml:title>
-        <dev:code>PS C:\&gt; {{ Add example code here }}</dev:code>
+        <dev:code>PS C:\&gt; Add-DSACLResetPassword -TargetDN $UsersOU -DelegateDN $UserAdminGroup -ObjectTypeName User -AccessType Allow</dev:code>
         <dev:remarks>
-          <maml:para>{{ Add example description here }}</maml:para>
+          <maml:para>Will give the group with DistinguishedName in $UserAdminGroup ResetPassword rights of user objects in the OU with DistinguishedName in $UsersOU and all sub-OUs. Add -NoInheritance to disable inheritance.</maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>
@@ -2635,11 +2652,11 @@
       <command:verb>Add</command:verb>
       <command:noun>DSACLWriteAccountRestrictions</command:noun>
       <maml:description>
-        <maml:para>{{ Fill in the Synopsis }}</maml:para>
+        <maml:para>Delegate rights to write to the property set "Account Restrictions" on objects of selected type in target (usually an OU)</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>{{ Fill in the Description }}</maml:para>
+      <maml:para>Delegate rights to write to the property set "Account Restrictions" on objects of selected type in target (usually an OU)</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
@@ -2647,7 +2664,7 @@
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>AccessType</maml:name>
           <maml:description>
-            <maml:para>{{ Fill AccessType Description }}</maml:para>
+            <maml:para>llow or Deny</maml:para>
           </maml:description>
           <command:parameterValueGroup>
             <command:parameterValue required="false" command:variableLength="false">Allow</command:parameterValue>
@@ -2663,7 +2680,7 @@
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
           <maml:name>DelegateDN</maml:name>
           <maml:description>
-            <maml:para>{{ Fill DelegateDN Description }}</maml:para>
+            <maml:para>DistinguishedName of group or user to give permissions to.</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -2675,7 +2692,7 @@
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>NoInheritance</maml:name>
           <maml:description>
-            <maml:para>{{ Fill NoInheritance Description }}</maml:para>
+            <maml:para>Sets access right to "This object only"</maml:para>
           </maml:description>
           <dev:type>
             <maml:name>SwitchParameter</maml:name>
@@ -2686,7 +2703,7 @@
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>ObjectTypeGuid</maml:name>
           <maml:description>
-            <maml:para>{{ Fill ObjectTypeGuid Description }}</maml:para>
+            <maml:para>ObjectType guid, used for custom object types</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">Guid</command:parameterValue>
           <dev:type>
@@ -2698,7 +2715,7 @@
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName, ByValue)" position="named" aliases="none">
           <maml:name>TargetDN</maml:name>
           <maml:description>
-            <maml:para>{{ Fill TargetDN Description }}</maml:para>
+            <maml:para>DistinguishedName of object to modify ACL on. Usually an OU.</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -2713,7 +2730,7 @@
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>AccessType</maml:name>
           <maml:description>
-            <maml:para>{{ Fill AccessType Description }}</maml:para>
+            <maml:para>llow or Deny</maml:para>
           </maml:description>
           <command:parameterValueGroup>
             <command:parameterValue required="false" command:variableLength="false">Allow</command:parameterValue>
@@ -2729,7 +2746,7 @@
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
           <maml:name>DelegateDN</maml:name>
           <maml:description>
-            <maml:para>{{ Fill DelegateDN Description }}</maml:para>
+            <maml:para>DistinguishedName of group or user to give permissions to.</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -2741,7 +2758,7 @@
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>NoInheritance</maml:name>
           <maml:description>
-            <maml:para>{{ Fill NoInheritance Description }}</maml:para>
+            <maml:para>Sets access right to "This object only"</maml:para>
           </maml:description>
           <dev:type>
             <maml:name>SwitchParameter</maml:name>
@@ -2752,7 +2769,7 @@
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>ObjectTypeName</maml:name>
           <maml:description>
-            <maml:para>{{ Fill ObjectTypeName Description }}</maml:para>
+            <maml:para>Object type to give full control over</maml:para>
           </maml:description>
           <command:parameterValueGroup>
             <command:parameterValue required="false" command:variableLength="false">User</command:parameterValue>
@@ -2770,7 +2787,7 @@
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName, ByValue)" position="named" aliases="none">
           <maml:name>TargetDN</maml:name>
           <maml:description>
-            <maml:para>{{ Fill TargetDN Description }}</maml:para>
+            <maml:para>DistinguishedName of object to modify ACL on. Usually an OU.</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -2785,7 +2802,7 @@
       <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>AccessType</maml:name>
         <maml:description>
-          <maml:para>{{ Fill AccessType Description }}</maml:para>
+          <maml:para>llow or Deny</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">AccessControlType</command:parameterValue>
         <dev:type>
@@ -2797,7 +2814,7 @@
       <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
         <maml:name>DelegateDN</maml:name>
         <maml:description>
-          <maml:para>{{ Fill DelegateDN Description }}</maml:para>
+          <maml:para>DistinguishedName of group or user to give permissions to.</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -2809,7 +2826,7 @@
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>NoInheritance</maml:name>
         <maml:description>
-          <maml:para>{{ Fill NoInheritance Description }}</maml:para>
+          <maml:para>Sets access right to "This object only"</maml:para>
         </maml:description>
         <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
         <dev:type>
@@ -2821,7 +2838,7 @@
       <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>ObjectTypeGuid</maml:name>
         <maml:description>
-          <maml:para>{{ Fill ObjectTypeGuid Description }}</maml:para>
+          <maml:para>ObjectType guid, used for custom object types</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">Guid</command:parameterValue>
         <dev:type>
@@ -2833,7 +2850,7 @@
       <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>ObjectTypeName</maml:name>
         <maml:description>
-          <maml:para>{{ Fill ObjectTypeName Description }}</maml:para>
+          <maml:para>Object type to give full control over</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -2845,7 +2862,7 @@
       <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName, ByValue)" position="named" aliases="none">
         <maml:name>TargetDN</maml:name>
         <maml:description>
-          <maml:para>{{ Fill TargetDN Description }}</maml:para>
+          <maml:para>DistinguishedName of object to modify ACL on. Usually an OU.</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -2883,9 +2900,9 @@
     <command:examples>
       <command:example>
         <maml:title>-------------------------- Example 1 --------------------------</maml:title>
-        <dev:code>PS C:\&gt; {{ Add example code here }}</dev:code>
+        <dev:code>PS C:\&gt; Add-DSACLWriteAccountRestrictions -TargetDN $UsersOU -DelegateDN $UserAdminGroup -ObjectTypeName User -AccessType Allow</dev:code>
         <dev:remarks>
-          <maml:para>{{ Add example description here }}</maml:para>
+          <maml:para>Will give the group with DistinguishedName in $UserAdminGroup rights to SET SPN of user objects in the OU with DistinguishedName in $UsersOU and all sub-OUs. Add -NoInheritance to disable inheritance.</maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>
@@ -2897,7 +2914,7 @@
       <command:verb>Add</command:verb>
       <command:noun>DSACLWriteDNSHostName</command:noun>
       <maml:description>
-        <maml:para>{{ Fill in the Synopsis }}</maml:para>
+        <maml:para>Delegate rights to SET DNSHostName on objects of selected type in target (usually an OU)</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
@@ -2909,7 +2926,7 @@
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>AccessType</maml:name>
           <maml:description>
-            <maml:para>{{ Fill AccessType Description }}</maml:para>
+            <maml:para>Allow or Deny. Allow is set by default</maml:para>
           </maml:description>
           <command:parameterValueGroup>
             <command:parameterValue required="false" command:variableLength="false">Allow</command:parameterValue>
@@ -2925,7 +2942,7 @@
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
           <maml:name>DelegateDN</maml:name>
           <maml:description>
-            <maml:para>{{ Fill DelegateDN Description }}</maml:para>
+            <maml:para>DistinguishedName of group or user to give permissions to.</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -2937,7 +2954,7 @@
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>NoInheritance</maml:name>
           <maml:description>
-            <maml:para>{{ Fill NoInheritance Description }}</maml:para>
+            <maml:para>Sets access right to "This object only"</maml:para>
           </maml:description>
           <dev:type>
             <maml:name>SwitchParameter</maml:name>
@@ -2948,7 +2965,7 @@
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>ObjectTypeGuid</maml:name>
           <maml:description>
-            <maml:para>{{ Fill ObjectTypeGuid Description }}</maml:para>
+            <maml:para>ObjectType guid, used for custom object types</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">Guid</command:parameterValue>
           <dev:type>
@@ -2960,7 +2977,7 @@
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName, ByValue)" position="named" aliases="none">
           <maml:name>TargetDN</maml:name>
           <maml:description>
-            <maml:para>{{ Fill TargetDN Description }}</maml:para>
+            <maml:para>DistinguishedName of object to modify ACL on. Usually an OU.</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -2972,7 +2989,7 @@
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>ValidatedOnly</maml:name>
           <maml:description>
-            <maml:para>{{ Fill ValidatedOnly Description }}</maml:para>
+            <maml:para>Only effects validated writes</maml:para>
           </maml:description>
           <dev:type>
             <maml:name>SwitchParameter</maml:name>
@@ -2986,7 +3003,7 @@
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>AccessType</maml:name>
           <maml:description>
-            <maml:para>{{ Fill AccessType Description }}</maml:para>
+            <maml:para>Allow or Deny. Allow is set by default</maml:para>
           </maml:description>
           <command:parameterValueGroup>
             <command:parameterValue required="false" command:variableLength="false">Allow</command:parameterValue>
@@ -3002,7 +3019,7 @@
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
           <maml:name>DelegateDN</maml:name>
           <maml:description>
-            <maml:para>{{ Fill DelegateDN Description }}</maml:para>
+            <maml:para>DistinguishedName of group or user to give permissions to.</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -3014,7 +3031,7 @@
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>NoInheritance</maml:name>
           <maml:description>
-            <maml:para>{{ Fill NoInheritance Description }}</maml:para>
+            <maml:para>Sets access right to "This object only"</maml:para>
           </maml:description>
           <dev:type>
             <maml:name>SwitchParameter</maml:name>
@@ -3025,7 +3042,7 @@
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>ObjectTypeName</maml:name>
           <maml:description>
-            <maml:para>{{ Fill ObjectTypeName Description }}</maml:para>
+            <maml:para>Object type to give full control over</maml:para>
           </maml:description>
           <command:parameterValueGroup>
             <command:parameterValue required="false" command:variableLength="false">Computer</command:parameterValue>
@@ -3042,7 +3059,7 @@
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName, ByValue)" position="named" aliases="none">
           <maml:name>TargetDN</maml:name>
           <maml:description>
-            <maml:para>{{ Fill TargetDN Description }}</maml:para>
+            <maml:para>DistinguishedName of object to modify ACL on. Usually an OU.</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -3054,7 +3071,7 @@
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>ValidatedOnly</maml:name>
           <maml:description>
-            <maml:para>{{ Fill ValidatedOnly Description }}</maml:para>
+            <maml:para>Only effects validated writes</maml:para>
           </maml:description>
           <dev:type>
             <maml:name>SwitchParameter</maml:name>
@@ -3068,7 +3085,7 @@
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>AccessType</maml:name>
         <maml:description>
-          <maml:para>{{ Fill AccessType Description }}</maml:para>
+          <maml:para>Allow or Deny. Allow is set by default</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">AccessControlType</command:parameterValue>
         <dev:type>
@@ -3080,7 +3097,7 @@
       <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
         <maml:name>DelegateDN</maml:name>
         <maml:description>
-          <maml:para>{{ Fill DelegateDN Description }}</maml:para>
+          <maml:para>DistinguishedName of group or user to give permissions to.</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -3092,7 +3109,7 @@
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>NoInheritance</maml:name>
         <maml:description>
-          <maml:para>{{ Fill NoInheritance Description }}</maml:para>
+          <maml:para>Sets access right to "This object only"</maml:para>
         </maml:description>
         <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
         <dev:type>
@@ -3104,7 +3121,7 @@
       <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>ObjectTypeGuid</maml:name>
         <maml:description>
-          <maml:para>{{ Fill ObjectTypeGuid Description }}</maml:para>
+          <maml:para>ObjectType guid, used for custom object types</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">Guid</command:parameterValue>
         <dev:type>
@@ -3116,7 +3133,7 @@
       <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>ObjectTypeName</maml:name>
         <maml:description>
-          <maml:para>{{ Fill ObjectTypeName Description }}</maml:para>
+          <maml:para>Object type to give full control over</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -3128,7 +3145,7 @@
       <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName, ByValue)" position="named" aliases="none">
         <maml:name>TargetDN</maml:name>
         <maml:description>
-          <maml:para>{{ Fill TargetDN Description }}</maml:para>
+          <maml:para>DistinguishedName of object to modify ACL on. Usually an OU.</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -3140,7 +3157,7 @@
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>ValidatedOnly</maml:name>
         <maml:description>
-          <maml:para>{{ Fill ValidatedOnly Description }}</maml:para>
+          <maml:para>Only effects validated writes</maml:para>
         </maml:description>
         <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
         <dev:type>
@@ -3178,9 +3195,9 @@
     <command:examples>
       <command:example>
         <maml:title>-------------------------- Example 1 --------------------------</maml:title>
-        <dev:code>PS C:\&gt; {{ Add example code here }}</dev:code>
+        <dev:code>PS C:\&gt; Add-DSACLWriteDNSHostName -TargetDN $ComputersOU -DelegateDN $ComputerAdminGroup -ObjectTypeName Computer -AccessType Allow</dev:code>
         <dev:remarks>
-          <maml:para>{{ Add example description here }}</maml:para>
+          <maml:para>Will give the group with DistinguishedName in $ComputerAdminGroup rights to SET DNSHostName of computer objects in the OU with DistinguishedName in $ComputersOU and all sub-OUs. Add -NoInheritance to disable inheritance.</maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>
@@ -3192,7 +3209,7 @@
       <command:verb>Add</command:verb>
       <command:noun>DSACLWriteServicePrincipalName</command:noun>
       <maml:description>
-        <maml:para>{{ Fill in the Synopsis }}</maml:para>
+        <maml:para>Delegate rights to SET ServicePrincipalName (SPN) on objects of selected type in target (usually an OU)</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
@@ -3204,7 +3221,7 @@
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>AccessType</maml:name>
           <maml:description>
-            <maml:para>{{ Fill AccessType Description }}</maml:para>
+            <maml:para>Allow or Deny</maml:para>
           </maml:description>
           <command:parameterValueGroup>
             <command:parameterValue required="false" command:variableLength="false">Allow</command:parameterValue>
@@ -3220,7 +3237,7 @@
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
           <maml:name>DelegateDN</maml:name>
           <maml:description>
-            <maml:para>{{ Fill DelegateDN Description }}</maml:para>
+            <maml:para>DistinguishedName of group or user to give permissions to.</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -3232,7 +3249,7 @@
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>NoInheritance</maml:name>
           <maml:description>
-            <maml:para>{{ Fill NoInheritance Description }}</maml:para>
+            <maml:para>Sets access right to "This object only"</maml:para>
           </maml:description>
           <dev:type>
             <maml:name>SwitchParameter</maml:name>
@@ -3243,7 +3260,7 @@
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>ObjectTypeGuid</maml:name>
           <maml:description>
-            <maml:para>{{ Fill ObjectTypeGuid Description }}</maml:para>
+            <maml:para>ObjectType guid, used for custom object types</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">Guid</command:parameterValue>
           <dev:type>
@@ -3255,7 +3272,7 @@
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName, ByValue)" position="named" aliases="none">
           <maml:name>TargetDN</maml:name>
           <maml:description>
-            <maml:para>{{ Fill TargetDN Description }}</maml:para>
+            <maml:para>DistinguishedName of object to modify ACL on. Usually an OU.</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -3267,7 +3284,7 @@
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>ValidatedOnly</maml:name>
           <maml:description>
-            <maml:para>{{ Fill ValidatedOnly Description }}</maml:para>
+            <maml:para>Only effects validated writes</maml:para>
           </maml:description>
           <dev:type>
             <maml:name>SwitchParameter</maml:name>
@@ -3281,7 +3298,7 @@
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>AccessType</maml:name>
           <maml:description>
-            <maml:para>{{ Fill AccessType Description }}</maml:para>
+            <maml:para>Allow or Deny</maml:para>
           </maml:description>
           <command:parameterValueGroup>
             <command:parameterValue required="false" command:variableLength="false">Allow</command:parameterValue>
@@ -3297,7 +3314,7 @@
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
           <maml:name>DelegateDN</maml:name>
           <maml:description>
-            <maml:para>{{ Fill DelegateDN Description }}</maml:para>
+            <maml:para>DistinguishedName of group or user to give permissions to.</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -3309,7 +3326,7 @@
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>NoInheritance</maml:name>
           <maml:description>
-            <maml:para>{{ Fill NoInheritance Description }}</maml:para>
+            <maml:para>Sets access right to "This object only"</maml:para>
           </maml:description>
           <dev:type>
             <maml:name>SwitchParameter</maml:name>
@@ -3320,7 +3337,7 @@
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>ObjectTypeName</maml:name>
           <maml:description>
-            <maml:para>{{ Fill ObjectTypeName Description }}</maml:para>
+            <maml:para>Object type to give full control over</maml:para>
           </maml:description>
           <command:parameterValueGroup>
             <command:parameterValue required="false" command:variableLength="false">User</command:parameterValue>
@@ -3338,7 +3355,7 @@
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName, ByValue)" position="named" aliases="none">
           <maml:name>TargetDN</maml:name>
           <maml:description>
-            <maml:para>{{ Fill TargetDN Description }}</maml:para>
+            <maml:para>DistinguishedName of object to modify ACL on. Usually an OU.</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -3350,7 +3367,7 @@
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>ValidatedOnly</maml:name>
           <maml:description>
-            <maml:para>{{ Fill ValidatedOnly Description }}</maml:para>
+            <maml:para>Only effects validated writes</maml:para>
           </maml:description>
           <dev:type>
             <maml:name>SwitchParameter</maml:name>
@@ -3364,7 +3381,7 @@
       <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>AccessType</maml:name>
         <maml:description>
-          <maml:para>{{ Fill AccessType Description }}</maml:para>
+          <maml:para>Allow or Deny</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">AccessControlType</command:parameterValue>
         <dev:type>
@@ -3376,7 +3393,7 @@
       <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
         <maml:name>DelegateDN</maml:name>
         <maml:description>
-          <maml:para>{{ Fill DelegateDN Description }}</maml:para>
+          <maml:para>DistinguishedName of group or user to give permissions to.</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -3388,7 +3405,7 @@
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>NoInheritance</maml:name>
         <maml:description>
-          <maml:para>{{ Fill NoInheritance Description }}</maml:para>
+          <maml:para>Sets access right to "This object only"</maml:para>
         </maml:description>
         <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
         <dev:type>
@@ -3400,7 +3417,7 @@
       <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>ObjectTypeGuid</maml:name>
         <maml:description>
-          <maml:para>{{ Fill ObjectTypeGuid Description }}</maml:para>
+          <maml:para>ObjectType guid, used for custom object types</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">Guid</command:parameterValue>
         <dev:type>
@@ -3412,7 +3429,7 @@
       <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>ObjectTypeName</maml:name>
         <maml:description>
-          <maml:para>{{ Fill ObjectTypeName Description }}</maml:para>
+          <maml:para>Object type to give full control over</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -3424,7 +3441,7 @@
       <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName, ByValue)" position="named" aliases="none">
         <maml:name>TargetDN</maml:name>
         <maml:description>
-          <maml:para>{{ Fill TargetDN Description }}</maml:para>
+          <maml:para>DistinguishedName of object to modify ACL on. Usually an OU.</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -3436,7 +3453,7 @@
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>ValidatedOnly</maml:name>
         <maml:description>
-          <maml:para>{{ Fill ValidatedOnly Description }}</maml:para>
+          <maml:para>Only effects validated writes</maml:para>
         </maml:description>
         <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
         <dev:type>
@@ -3474,9 +3491,9 @@
     <command:examples>
       <command:example>
         <maml:title>-------------------------- Example 1 --------------------------</maml:title>
-        <dev:code>PS C:\&gt; {{ Add example code here }}</dev:code>
+        <dev:code>PS C:\&gt; Add-DSACLWriteServicePrincipalName -TargetDN $UsersOU -DelegateDN $UserAdminGroup -ObjectTypeName User -AccessType Allow</dev:code>
         <dev:remarks>
-          <maml:para>{{ Add example description here }}</maml:para>
+          <maml:para>Will give the group with DistinguishedName in $UserAdminGroup rights to SET SPN of user objects in the OU with DistinguishedName in $UsersOU and all sub-OUs. Add -NoInheritance to disable inheritance.</maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>
@@ -3877,11 +3894,11 @@
       <command:verb>New</command:verb>
       <command:noun>DSACLAccessRule</command:noun>
       <maml:description>
-        <maml:para>{{ Fill in the Synopsis }}</maml:para>
+        <maml:para>Create Access Control Entry for Active Directory ACL</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>{{ Fill in the Description }}</maml:para>
+      <maml:para>Create Access Control Entry for Active Directory ACL</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
@@ -3889,7 +3906,7 @@
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
           <maml:name>AccessControlType</maml:name>
           <maml:description>
-            <maml:para>{{ Fill AccessControlType Description }}</maml:para>
+            <maml:para>Sets allow or deny</maml:para>
           </maml:description>
           <command:parameterValueGroup>
             <command:parameterValue required="false" command:variableLength="false">Allow</command:parameterValue>
@@ -3905,7 +3922,7 @@
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
           <maml:name>ActiveDirectoryRights</maml:name>
           <maml:description>
-            <maml:para>{{ Fill ActiveDirectoryRights Description }}</maml:para>
+            <maml:para>List of access rights that should be applied</maml:para>
           </maml:description>
           <command:parameterValueGroup>
             <command:parameterValue required="false" command:variableLength="false">CreateChild</command:parameterValue>
@@ -3938,7 +3955,7 @@
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName, ByValue)" position="named" aliases="none">
           <maml:name>Identity</maml:name>
           <maml:description>
-            <maml:para>{{ Fill Identity Description }}</maml:para>
+            <maml:para>SID of principal that will rule will apply to</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">SecurityIdentifier</command:parameterValue>
           <dev:type>
@@ -3950,7 +3967,7 @@
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
           <maml:name>InheritanceType</maml:name>
           <maml:description>
-            <maml:para>{{ Fill InheritanceType Description }}</maml:para>
+            <maml:para>Sets if and how this rule should be inherited</maml:para>
           </maml:description>
           <command:parameterValueGroup>
             <command:parameterValue required="false" command:variableLength="false">None</command:parameterValue>
@@ -3969,7 +3986,7 @@
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
           <maml:name>InheritedObjectType</maml:name>
           <maml:description>
-            <maml:para>{{ Fill InheritedObjectType Description }}</maml:para>
+            <maml:para>Sets guid of object types that should inherit this rule</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">Guid</command:parameterValue>
           <dev:type>
@@ -3981,7 +3998,7 @@
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
           <maml:name>ObjectType</maml:name>
           <maml:description>
-            <maml:para>{{ Fill ObjectType Description }}</maml:para>
+            <maml:para>Sets guid where access right should apply</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">Guid</command:parameterValue>
           <dev:type>
@@ -3996,7 +4013,7 @@
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
           <maml:name>AccessControlType</maml:name>
           <maml:description>
-            <maml:para>{{ Fill AccessControlType Description }}</maml:para>
+            <maml:para>Sets allow or deny</maml:para>
           </maml:description>
           <command:parameterValueGroup>
             <command:parameterValue required="false" command:variableLength="false">Allow</command:parameterValue>
@@ -4012,7 +4029,7 @@
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
           <maml:name>ActiveDirectoryRights</maml:name>
           <maml:description>
-            <maml:para>{{ Fill ActiveDirectoryRights Description }}</maml:para>
+            <maml:para>List of access rights that should be applied</maml:para>
           </maml:description>
           <command:parameterValueGroup>
             <command:parameterValue required="false" command:variableLength="false">CreateChild</command:parameterValue>
@@ -4045,7 +4062,7 @@
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName, ByValue)" position="named" aliases="none">
           <maml:name>Identity</maml:name>
           <maml:description>
-            <maml:para>{{ Fill Identity Description }}</maml:para>
+            <maml:para>SID of principal that will rule will apply to</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">SecurityIdentifier</command:parameterValue>
           <dev:type>
@@ -4057,7 +4074,7 @@
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
           <maml:name>InheritanceType</maml:name>
           <maml:description>
-            <maml:para>{{ Fill InheritanceType Description }}</maml:para>
+            <maml:para>Sets if and how this rule should be inherited</maml:para>
           </maml:description>
           <command:parameterValueGroup>
             <command:parameterValue required="false" command:variableLength="false">None</command:parameterValue>
@@ -4076,7 +4093,7 @@
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
           <maml:name>ObjectType</maml:name>
           <maml:description>
-            <maml:para>{{ Fill ObjectType Description }}</maml:para>
+            <maml:para>Sets guid where access right should apply</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">Guid</command:parameterValue>
           <dev:type>
@@ -4091,7 +4108,7 @@
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
           <maml:name>AccessControlType</maml:name>
           <maml:description>
-            <maml:para>{{ Fill AccessControlType Description }}</maml:para>
+            <maml:para>Sets allow or deny</maml:para>
           </maml:description>
           <command:parameterValueGroup>
             <command:parameterValue required="false" command:variableLength="false">Allow</command:parameterValue>
@@ -4107,7 +4124,7 @@
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
           <maml:name>ActiveDirectoryRights</maml:name>
           <maml:description>
-            <maml:para>{{ Fill ActiveDirectoryRights Description }}</maml:para>
+            <maml:para>List of access rights that should be applied</maml:para>
           </maml:description>
           <command:parameterValueGroup>
             <command:parameterValue required="false" command:variableLength="false">CreateChild</command:parameterValue>
@@ -4140,7 +4157,7 @@
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName, ByValue)" position="named" aliases="none">
           <maml:name>Identity</maml:name>
           <maml:description>
-            <maml:para>{{ Fill Identity Description }}</maml:para>
+            <maml:para>SID of principal that will rule will apply to</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">SecurityIdentifier</command:parameterValue>
           <dev:type>
@@ -4152,7 +4169,7 @@
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
           <maml:name>InheritanceType</maml:name>
           <maml:description>
-            <maml:para>{{ Fill InheritanceType Description }}</maml:para>
+            <maml:para>Sets if and how this rule should be inherited</maml:para>
           </maml:description>
           <command:parameterValueGroup>
             <command:parameterValue required="false" command:variableLength="false">None</command:parameterValue>
@@ -4171,7 +4188,7 @@
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
           <maml:name>InheritedObjectType</maml:name>
           <maml:description>
-            <maml:para>{{ Fill InheritedObjectType Description }}</maml:para>
+            <maml:para>Sets guid of object types that should inherit this rule</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">Guid</command:parameterValue>
           <dev:type>
@@ -4186,7 +4203,7 @@
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
           <maml:name>AccessControlType</maml:name>
           <maml:description>
-            <maml:para>{{ Fill AccessControlType Description }}</maml:para>
+            <maml:para>Sets allow or deny</maml:para>
           </maml:description>
           <command:parameterValueGroup>
             <command:parameterValue required="false" command:variableLength="false">Allow</command:parameterValue>
@@ -4202,7 +4219,7 @@
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
           <maml:name>ActiveDirectoryRights</maml:name>
           <maml:description>
-            <maml:para>{{ Fill ActiveDirectoryRights Description }}</maml:para>
+            <maml:para>List of access rights that should be applied</maml:para>
           </maml:description>
           <command:parameterValueGroup>
             <command:parameterValue required="false" command:variableLength="false">CreateChild</command:parameterValue>
@@ -4235,7 +4252,7 @@
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName, ByValue)" position="named" aliases="none">
           <maml:name>Identity</maml:name>
           <maml:description>
-            <maml:para>{{ Fill Identity Description }}</maml:para>
+            <maml:para>SID of principal that will rule will apply to</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">SecurityIdentifier</command:parameterValue>
           <dev:type>
@@ -4247,7 +4264,7 @@
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
           <maml:name>InheritanceType</maml:name>
           <maml:description>
-            <maml:para>{{ Fill InheritanceType Description }}</maml:para>
+            <maml:para>Sets if and how this rule should be inherited</maml:para>
           </maml:description>
           <command:parameterValueGroup>
             <command:parameterValue required="false" command:variableLength="false">None</command:parameterValue>
@@ -4269,7 +4286,7 @@
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
           <maml:name>AccessControlType</maml:name>
           <maml:description>
-            <maml:para>{{ Fill AccessControlType Description }}</maml:para>
+            <maml:para>Sets allow or deny</maml:para>
           </maml:description>
           <command:parameterValueGroup>
             <command:parameterValue required="false" command:variableLength="false">Allow</command:parameterValue>
@@ -4285,7 +4302,7 @@
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
           <maml:name>ActiveDirectoryRights</maml:name>
           <maml:description>
-            <maml:para>{{ Fill ActiveDirectoryRights Description }}</maml:para>
+            <maml:para>List of access rights that should be applied</maml:para>
           </maml:description>
           <command:parameterValueGroup>
             <command:parameterValue required="false" command:variableLength="false">CreateChild</command:parameterValue>
@@ -4318,7 +4335,7 @@
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName, ByValue)" position="named" aliases="none">
           <maml:name>Identity</maml:name>
           <maml:description>
-            <maml:para>{{ Fill Identity Description }}</maml:para>
+            <maml:para>SID of principal that will rule will apply to</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">SecurityIdentifier</command:parameterValue>
           <dev:type>
@@ -4330,7 +4347,7 @@
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
           <maml:name>ObjectType</maml:name>
           <maml:description>
-            <maml:para>{{ Fill ObjectType Description }}</maml:para>
+            <maml:para>Sets guid where access right should apply</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">Guid</command:parameterValue>
           <dev:type>
@@ -4345,7 +4362,7 @@
       <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
         <maml:name>AccessControlType</maml:name>
         <maml:description>
-          <maml:para>{{ Fill AccessControlType Description }}</maml:para>
+          <maml:para>Sets allow or deny</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">AccessControlType</command:parameterValue>
         <dev:type>
@@ -4357,7 +4374,7 @@
       <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
         <maml:name>ActiveDirectoryRights</maml:name>
         <maml:description>
-          <maml:para>{{ Fill ActiveDirectoryRights Description }}</maml:para>
+          <maml:para>List of access rights that should be applied</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">ActiveDirectoryRights[]</command:parameterValue>
         <dev:type>
@@ -4369,7 +4386,7 @@
       <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName, ByValue)" position="named" aliases="none">
         <maml:name>Identity</maml:name>
         <maml:description>
-          <maml:para>{{ Fill Identity Description }}</maml:para>
+          <maml:para>SID of principal that will rule will apply to</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">SecurityIdentifier</command:parameterValue>
         <dev:type>
@@ -4381,7 +4398,7 @@
       <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
         <maml:name>InheritanceType</maml:name>
         <maml:description>
-          <maml:para>{{ Fill InheritanceType Description }}</maml:para>
+          <maml:para>Sets if and how this rule should be inherited</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">ActiveDirectorySecurityInheritance</command:parameterValue>
         <dev:type>
@@ -4393,7 +4410,7 @@
       <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
         <maml:name>InheritedObjectType</maml:name>
         <maml:description>
-          <maml:para>{{ Fill InheritedObjectType Description }}</maml:para>
+          <maml:para>Sets guid of object types that should inherit this rule</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">Guid</command:parameterValue>
         <dev:type>
@@ -4405,7 +4422,7 @@
       <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
         <maml:name>ObjectType</maml:name>
         <maml:description>
-          <maml:para>{{ Fill ObjectType Description }}</maml:para>
+          <maml:para>Sets guid where access right should apply</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">Guid</command:parameterValue>
         <dev:type>
@@ -4475,9 +4492,9 @@
     <command:examples>
       <command:example>
         <maml:title>-------------------------- Example 1 --------------------------</maml:title>
-        <dev:code>PS C:\&gt; {{ Add example code here }}</dev:code>
+        <dev:code>PS C:\&gt; New-ADAccessRule -Identity $SID -ActiveDirectoryRights 'CreateChild', 'DeleteChild' -AccessControlType Allow -ObjectType $TypeGuid -InheritanceType None</dev:code>
         <dev:remarks>
-          <maml:para>{{ Add example description here }}</maml:para>
+          <maml:para>Create access rule that gives the object with SID $SID access to create and delete objects of type $TypeGuid on "this object only"</maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>
@@ -4489,11 +4506,11 @@
       <command:verb>New</command:verb>
       <command:noun>DSACLAuditRule</command:noun>
       <maml:description>
-        <maml:para>{{ Fill in the Synopsis }}</maml:para>
+        <maml:para>Create Access Control Entry for Active Directory ACL</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>{{ Fill in the Description }}</maml:para>
+      <maml:para>Create Access Control Entry for Active Directory ACL</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
@@ -4501,7 +4518,7 @@
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
           <maml:name>ActiveDirectoryRights</maml:name>
           <maml:description>
-            <maml:para>{{ Fill ActiveDirectoryRights Description }}</maml:para>
+            <maml:para>List of access rights that should be applied</maml:para>
           </maml:description>
           <command:parameterValueGroup>
             <command:parameterValue required="false" command:variableLength="false">CreateChild</command:parameterValue>
@@ -4534,7 +4551,7 @@
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
           <maml:name>AuditFlags</maml:name>
           <maml:description>
-            <maml:para>{{ Fill AuditFlags Description }}</maml:para>
+            <maml:para>Sets allow or deny</maml:para>
           </maml:description>
           <command:parameterValueGroup>
             <command:parameterValue required="false" command:variableLength="false">None</command:parameterValue>
@@ -4551,7 +4568,7 @@
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName, ByValue)" position="named" aliases="none">
           <maml:name>Identity</maml:name>
           <maml:description>
-            <maml:para>{{ Fill Identity Description }}</maml:para>
+            <maml:para>SID of principal that will rule will apply to</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">SecurityIdentifier</command:parameterValue>
           <dev:type>
@@ -4563,7 +4580,7 @@
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
           <maml:name>InheritanceType</maml:name>
           <maml:description>
-            <maml:para>{{ Fill InheritanceType Description }}</maml:para>
+            <maml:para>Sets if and how this rule should be inherited</maml:para>
           </maml:description>
           <command:parameterValueGroup>
             <command:parameterValue required="false" command:variableLength="false">None</command:parameterValue>
@@ -4582,7 +4599,7 @@
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
           <maml:name>InheritedObjectType</maml:name>
           <maml:description>
-            <maml:para>{{ Fill InheritedObjectType Description }}</maml:para>
+            <maml:para>Sets guid of object types that should inherit this rule</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">Guid</command:parameterValue>
           <dev:type>
@@ -4594,7 +4611,7 @@
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
           <maml:name>ObjectType</maml:name>
           <maml:description>
-            <maml:para>{{ Fill ObjectType Description }}</maml:para>
+            <maml:para>Sets guid where access right should apply</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">Guid</command:parameterValue>
           <dev:type>
@@ -4609,7 +4626,7 @@
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
           <maml:name>ActiveDirectoryRights</maml:name>
           <maml:description>
-            <maml:para>{{ Fill ActiveDirectoryRights Description }}</maml:para>
+            <maml:para>List of access rights that should be applied</maml:para>
           </maml:description>
           <command:parameterValueGroup>
             <command:parameterValue required="false" command:variableLength="false">CreateChild</command:parameterValue>
@@ -4642,7 +4659,7 @@
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
           <maml:name>AuditFlags</maml:name>
           <maml:description>
-            <maml:para>{{ Fill AuditFlags Description }}</maml:para>
+            <maml:para>Sets allow or deny</maml:para>
           </maml:description>
           <command:parameterValueGroup>
             <command:parameterValue required="false" command:variableLength="false">None</command:parameterValue>
@@ -4659,7 +4676,7 @@
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName, ByValue)" position="named" aliases="none">
           <maml:name>Identity</maml:name>
           <maml:description>
-            <maml:para>{{ Fill Identity Description }}</maml:para>
+            <maml:para>SID of principal that will rule will apply to</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">SecurityIdentifier</command:parameterValue>
           <dev:type>
@@ -4671,7 +4688,7 @@
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
           <maml:name>InheritanceType</maml:name>
           <maml:description>
-            <maml:para>{{ Fill InheritanceType Description }}</maml:para>
+            <maml:para>Sets if and how this rule should be inherited</maml:para>
           </maml:description>
           <command:parameterValueGroup>
             <command:parameterValue required="false" command:variableLength="false">None</command:parameterValue>
@@ -4690,7 +4707,7 @@
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
           <maml:name>ObjectType</maml:name>
           <maml:description>
-            <maml:para>{{ Fill ObjectType Description }}</maml:para>
+            <maml:para>Sets guid where access right should apply</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">Guid</command:parameterValue>
           <dev:type>
@@ -4705,7 +4722,7 @@
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
           <maml:name>ActiveDirectoryRights</maml:name>
           <maml:description>
-            <maml:para>{{ Fill ActiveDirectoryRights Description }}</maml:para>
+            <maml:para>List of access rights that should be applied</maml:para>
           </maml:description>
           <command:parameterValueGroup>
             <command:parameterValue required="false" command:variableLength="false">CreateChild</command:parameterValue>
@@ -4738,7 +4755,7 @@
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
           <maml:name>AuditFlags</maml:name>
           <maml:description>
-            <maml:para>{{ Fill AuditFlags Description }}</maml:para>
+            <maml:para>Sets allow or deny</maml:para>
           </maml:description>
           <command:parameterValueGroup>
             <command:parameterValue required="false" command:variableLength="false">None</command:parameterValue>
@@ -4755,7 +4772,7 @@
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName, ByValue)" position="named" aliases="none">
           <maml:name>Identity</maml:name>
           <maml:description>
-            <maml:para>{{ Fill Identity Description }}</maml:para>
+            <maml:para>SID of principal that will rule will apply to</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">SecurityIdentifier</command:parameterValue>
           <dev:type>
@@ -4767,7 +4784,7 @@
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
           <maml:name>InheritanceType</maml:name>
           <maml:description>
-            <maml:para>{{ Fill InheritanceType Description }}</maml:para>
+            <maml:para>Sets if and how this rule should be inherited</maml:para>
           </maml:description>
           <command:parameterValueGroup>
             <command:parameterValue required="false" command:variableLength="false">None</command:parameterValue>
@@ -4786,7 +4803,7 @@
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
           <maml:name>InheritedObjectType</maml:name>
           <maml:description>
-            <maml:para>{{ Fill InheritedObjectType Description }}</maml:para>
+            <maml:para>Sets guid of object types that should inherit this rule</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">Guid</command:parameterValue>
           <dev:type>
@@ -4801,7 +4818,7 @@
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
           <maml:name>ActiveDirectoryRights</maml:name>
           <maml:description>
-            <maml:para>{{ Fill ActiveDirectoryRights Description }}</maml:para>
+            <maml:para>List of access rights that should be applied</maml:para>
           </maml:description>
           <command:parameterValueGroup>
             <command:parameterValue required="false" command:variableLength="false">CreateChild</command:parameterValue>
@@ -4834,7 +4851,7 @@
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
           <maml:name>AuditFlags</maml:name>
           <maml:description>
-            <maml:para>{{ Fill AuditFlags Description }}</maml:para>
+            <maml:para>Sets allow or deny</maml:para>
           </maml:description>
           <command:parameterValueGroup>
             <command:parameterValue required="false" command:variableLength="false">None</command:parameterValue>
@@ -4851,7 +4868,7 @@
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName, ByValue)" position="named" aliases="none">
           <maml:name>Identity</maml:name>
           <maml:description>
-            <maml:para>{{ Fill Identity Description }}</maml:para>
+            <maml:para>SID of principal that will rule will apply to</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">SecurityIdentifier</command:parameterValue>
           <dev:type>
@@ -4863,7 +4880,7 @@
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
           <maml:name>InheritanceType</maml:name>
           <maml:description>
-            <maml:para>{{ Fill InheritanceType Description }}</maml:para>
+            <maml:para>Sets if and how this rule should be inherited</maml:para>
           </maml:description>
           <command:parameterValueGroup>
             <command:parameterValue required="false" command:variableLength="false">None</command:parameterValue>
@@ -4885,7 +4902,7 @@
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
           <maml:name>ActiveDirectoryRights</maml:name>
           <maml:description>
-            <maml:para>{{ Fill ActiveDirectoryRights Description }}</maml:para>
+            <maml:para>List of access rights that should be applied</maml:para>
           </maml:description>
           <command:parameterValueGroup>
             <command:parameterValue required="false" command:variableLength="false">CreateChild</command:parameterValue>
@@ -4918,7 +4935,7 @@
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
           <maml:name>AuditFlags</maml:name>
           <maml:description>
-            <maml:para>{{ Fill AuditFlags Description }}</maml:para>
+            <maml:para>Sets allow or deny</maml:para>
           </maml:description>
           <command:parameterValueGroup>
             <command:parameterValue required="false" command:variableLength="false">None</command:parameterValue>
@@ -4935,7 +4952,7 @@
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName, ByValue)" position="named" aliases="none">
           <maml:name>Identity</maml:name>
           <maml:description>
-            <maml:para>{{ Fill Identity Description }}</maml:para>
+            <maml:para>SID of principal that will rule will apply to</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">SecurityIdentifier</command:parameterValue>
           <dev:type>
@@ -4947,7 +4964,7 @@
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
           <maml:name>ObjectType</maml:name>
           <maml:description>
-            <maml:para>{{ Fill ObjectType Description }}</maml:para>
+            <maml:para>Sets guid where access right should apply</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">Guid</command:parameterValue>
           <dev:type>
@@ -4962,7 +4979,7 @@
       <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
         <maml:name>ActiveDirectoryRights</maml:name>
         <maml:description>
-          <maml:para>{{ Fill ActiveDirectoryRights Description }}</maml:para>
+          <maml:para>List of access rights that should be applied</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">ActiveDirectoryRights[]</command:parameterValue>
         <dev:type>
@@ -4974,7 +4991,7 @@
       <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
         <maml:name>AuditFlags</maml:name>
         <maml:description>
-          <maml:para>{{ Fill AuditFlags Description }}</maml:para>
+          <maml:para>Sets allow or deny</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">AuditFlags</command:parameterValue>
         <dev:type>
@@ -4986,7 +5003,7 @@
       <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName, ByValue)" position="named" aliases="none">
         <maml:name>Identity</maml:name>
         <maml:description>
-          <maml:para>{{ Fill Identity Description }}</maml:para>
+          <maml:para>SID of principal that will rule will apply to</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">SecurityIdentifier</command:parameterValue>
         <dev:type>
@@ -4998,7 +5015,7 @@
       <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
         <maml:name>InheritanceType</maml:name>
         <maml:description>
-          <maml:para>{{ Fill InheritanceType Description }}</maml:para>
+          <maml:para>Sets if and how this rule should be inherited</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">ActiveDirectorySecurityInheritance</command:parameterValue>
         <dev:type>
@@ -5010,7 +5027,7 @@
       <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
         <maml:name>InheritedObjectType</maml:name>
         <maml:description>
-          <maml:para>{{ Fill InheritedObjectType Description }}</maml:para>
+          <maml:para>Sets guid of object types that should inherit this rule</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">Guid</command:parameterValue>
         <dev:type>
@@ -5022,7 +5039,7 @@
       <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
         <maml:name>ObjectType</maml:name>
         <maml:description>
-          <maml:para>{{ Fill ObjectType Description }}</maml:para>
+          <maml:para>Sets guid where access right should apply</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">Guid</command:parameterValue>
         <dev:type>
@@ -5092,9 +5109,9 @@
     <command:examples>
       <command:example>
         <maml:title>-------------------------- Example 1 --------------------------</maml:title>
-        <dev:code>PS C:\&gt; {{ Add example code here }}</dev:code>
+        <dev:code>PS C:\&gt; New-ADAccessRule -Identity $SID -ActiveDirectoryRights 'CreateChild', 'DeleteChild' -AccessControlType Allow -ObjectType $TypeGuid -InheritanceType None</dev:code>
         <dev:remarks>
-          <maml:para>{{ Add example description here }}</maml:para>
+          <maml:para>Create access rule that gives the object with SID $SID access to create and delete objects of type $TypeGuid on "this object only"</maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>
