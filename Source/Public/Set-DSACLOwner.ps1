@@ -1,19 +1,12 @@
-<#
-.SYNOPSIS
-Set owner on any object in Active Directory
-
-#>
 function Set-DSACLOwner {
     [CmdletBinding(SupportsShouldProcess)]
     [Alias('chown')]
     [Alias('setowner')]
     param (
-        # DistinguishedName of object to modify ACL on.
         [Parameter(Mandatory,ValueFromPipeline,ValueFromPipelineByPropertyName)]
         [String]
         $TargetDN,
 
-        # DistinguishedName of group or user to give permissions to.
         [Parameter(Mandatory,ValueFromPipelineByPropertyName)]
         [String]
         $OwnerDN
