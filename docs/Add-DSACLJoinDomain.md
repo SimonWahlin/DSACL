@@ -8,7 +8,7 @@ schema: 2.0.0
 # Add-DSACLJoinDomain
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+Give DelegateDN rights to join computers in target (usually an OU).
 
 ## SYNTAX
 
@@ -18,21 +18,21 @@ Add-DSACLJoinDomain [-TargetDN] <String> [-DelegateDN] <String> [-AllowCreate] [
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+Give DelegateDN rights to join computers in target (usually an OU).
 
 ## EXAMPLES
 
 ### Example 1
 ```powershell
-PS C:\> {{ Add example code here }}
+PS C:\> Add-DSACLJoinDomain -TargetDN $ComputersOU -DelegateDN $JoinDomainAccounts -AccessType Allow
 ```
 
-{{ Add example description here }}
+Will give the group with DistinguishedName in $JoinDomainAccounts rights to join computers to the domain. Requires a computer account to be created already.
 
 ## PARAMETERS
 
 ### -AllowCreate
-{{ Fill AllowCreate Description }}
+Allow creating computer objects, this allows to join computers without a pre-staged computer account
 
 ```yaml
 Type: SwitchParameter
@@ -47,7 +47,7 @@ Accept wildcard characters: False
 ```
 
 ### -DelegateDN
-{{ Fill DelegateDN Description }}
+DistinguishedName of group or user to give permissions to.
 
 ```yaml
 Type: String
@@ -62,7 +62,7 @@ Accept wildcard characters: False
 ```
 
 ### -NoInheritance
-{{ Fill NoInheritance Description }}
+Sets access right to "This object only"
 
 ```yaml
 Type: SwitchParameter
@@ -77,7 +77,7 @@ Accept wildcard characters: False
 ```
 
 ### -TargetDN
-{{ Fill TargetDN Description }}
+DistinguishedName of object to modify ACL on. Usually an OU.
 
 ```yaml
 Type: String

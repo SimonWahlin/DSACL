@@ -8,7 +8,7 @@ schema: 2.0.0
 # Add-DSACLReplicatingDirectoryChanges
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+Give Delegate "Replicating Directory Changes" rights on domain with DistinguishedName in target
 
 ## SYNTAX
 
@@ -17,21 +17,22 @@ Add-DSACLReplicatingDirectoryChanges [-DelegateDN] <String> [-AllowReplicateSecr
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+Give Delegate "Replicating Directory Changes" rights on domain with DistinguishedName in target
 
 ## EXAMPLES
 
 ### Example 1
 ```powershell
-PS C:\> {{ Add example code here }}
+PS C:\> Add-DSACLReplicatingDirectoryChanges -DelegateDN $AADCServiceAccount
 ```
 
-{{ Add example description here }}
+Will give the service account with DistinguishedName in $AADCServiceAccount the right "Replicating Directory Changes".
+Add -AllowReplicateSecrets to grant "Replicating Directory Changes All" instead..
 
 ## PARAMETERS
 
 ### -AllowReplicateSecrets
-{{ Fill AllowReplicateSecrets Description }}
+Allow replicating secrets, like passwords (Corresponds to "Replicating Directory Changes All")
 
 ```yaml
 Type: SwitchParameter
@@ -46,7 +47,7 @@ Accept wildcard characters: False
 ```
 
 ### -DelegateDN
-{{ Fill DelegateDN Description }}
+DistinguishedName of group or user to give permissions to.
 
 ```yaml
 Type: String

@@ -8,7 +8,7 @@ schema: 2.0.0
 # Add-DSACLRenameObject
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+Give Delegate rights to rename objects in target (usually an OU)
 
 ## SYNTAX
 
@@ -24,15 +24,15 @@ Add-DSACLRenameObject -ObjectTypeName <String> -TargetDN <String> -DelegateDN <S
 
 ### Example 1
 ```powershell
-PS C:\> {{ Add example code here }}
+PS C:\> Add-DSACLRenameObject -ObjectTypeName Computer -TargetDN $ComputersOU -DelegateDN $ComputerAdminGroup -AccessType Allow
 ```
 
-{{ Add example description here }}
+Will give the group with DistinguishedName in $ComputerAdminGroup rights to rename computers in the OU with DistinguishedName in $ComputersOU and all sub-OUs. Add -NoInheritance do disable inheritance.
 
 ## PARAMETERS
 
 ### -DelegateDN
-{{ Fill DelegateDN Description }}
+DistinguishedName of group or user to give permissions to.
 
 ```yaml
 Type: String
@@ -47,7 +47,7 @@ Accept wildcard characters: False
 ```
 
 ### -NoInheritance
-{{ Fill NoInheritance Description }}
+Sets access right to "This object only"
 
 ```yaml
 Type: SwitchParameter
@@ -62,7 +62,7 @@ Accept wildcard characters: False
 ```
 
 ### -ObjectTypeName
-{{ Fill ObjectTypeName Description }}
+Object type to allow being renamed
 
 ```yaml
 Type: String
@@ -78,7 +78,7 @@ Accept wildcard characters: False
 ```
 
 ### -TargetDN
-{{ Fill TargetDN Description }}
+DistinguishedName of object to modify ACL on. Usually an OU.
 
 ```yaml
 Type: String

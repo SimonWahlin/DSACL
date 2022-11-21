@@ -8,7 +8,7 @@ schema: 2.0.0
 # Add-DSACLCustom
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+Give Delegate custom rights in target (usually an OU)
 
 ## SYNTAX
 
@@ -34,7 +34,8 @@ Add-DSACLCustom -TargetDN <String> [-Self] -ActiveDirectoryRights <ActiveDirecto
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+Used to delegate any custom rights in Active Directory.
+Requires knowledge of creating ActiveDirectoryAccessRules, please use with caution.
 
 ## EXAMPLES
 
@@ -48,7 +49,7 @@ PS C:\> {{ Add example code here }}
 ## PARAMETERS
 
 ### -AccessControlType
-{{ Fill AccessControlType Description }}
+Specifies if the Access Control Entry is Allow or Deny
 
 ```yaml
 Type: AccessControlType
@@ -64,7 +65,7 @@ Accept wildcard characters: False
 ```
 
 ### -ActiveDirectoryRights
-{{ Fill ActiveDirectoryRights Description }}
+List of access rights that should be applied
 
 ```yaml
 Type: ActiveDirectoryRights[]
@@ -80,7 +81,7 @@ Accept wildcard characters: False
 ```
 
 ### -DelegateDN
-{{ Fill DelegateDN Description }}
+DistinguishedName of group or user to give permissions to.
 
 ```yaml
 Type: String
@@ -95,7 +96,7 @@ Accept wildcard characters: False
 ```
 
 ### -InheritanceType
-{{ Fill InheritanceType Description }}
+Sets if and how this rule should be inherited
 
 ```yaml
 Type: ActiveDirectorySecurityInheritance
@@ -111,7 +112,7 @@ Accept wildcard characters: False
 ```
 
 ### -InheritedObjectType
-{{ Fill InheritedObjectType Description }}
+Sets guid of object types that should inherit this rule
 
 ```yaml
 Type: Guid
@@ -126,7 +127,7 @@ Accept wildcard characters: False
 ```
 
 ### -ObjectType
-{{ Fill ObjectType Description }}
+Sets guid where access right should apply
 
 ```yaml
 Type: Guid
@@ -141,7 +142,7 @@ Accept wildcard characters: False
 ```
 
 ### -SID
-{{ Fill SID Description }}
+Specify Secure Identifier (SID)
 
 ```yaml
 Type: String
@@ -156,7 +157,7 @@ Accept wildcard characters: False
 ```
 
 ### -Self
-{{ Fill Self Description }}
+Give access to "Self" instead of a user or group
 
 ```yaml
 Type: SwitchParameter
@@ -171,7 +172,7 @@ Accept wildcard characters: False
 ```
 
 ### -TargetDN
-{{ Fill TargetDN Description }}
+DistinguishedName of object to modify ACL on. Usually an OU.
 
 ```yaml
 Type: String

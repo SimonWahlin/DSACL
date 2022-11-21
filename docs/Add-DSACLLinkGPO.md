@@ -8,7 +8,7 @@ schema: 2.0.0
 # Add-DSACLLinkGPO
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+Delegate rights to link GPO on target (usually an OU)
 
 ## SYNTAX
 
@@ -18,21 +18,22 @@ Add-DSACLLinkGPO [-TargetDN] <String> [-DelegateDN] <String> [[-AccessType] <Acc
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+Delegate rights to link GPO on target (usually an OU)
 
 ## EXAMPLES
 
 ### Example 1
 ```powershell
-PS C:\> {{ Add example code here }}
+PS C:\> Add-DSACLLinkGPO -TargetDN $UsersOU -DelegateDN $GPAdmin -AccessType Allow
 ```
 
-{{ Add example description here }}
+Will give the group with DistinguishedName in $GPAdmin rights to link GPOs on
+the OU with DistinguishedName in $UsersOU and all sub-OUs. Add -NoInheritance to disable inheritance.
 
 ## PARAMETERS
 
 ### -AccessType
-{{ Fill AccessType Description }}
+Allow or Deny
 
 ```yaml
 Type: AccessControlType
@@ -48,7 +49,7 @@ Accept wildcard characters: False
 ```
 
 ### -DelegateDN
-{{ Fill DelegateDN Description }}
+DistinguishedName of group or user to give permissions to.
 
 ```yaml
 Type: String
@@ -63,7 +64,7 @@ Accept wildcard characters: False
 ```
 
 ### -NoInheritance
-{{ Fill NoInheritance Description }}
+Sets access right to "This object only"
 
 ```yaml
 Type: SwitchParameter
@@ -78,7 +79,7 @@ Accept wildcard characters: False
 ```
 
 ### -TargetDN
-{{ Fill TargetDN Description }}
+DistinguishedName of object to modify ACL on. Usually an OU.
 
 ```yaml
 Type: String

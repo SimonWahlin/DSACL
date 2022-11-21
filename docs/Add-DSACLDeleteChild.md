@@ -8,7 +8,7 @@ schema: 2.0.0
 # Add-DSACLDeleteChild
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+Give Delegate rights to delete objects of selected type in target (usually an OU)
 
 ## SYNTAX
 
@@ -25,21 +25,22 @@ Add-DSACLDeleteChild -TargetDN <String> -DelegateDN <String> -ObjectTypeGuid <Gu
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+Give Delegate rights to delete objects of selected type in target (usually an OU)
 
 ## EXAMPLES
 
 ### Example 1
 ```powershell
-PS C:\> {{ Add example code here }}
+PS C:\> Add-DSACLDeleteChild -TargetDN $UsersOU -DelegateDN $UserAdminGroup -ObjectTypeName User
 ```
 
-{{ Add example description here }}
+Will give the group with DistinguishedName in $UserAdminGroup access to delete user objects in
+the OU with DistinguishedName in $UsersOU and all sub-OUs. Add -NoInheritance do disable inheritance.
 
 ## PARAMETERS
 
 ### -AccessType
-{{ Fill AccessType Description }}
+Specifies if the Access Control Entry is Allow or Deny
 
 ```yaml
 Type: AccessControlType
@@ -55,7 +56,7 @@ Accept wildcard characters: False
 ```
 
 ### -DelegateDN
-{{ Fill DelegateDN Description }}
+DistinguishedName of group or user to give permissions to.
 
 ```yaml
 Type: String
@@ -70,7 +71,9 @@ Accept wildcard characters: False
 ```
 
 ### -IncludeChildren
-{{ Fill IncludeChildren Description }}
+Adds DeleteTree right allowing to delete an object and all its child objects in one operation
+
+This is often required for deleting computer objects
 
 ```yaml
 Type: SwitchParameter
@@ -85,7 +88,7 @@ Accept wildcard characters: False
 ```
 
 ### -NoInheritance
-{{ Fill NoInheritance Description }}
+Sets access right to "This object only"
 
 ```yaml
 Type: SwitchParameter
@@ -100,7 +103,7 @@ Accept wildcard characters: False
 ```
 
 ### -ObjectTypeGuid
-{{ Fill ObjectTypeGuid Description }}
+ObjectType guid, used for custom object types
 
 ```yaml
 Type: Guid
@@ -115,7 +118,7 @@ Accept wildcard characters: False
 ```
 
 ### -ObjectTypeName
-{{ Fill ObjectTypeName Description }}
+Object type to give full control over
 
 ```yaml
 Type: String
@@ -131,7 +134,7 @@ Accept wildcard characters: False
 ```
 
 ### -TargetDN
-{{ Fill TargetDN Description }}
+DistinguishedName of object to modify ACL on. Usually an OU.
 
 ```yaml
 Type: String

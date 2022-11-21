@@ -8,7 +8,7 @@ schema: 2.0.0
 # New-DSACLAuditRule
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+Create Access Control Entry for Active Directory ACL
 
 ## SYNTAX
 
@@ -52,21 +52,21 @@ New-DSACLAuditRule -Identity <SecurityIdentifier> -ActiveDirectoryRights <Active
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+Create Access Control Entry for Active Directory ACL
 
 ## EXAMPLES
 
 ### Example 1
 ```powershell
-PS C:\> {{ Add example code here }}
+PS C:\> New-ADAccessRule -Identity $SID -ActiveDirectoryRights 'CreateChild', 'DeleteChild' -AccessControlType Allow -ObjectType $TypeGuid -InheritanceType None
 ```
 
-{{ Add example description here }}
+Create access rule that gives the object with SID $SID access to create and delete objects of type $TypeGuid on "this object only"
 
 ## PARAMETERS
 
 ### -ActiveDirectoryRights
-{{ Fill ActiveDirectoryRights Description }}
+List of access rights that should be applied
 
 ```yaml
 Type: ActiveDirectoryRights[]
@@ -82,7 +82,7 @@ Accept wildcard characters: False
 ```
 
 ### -AuditFlags
-{{ Fill AuditFlags Description }}
+Sets allow or deny
 
 ```yaml
 Type: AuditFlags
@@ -98,7 +98,7 @@ Accept wildcard characters: False
 ```
 
 ### -Identity
-{{ Fill Identity Description }}
+SID of principal that will rule will apply to
 
 ```yaml
 Type: SecurityIdentifier
@@ -113,7 +113,7 @@ Accept wildcard characters: False
 ```
 
 ### -InheritanceType
-{{ Fill InheritanceType Description }}
+Sets if and how this rule should be inherited
 
 ```yaml
 Type: ActiveDirectorySecurityInheritance
@@ -129,7 +129,7 @@ Accept wildcard characters: False
 ```
 
 ### -InheritedObjectType
-{{ Fill InheritedObjectType Description }}
+Sets guid of object types that should inherit this rule
 
 ```yaml
 Type: Guid
@@ -144,7 +144,7 @@ Accept wildcard characters: False
 ```
 
 ### -ObjectType
-{{ Fill ObjectType Description }}
+Sets guid where access right should apply
 
 ```yaml
 Type: Guid

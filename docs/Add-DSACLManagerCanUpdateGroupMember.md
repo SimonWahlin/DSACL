@@ -8,7 +8,8 @@ schema: 2.0.0
 # Add-DSACLManagerCanUpdateGroupMember
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+Give Delegate rights to groups manager to manage members in group(s).
+Note that this access stays with the user if the manager changes.
 
 ## SYNTAX
 
@@ -17,21 +18,23 @@ Add-DSACLManagerCanUpdateGroupMember [-TargetDN] <String> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+Give Delegate rights to groups manager to manage members in group(s).
+Note that this access stays with the user if the manager changes.
 
 ## EXAMPLES
 
 ### Example 1
 ```powershell
-PS C:\> {{ Add example code here }}
+PS C:\> Add-DSACLManagerCanUpdateGroupMember -TargetDN $Group
 ```
 
-{{ Add example description here }}
+Will give the current manager of the group in $Group access to manage members.
+Note that this access stays with the user if the manager changes.
 
 ## PARAMETERS
 
 ### -TargetDN
-{{ Fill TargetDN Description }}
+DistinguishedName of object to modify ACL on. Has to be a group.
 
 ```yaml
 Type: String

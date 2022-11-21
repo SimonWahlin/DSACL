@@ -8,7 +8,7 @@ schema: 2.0.0
 # Add-DSACLCreateChild
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+Give Delegate rights to create objects of selected type in target (usually an OU)
 
 ## SYNTAX
 
@@ -25,21 +25,22 @@ Add-DSACLCreateChild -TargetDN <String> -DelegateDN <String> -ObjectTypeGuid <Gu
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+Give Delegate rights to create objects of selected type in target (usually an Organizational Unit)
 
 ## EXAMPLES
 
 ### Example 1
 ```powershell
-PS C:\> {{ Add example code here }}
+PS C:\> Add-DSACLCreateChild -TargetDN $UsersOU -DelegateDN $UserAdminGroup -ObjectTypeName User
 ```
 
-{{ Add example description here }}
+Will give the group with DistinguishedName in $UserAdminGroup access to create user objects in
+the OU with DistinguishedName in $UsersOU and all sub-OUs. Add -NoInheritance do disable inheritance.
 
 ## PARAMETERS
 
 ### -AccessType
-{{ Fill AccessType Description }}
+Specifies if the Access Control Entry is Allow or Deny
 
 ```yaml
 Type: AccessControlType
@@ -55,7 +56,7 @@ Accept wildcard characters: False
 ```
 
 ### -DelegateDN
-{{ Fill DelegateDN Description }}
+DistinguishedName to delegate to
 
 ```yaml
 Type: String
@@ -70,7 +71,7 @@ Accept wildcard characters: False
 ```
 
 ### -NoInheritance
-{{ Fill NoInheritance Description }}
+Switch parameter that disables Inheritance when delegating
 
 ```yaml
 Type: SwitchParameter
@@ -85,7 +86,7 @@ Accept wildcard characters: False
 ```
 
 ### -ObjectTypeGuid
-{{ Fill ObjectTypeGuid Description }}
+ObjectType guid is used for custom object types
 
 ```yaml
 Type: Guid
@@ -100,7 +101,7 @@ Accept wildcard characters: False
 ```
 
 ### -ObjectTypeName
-{{ Fill ObjectTypeName Description }}
+Object type to give full control over
 
 ```yaml
 Type: String
@@ -116,7 +117,7 @@ Accept wildcard characters: False
 ```
 
 ### -TargetDN
-{{ Fill TargetDN Description }}
+DistinguishedName of object to modify ACL on, usually an OU
 
 ```yaml
 Type: String

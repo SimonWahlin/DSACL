@@ -8,7 +8,7 @@ schema: 2.0.0
 # Add-DSACLResetPassword
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+Delegate ResetPassword rights on objects of selected type in target (usually an OU)
 
 ## SYNTAX
 
@@ -25,21 +25,21 @@ Add-DSACLResetPassword -TargetDN <String> -DelegateDN <String> -ObjectTypeGuid <
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+Delegate ResetPassword rights on objects of selected type in target (usually an OU)
 
 ## EXAMPLES
 
 ### Example 1
 ```powershell
-PS C:\> {{ Add example code here }}
+PS C:\> Add-DSACLResetPassword -TargetDN $UsersOU -DelegateDN $UserAdminGroup -ObjectTypeName User -AccessType Allow
 ```
 
-{{ Add example description here }}
+Will give the group with DistinguishedName in $UserAdminGroup ResetPassword rights of user objects in the OU with DistinguishedName in $UsersOU and all sub-OUs. Add -NoInheritance to disable inheritance.
 
 ## PARAMETERS
 
 ### -AccessType
-{{ Fill AccessType Description }}
+Allow or Deny
 
 ```yaml
 Type: AccessControlType
@@ -55,7 +55,7 @@ Accept wildcard characters: False
 ```
 
 ### -DelegateDN
-{{ Fill DelegateDN Description }}
+DistinguishedName of group or user to give permissions to.
 
 ```yaml
 Type: String
@@ -70,7 +70,7 @@ Accept wildcard characters: False
 ```
 
 ### -NoInheritance
-{{ Fill NoInheritance Description }}
+Sets access right to "This object only"
 
 ```yaml
 Type: SwitchParameter
@@ -85,7 +85,7 @@ Accept wildcard characters: False
 ```
 
 ### -ObjectTypeGuid
-{{ Fill ObjectTypeGuid Description }}
+ObjectType guid, used for custom object types
 
 ```yaml
 Type: Guid
@@ -100,7 +100,7 @@ Accept wildcard characters: False
 ```
 
 ### -ObjectTypeName
-{{ Fill ObjectTypeName Description }}
+Object type to give full control over
 
 ```yaml
 Type: String
@@ -116,7 +116,7 @@ Accept wildcard characters: False
 ```
 
 ### -TargetDN
-{{ Fill TargetDN Description }}
+DistinguishedName of object to modify ACL on. Usually an OU.
 
 ```yaml
 Type: String

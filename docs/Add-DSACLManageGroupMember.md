@@ -8,7 +8,7 @@ schema: 2.0.0
 # Add-DSACLManageGroupMember
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+Give Delegate rights to manage members in group(s).
 
 ## SYNTAX
 
@@ -25,21 +25,35 @@ Add-DSACLManageGroupMember -TargetDN <String> -DelegateDN <String> [-AccessType 
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+Give Delegate rights to manage members in group(s).
 
 ## EXAMPLES
 
 ### Example 1
 ```powershell
-PS C:\> {{ Add example code here }}
+PS C:\> Add-DSACLManageGroupMember -TargetDN $GroupsOU -DelegateDN $AccessAdminGroup -AccessType Allow
 ```
 
-{{ Add example description here }}
+Will give the group with DistinguishedName in $AccessAdminGroup access to manage members of any group in the OU with DistinguishedName in $GroupsOU and all sub-OUs. Add -NoInheritance do disable inheritance.
+
+### Example 2
+```powershell
+PS C:\> Add-DSACLManageGroupMember -TargetDN $GroupsOU -DelegateDN $AccessAdminGroup -AccessType Allow -NoInheritance
+```
+
+Will give the group with DistinguishedName in $AccessAdminGroup access to manage members of any group in the OU with DistinguishedName in $GroupsOU. Will not effect groups in sub-OUs.
+
+### Example 3
+```powershell
+PS C:\> Add-DSACLManageGroupMember -TargetDN $SpecialGroup -DelegateDN $AccessAdminGroup -AccessType Allow -DirectOnGroup
+```
+
+Will give the group with DistinguishedName in $AccessAdminGroup access to manage members of the group in with DistinguishedName in $SpecialGroup.
 
 ## PARAMETERS
 
 ### -AccessType
-{{ Fill AccessType Description }}
+Allow or Deny
 
 ```yaml
 Type: AccessControlType
@@ -55,7 +69,7 @@ Accept wildcard characters: False
 ```
 
 ### -DelegateDN
-{{ Fill DelegateDN Description }}
+DistinguishedName of group or user to give permissions to.
 
 ```yaml
 Type: String
@@ -70,7 +84,7 @@ Accept wildcard characters: False
 ```
 
 ### -DirectOnGroup
-{{ Fill DirectOnGroup Description }}
+Sets access right to "This object only", use this when TargetDN is a group.
 
 ```yaml
 Type: SwitchParameter
@@ -85,7 +99,7 @@ Accept wildcard characters: False
 ```
 
 ### -NoInheritance
-{{ Fill NoInheritance Description }}
+Sets access right to "Children". Use this to effect all groups in OU but not subOUs
 
 ```yaml
 Type: SwitchParameter
@@ -100,7 +114,7 @@ Accept wildcard characters: False
 ```
 
 ### -TargetDN
-{{ Fill TargetDN Description }}
+DistinguishedName of object to modify ACL on. Usually an OU.
 
 ```yaml
 Type: String

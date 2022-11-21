@@ -8,7 +8,8 @@ schema: 2.0.0
 # Add-DSACLMoveObjectFrom
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+Delegates right to move object of type ObjectTypeName from TargetDN.
+Moving also requires create-child rights in target container.
 
 ## SYNTAX
 
@@ -18,7 +19,7 @@ Add-DSACLMoveObjectFrom [-ObjectTypeName] <String> [-TargetDN] <Object> [-Delega
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+Delegates the rights to rename and delete objects in TargetDN.
 
 ## EXAMPLES
 
@@ -32,7 +33,7 @@ PS C:\> {{ Add example code here }}
 ## PARAMETERS
 
 ### -DelegateDN
-{{ Fill DelegateDN Description }}
+DistinguishedName of group or user to give permissions to.
 
 ```yaml
 Type: Object
@@ -47,7 +48,7 @@ Accept wildcard characters: False
 ```
 
 ### -NoInheritance
-{{ Fill NoInheritance Description }}
+Sets access right to "This object only"
 
 ```yaml
 Type: SwitchParameter
@@ -62,7 +63,7 @@ Accept wildcard characters: False
 ```
 
 ### -ObjectTypeName
-{{ Fill ObjectTypeName Description }}
+Object type to allow being moved
 
 ```yaml
 Type: String
@@ -78,7 +79,7 @@ Accept wildcard characters: False
 ```
 
 ### -TargetDN
-{{ Fill TargetDN Description }}
+DistinguishedName of object to modify ACL on. Usually an OU.
 
 ```yaml
 Type: Object
