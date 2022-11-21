@@ -1,0 +1,200 @@
+---
+external help file: DSACL-help.xml
+Module Name: DSACL
+online version:
+schema: 2.0.0
+---
+
+# Add-DSACLCustom
+
+## SYNOPSIS
+{{ Fill in the Synopsis }}
+
+## SYNTAX
+
+### Delegate (Default)
+```
+Add-DSACLCustom -TargetDN <String> -DelegateDN <String> -ActiveDirectoryRights <ActiveDirectoryRights[]>
+ -AccessControlType <AccessControlType> [-ObjectType <Guid>]
+ [-InheritanceType <ActiveDirectorySecurityInheritance>] [-InheritedObjectType <Guid>] [<CommonParameters>]
+```
+
+### Sid
+```
+Add-DSACLCustom -TargetDN <String> -SID <String> -ActiveDirectoryRights <ActiveDirectoryRights[]>
+ -AccessControlType <AccessControlType> [-ObjectType <Guid>]
+ [-InheritanceType <ActiveDirectorySecurityInheritance>] [-InheritedObjectType <Guid>] [<CommonParameters>]
+```
+
+### Self
+```
+Add-DSACLCustom -TargetDN <String> [-Self] -ActiveDirectoryRights <ActiveDirectoryRights[]>
+ -AccessControlType <AccessControlType> [-ObjectType <Guid>]
+ [-InheritanceType <ActiveDirectorySecurityInheritance>] [-InheritedObjectType <Guid>] [<CommonParameters>]
+```
+
+## DESCRIPTION
+{{ Fill in the Description }}
+
+## EXAMPLES
+
+### Example 1
+```powershell
+PS C:\> {{ Add example code here }}
+```
+
+{{ Add example description here }}
+
+## PARAMETERS
+
+### -AccessControlType
+{{ Fill AccessControlType Description }}
+
+```yaml
+Type: AccessControlType
+Parameter Sets: (All)
+Aliases:
+Accepted values: Allow, Deny
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ActiveDirectoryRights
+{{ Fill ActiveDirectoryRights Description }}
+
+```yaml
+Type: ActiveDirectoryRights[]
+Parameter Sets: (All)
+Aliases:
+Accepted values: CreateChild, DeleteChild, ListChildren, Self, ReadProperty, WriteProperty, DeleteTree, ListObject, ExtendedRight, Delete, ReadControl, GenericExecute, GenericWrite, GenericRead, WriteDacl, WriteOwner, GenericAll, Synchronize, AccessSystemSecurity
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -DelegateDN
+{{ Fill DelegateDN Description }}
+
+```yaml
+Type: String
+Parameter Sets: Delegate
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -InheritanceType
+{{ Fill InheritanceType Description }}
+
+```yaml
+Type: ActiveDirectorySecurityInheritance
+Parameter Sets: (All)
+Aliases:
+Accepted values: None, All, Descendents, SelfAndChildren, Children
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -InheritedObjectType
+{{ Fill InheritedObjectType Description }}
+
+```yaml
+Type: Guid
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ObjectType
+{{ Fill ObjectType Description }}
+
+```yaml
+Type: Guid
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -SID
+{{ Fill SID Description }}
+
+```yaml
+Type: String
+Parameter Sets: Sid
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Self
+{{ Fill Self Description }}
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: Self
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -TargetDN
+{{ Fill TargetDN Description }}
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### CommonParameters
+This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
+
+## INPUTS
+
+### None
+
+## OUTPUTS
+
+### System.Object
+## NOTES
+
+## RELATED LINKS
