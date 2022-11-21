@@ -31,7 +31,7 @@ Add-DSACLFullControl -TargetDN <String> -DelegateDN <String> -ObjectTypeGuid <Gu
 
 ### Example 1
 ```powershell
-PS C:\> {{ Add example code here }}
+PS C:\> Add-DSACLFullControl -
 ```
 
 {{ Add example description here }}
