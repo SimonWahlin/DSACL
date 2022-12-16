@@ -1,7 +1,14 @@
 <#
 .SYNOPSIS
-Set owner on any object in Active Directory
+    Sets an Active Directory object as the Owner of an Access Control List (ACL).
 
+.DESCRIPTION
+    The **Set-DSACLOwner** cmdlet will set the given OwnerDN (Objects Distinguished Name) as Owner of the specified TargetDN (Target Distinguished Name).
+    The TargetDN parameter specifies what object the modification will execute on.
+    The OwnerDN parameter specifies what object in Active Directory that will take ownership of the target.
+
+.EXAMPLE
+    Set-DSACLOwner -TargetDN "OU=Accounting,DC=FABRIKAM,DC=COM" -OwnerDN "CN=Chew David,OU=Accounting,DC=FABRIKAM,DC=COM"
 #>
 function Set-DSACLOwner {
     [CmdletBinding(SupportsShouldProcess)]
